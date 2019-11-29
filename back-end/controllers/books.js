@@ -1,7 +1,9 @@
 const bookModel = require('../models/book');
 
 module.exports = {
+
     getBooks: (req, res) => {
+
     },
 
     bookCreate: (req, res) => {
@@ -35,4 +37,5 @@ module.exports = {
     bookDelete: (req, res) => {
 
     }
+
 }
