@@ -9,6 +9,12 @@ const booksRouter = require('./routes/books');
 const usersRouter = require('./routes/users');
 
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+});
 
 app.use('/routes/books', booksRouter);
 app.use('/routes/users', usersRouter);
@@ -22,5 +28,5 @@ app.use((error, req, res, next) => {
 })
 
 app.listen(port, () => {
-    console.log('App listening on port 3000!');
+    console.log(`App listening on port ${port}!`);
 });
