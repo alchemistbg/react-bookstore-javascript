@@ -3,19 +3,33 @@ const bookModel = require('../models/book');
 module.exports = {
 
     getBooks: (req, res) => {
-
+        bookModel.find()
+            .populate({ path: 'genres', select: 'name' })
+            .then((books) => {
+                // books.map((book) => {
+                //     return book.populate('genres');
+                // });
+                res.status(200).json({
+                    books
+                });
+            })
+            .catch();
     },
 
     bookCreate: (req, res) => {
-        const { title, author } = req.body;
+        const { title, author, publisher, isbn, genres } = req.body;
 
-        const book = new bookModel({ title, author });
-        book.save();
+        bookModel.create({ title, author, publisher, isbn, genres })
+            .then((book) => {
+                res.status(200).json({
+                    message: "Book Added",
+                    book
+                });
+            })
+            .catch();
+        // const book = new bookModel({ title, author, publisher, isbn, genres });
+        // book.save().then().catch();
 
-        res.status(200).json({
-            message: "Book Added",
-            book
-        });
     },
 
     bookDetails: (req, res) => {
