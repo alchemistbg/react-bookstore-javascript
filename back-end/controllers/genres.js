@@ -17,15 +17,15 @@ module.exports = {
         genre.save();
     },
 
-    // genreDetails: () => {
+    genreDetails: () => {
 
-    // },
+    },
 
-    // genreEdit: () => {
+    genreEdit: () => {
 
-    // },
-    // genreDelete: () => {
+    },
+    genreDelete: () => {
 
-    // },
+    },
 
 }
