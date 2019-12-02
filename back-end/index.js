@@ -5,8 +5,10 @@ const app = express();
 
 require('./config/database')();
 
+const genresRouter = require('./routes/genres');
 const booksRouter = require('./routes/books');
 const usersRouter = require('./routes/users');
+const ordersRouter = require('./routes/orders');
 
 app.use(bodyParser.json());
 app.use((req, res, next) => {
@@ -16,6 +18,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/routes/genres', genresRouter);
+app.use('/routes/orders', ordersRouter);
 app.use('/routes/books', booksRouter);
 app.use('/routes/users', usersRouter);
 
