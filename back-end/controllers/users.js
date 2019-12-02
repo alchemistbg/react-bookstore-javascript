@@ -26,7 +26,7 @@ module.exports = {
             const { username, password, email, userRole } = req.body;
             userModel.create({ username, password, email, userRole })
                 .then((user) => {
-                    res.status(200).json({
+                    res.status(201).json({
                         message: 'User registered successfully',
                         userId: user._id
                     });
@@ -96,7 +96,18 @@ module.exports = {
     },
 
     profileRead: (req, res) => {
+        const userId = req.params.id;
 
+        userModel.findById(userId)
+            .select('userRole username email orders')
+            .populate({ path: 'order' })
+            .then((user) => {
+                res.status(200).json({
+                    message: "",
+                    user
+                });
+            })
+            .catch();
     },
 
     profileEdit: (req, res) => {
