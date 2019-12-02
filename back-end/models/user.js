@@ -21,7 +21,11 @@ const userSchema = new Schema({
         enum: ['user', 'admin'],
         default: 'user',
         // required: true
-    }
+    },
+    orders: [{
+        type: Schema.Types.ObjectId,
+        res: 'order'
+    }]
 });
 
 userSchema.methods = {
