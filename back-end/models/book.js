@@ -18,15 +18,29 @@ const bookSchema = new Schema({
         type: String,
         required: true
     },
-    genres: {
-        type: String,
-        required: true
-    },
-    // votesRating: {},
-    // salesRating: {},
-    // price: {},
-    // qty: {},
-    // comments: {}
+    genres: [{
+        type: Schema.Types.ObjectId,
+        ref: 'genre'
+    }],
+    // price: {
+    //     type: Number,
+    //     required: true
+    // },
+    // qty: {
+    //     type: Number,
+    //     default: 0
+    // },
+    // salesRating: {
+    //     type: Number,
+    //     default: 0.0
+    // },
+    // votesRating: {
+    //     type: Number,
+    //     default: 0.0
+    // },
+    // comments: {
+
+    // }
 });
 
 module.exports = mongoose.model('book', bookSchema);
