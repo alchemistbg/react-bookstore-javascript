@@ -25,9 +25,9 @@ app.use('/routes/users', usersRouter);
 
 app.use((error, req, res, next) => {
     console.log(error);
-    const status = error.statusCode || 500;
-    const message = error.message;
-    res.status(status).json({ message: message });
+    const status = error.status || 500;
+    const { message, info } = error;
+    res.status(status).json({ message: message, info });
     next();
 })
 
