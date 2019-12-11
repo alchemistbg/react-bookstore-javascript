@@ -92,4 +92,44 @@ userSchema.pre('save', async function (next) {
 //     next();
 // });
 
-module.exports = mongoose.model('user', userSchema);
+
+userSchema.set('toJSON', { getters: true, virtuals: true });
+const User = mongoose.model('user', userSchema);
+
+module.exports = User;
+module.exports.seedUsers = () => {
+    User.find({})
+        .then((users) => {
+            if (users.length > 0) {
+                return
+            }
+
+            console.log('User collection is empty. It will be seeded with sample collection.');
+            const userSeed = [
+                {
+                    "firstname": "Unufri",
+                    "lastname": "Penchev",
+                    "username": "UnChev",
+                    "password": "unufriPass",
+                    "email": "unufri@unufri.com",
+                    "userRole": "user",
+                    "orders": [],
+                },
+                {
+                    "firstname": "Petar",
+                    "lastname": "Ivanov",
+                    "username": "peshov",
+                    "password": "peshoPass",
+                    "email": "pesho@pesho.com",
+                    "userRole": "user",
+                    "orders": [],
+                },
+
+            ];
+
+            User.create(userSeed)
+                .then(() => console.log(`Users collection seeded successfully with ${userSeed.length} users!`))
+                .catch((error) => console.log(error));
+        })
+        .catch();
+}
