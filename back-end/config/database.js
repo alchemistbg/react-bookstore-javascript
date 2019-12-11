@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
+const Book = require('../models/Book');
+const User = require('../models/User');
 
 module.exports = () => {
     mongoose.connect('mongodb://localhost:27017/reactive', {
@@ -14,7 +16,11 @@ module.exports = () => {
             console.log(error);
         }
 
-        console.log('MongoDB ready!')
+        console.log('MongoDB ready!');
+
+        Book.seedBooks();
+        User.seedUsers();
+
     });
 
     db.on('error', (reason) => {
