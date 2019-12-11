@@ -36,6 +36,13 @@ const userSchema = new Schema({
     }]
 });
 
+userSchema.virtual('fullName')
+    .get(
+        function () {
+            return `${this.firstname} ${this.lastname}`;
+        }
+    )
+
 userSchema.methods = {
     //async-based version
     matchPassword: async function (password) {
