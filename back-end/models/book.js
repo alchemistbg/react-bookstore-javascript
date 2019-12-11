@@ -18,14 +18,18 @@ const bookSchema = new Schema({
         type: String,
         required: true
     },
+    price: {
+        type: Number,
+        required: true
+    },
     genres: [{
         type: Schema.Types.ObjectId,
         ref: 'genre'
     }],
-    // price: {
-    //     type: Number,
-    //     required: true
-    // },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
+    }]
     // qty: {
     //     type: Number,
     //     default: 0
