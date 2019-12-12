@@ -1,0 +1,39 @@
+.book-item {
+    width: 15em;
+    height: 25em;
+    border: 3px solid rgb(15, 76, 129);
+    position: relative;
+    // margin: 1em;
+    // padding: 1em;
+    display: flex;
+
+    .details {
+        // background: red;
+        // text-align: center;
+        display: none;
+        padding: 0;
+        margin: 0;
+        position: absolute;
+        font-weight: bold;
+        font-size: 2em;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.book-item:hover {
+    .details {
+        animation: fadeIn 0.2s;
+        animation-direction: alternate;
+        animation-fill-mode: both;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background: rgba(15, 76, 129, 0.5);
+    }
+}
