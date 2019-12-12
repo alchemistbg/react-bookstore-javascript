@@ -1,0 +1,9 @@
+.book-list {
+    margin: 0 auto;
+    padding: 0;
+    list-style: outside;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
