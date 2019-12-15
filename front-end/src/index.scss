@@ -1,0 +1,17 @@
+@import './scss/variables.scss';
+@import './scss/reset.scss';
+@import './scss/mixins.scss';
+@import './scss/animations.scss';
+@import './scss/typography.scss';
+
+@import './scss/layout.scss';
+@import './scss/buttons.scss';
+
+@import './components/Donut.scss';
+@import './components/Navigation/Header.scss';
+@import './components/Navigation/Footer.scss';
+@import './components/BookList.scss';
+@import './components/BookCard/BookCard.scss';
+@import './components/BookDetails/BookDetails.scss';
+
+@import './components/Forms/Forms.scss';
