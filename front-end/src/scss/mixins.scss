@@ -1,0 +1,38 @@
+@mixin bp($point) {
+
+    @if $point==desktopl {
+        @media (max-width: 1600px) {
+            @content;
+        }
+    }
+
+    @else if $point==desktops {
+        @media (max-width: 1280px) {
+            @content;
+        }
+    }
+
+    @else if $point==tabletl {
+        @media (max-width: 1024px) {
+            @content;
+        }
+    }
+
+    @else if $point==tablets {
+        @media (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @else if $point==phonel {
+        @media (max-width: 600px) {
+            @content;
+        }
+    }
+
+    @else if $point==phones {
+        @media (max-width: 360px) {
+            @content;
+        }
+    }
+}

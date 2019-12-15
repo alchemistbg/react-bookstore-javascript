@@ -1,0 +1,187 @@
+@import url('https://use.fontawesome.com/releases/v5.11.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext');
+@import url('https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext');
+
+html {
+    font: var(--font-size-body-normal)/1.5 'PT Sans', sans-serif;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: var(--font-size-body-large)
+    }
+}
+
+@media (min-width: 1280px) {
+    html {
+        font-size: var(--font-size-body-Large)
+    }
+}
+
+@media (min-width: 1600px) {
+    html {
+        font-size: var(--font-size-body-LARGE)
+    }
+}
+
+body,
+table,
+form,
+select,
+option,
+input,
+textarea {
+    font: inherit;
+    color: var(--color-body-text);
+    background: var(--color-body-bg);
+}
+
+// .site-title,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-size: 1em;
+    // font-family: 'PT Serif', serif;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.8em;
+}
+
+h2 {
+    font-size: 2.4em;
+}
+
+h3 {
+    font-size: 2.0em;
+}
+
+h4 {
+    font-size: 1.7em;
+}
+
+h5 {
+    font-size: 1.4em;
+}
+
+h6 {
+    font-size: 1.2em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-body-text);
+
+    &.text-link {
+        color: var(--color-link-main);
+        font-weight: bold;
+    }
+
+    &.text-link:hover {
+        color: var(--color-link-hover);
+    }
+}
+
+p,
+ul,
+ol {
+    padding-bottom: 1.5em;
+}
+
+ul,
+ol {
+    padding-left: 2em;
+}
+
+span.vip-text {
+    font-weight: bold;
+}
+
+ul ul,
+ol ul,
+ul ol,
+ol ol {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+ol>li>ol>li {
+    list-style-type: lower-roman;
+}
+
+blockquote {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 1.5em;
+    padding-left: 4em;
+    padding-right: 4em;
+    position: relative;
+    font-family: 'PT Serif', serif;
+    background: #eee;
+
+    &::before,
+    &::after {
+        display: block;
+        content: '';
+        width: 38px;
+        height: 45px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    // &::before {
+    //     background: url(../images/logos/razor_ltr.png) no-repeat;
+    //     background-size: cover;
+    //     left: 0.8em;
+    // }
+
+    // &::after {
+    //     background: url(../images/logos/razor_rtl.png) no-repeat;
+    //     background-size: cover;
+    //     right: 0.8em;
+    // }
+
+    @include bp (tablets) {
+        &::before {
+            width: 19px;
+            height: 22.5px;
+        }
+
+        &::after {
+            width: 19px;
+            height: 22.5px;
+        }
+    }
+}
+
+.quote-text {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    font-size: 1.2em;
+    font-style: italic;
+}
+
+.quote-author {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 1em;
+
+    &::before,
+    &::after {
+        display: inline-block;
+        content: '\2014';
+    }
+
+    &::before {
+        padding-right: 0.5em;
+    }
+
+    &::after {
+        padding-left: 0.5em;
+    }
+}

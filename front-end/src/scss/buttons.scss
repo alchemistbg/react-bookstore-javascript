@@ -1,0 +1,34 @@
+.form-button {
+    display: block;
+    // margin-left: auto;
+    padding: 0.6em;
+    border: 2px solid var(--color-main-text);
+    border-radius: var(--border-form-radius);
+    outline: none;
+    color: var(--color-main-text);
+    background-color: var(--color-main-background);
+    font-size: 1em;
+    font-weight: bold;
+    transition: color 0.2s, background-color 0.2s;
+}
+
+.form-button:hover {
+    color: var(--color-main-background);
+    background-color: var(--color-main-text);
+    cursor: pointer;
+    // animation: button-hover 0.1s ease-in;
+    // animation-fill-mode: both;
+}
+
+// .form-button,
+// .form-button:hover,
+// .form-button:focus {
+//     display: block;
+//     background-color: var(--color-link-main);
+//     // color: white;
+// }
+
+// .form-button:hover {
+//     // background-color: var(--color-link-hover);
+//     // animation: fadeIn 0.2s ease-in;
+// }

@@ -1,0 +1,31 @@
+#root {
+    border: 2px solid green;
+}
+
+.site-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header,
+footer {
+    border: 2px solid green;
+    flex: 0 0 auto;
+    background: var(--color-navigation-background);
+    color: var(--color-navigation-text);
+}
+
+main {
+    border: 2px solid blue;
+    flex: 1 0 auto;
+    color: var(--color-main-text);
+}
+
+.header-nav,
+.site-main,
+.footer-nav {
+    border: 2px solid red;
+    max-width: var(--width-main-content);
+    margin: 0 auto;
+}

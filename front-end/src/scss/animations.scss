@@ -1,0 +1,46 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes button-hover {
+    from {
+        color: var(--color-button-text);
+        background: var(--color-button-background);
+    }
+
+    to {
+        color: var(--color-button-background);
+        background: var(--color-button-text);
+    }
+}
+
+@keyframes donut-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+        // transform: rotate(0deg);
+    }
+}
+
+@keyframes text-glow {
+    0% {
+        background-position: -150%;
+    }
+
+    100% {
+        background-position: 150%;
+    }
+}
