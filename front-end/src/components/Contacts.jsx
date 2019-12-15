@@ -3,6 +3,7 @@ import React from 'react'
 
 function Header() {
     return (
+        document.title = 'Reactive Bookstore | Contacts',
         <h2>Contacts</h2>
     );
 }
