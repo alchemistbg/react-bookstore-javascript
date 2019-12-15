@@ -3,7 +3,8 @@ import React from 'react'
 
 function About() {
     return (
-        <h2>About</h2>
+        document.title = 'Reactive Bookstore | About us',
+        <h2>About us</h2>
     );
 }
 export default About;
