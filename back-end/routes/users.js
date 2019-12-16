@@ -5,7 +5,7 @@ const utils = require('../utils')
 const userController = require('../controllers/users');
 
 router.post('/', utils.validator.registrationDataValidator(), userController.register);
-router.post('/me', userController.login);
+router.post('/auth', userController.login);
 
 router.get('/:id', userController.profileRead);
 
