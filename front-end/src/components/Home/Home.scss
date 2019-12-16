@@ -1,0 +1,29 @@
+.home-page {
+    width: calc(var(--width-main-content) - 4em);
+
+    .category {
+        text-transform: capitalize;
+    }
+
+    .slick-slider {
+        // background: var(--color-comment-background);
+    }
+
+    .slick-prev,
+    .slick-next {}
+
+    .slick-arrow {}
+
+    .slick-prev {}
+
+    .slick-prev:before,
+    .slick-next:before {
+        color: var(--color-main-text);
+    }
+
+    .book-item {
+        padding: 0 2em;
+        // margin-right: 2em;
+        // width: 80%;
+    }
+}
