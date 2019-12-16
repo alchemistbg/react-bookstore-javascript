@@ -1,0 +1,33 @@
+.book-list-loader {
+    margin: auto;
+    padding-top: calc(100vh / 2 - 12em);
+}
+
+.book-list-container {
+    width: var(--width-main-content);
+    display: flex;
+    align-items: flex-start;
+}
+
+.sidebar {
+    border: 2px solid red;
+    flex: 0 0 24%;
+    margin-right: 2%;
+}
+
+.book-list {
+    width: var(--width-main-content);
+    margin: auto;
+    padding: 0;
+    list-style: outside;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    li {
+        flex-basis: 14vw;
+        margin: 0;
+        padding: 0;
+    }
+}
