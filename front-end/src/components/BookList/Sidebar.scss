@@ -1,0 +1,14 @@
+.sidebar {
+
+    .active,
+    li {
+        color: var(--color-navigation-background);
+    }
+
+    &-list {
+        list-style: none;
+        padding: 0;
+        color: var(--color-navigation-text);
+
+    }
+}
