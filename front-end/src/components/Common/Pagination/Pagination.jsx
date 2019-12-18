@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import _ from 'lodash';
 
 const Pagination = (props) => {
-    const { itemsCount, pageSize, currentPage, onPageChange } = props;
-    console.log(currentPage)
+    const { link, itemsCount, pageSize, currentPage, onPageChange } = props;
     const pagesCount = Math.ceil(itemsCount / pageSize);
 
     if (pagesCount === 1) {
@@ -17,11 +16,10 @@ const Pagination = (props) => {
         <ul className="pagination">
             {
                 pages.map((page) => {
-                    console.log(page === currentPage, page, currentPage);
                     return (<li key={page} className="page-item">
                         <Link
                             className={page === currentPage ? "page-link active" : "page-link"}
-                            to="/books"
+                            to={link}
                             onClick={() => onPageChange(page)}>
                             {page}
                         </Link>
