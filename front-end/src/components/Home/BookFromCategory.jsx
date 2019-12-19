@@ -6,7 +6,8 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 
 import BookCard from '../BookCard/BookCard';
 
-import { getBooks } from '../../utils/requests';
+import { getBooks } from '../../services/requests';
+import Donut from '../Common/Preloader/Donut';
 
 
 function BookFromCategory(props) {
@@ -20,12 +21,14 @@ function BookFromCategory(props) {
         slidesToScroll: 1
     };
 
-    let [books, setBooks] = useState([])
+    let [books, setBooks] = useState([]);
+    let [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         getBooks(category)
             .then((booksFromCategory) => {
                 setBooks(booksFromCategory.data.books);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error.response)
@@ -34,14 +37,19 @@ function BookFromCategory(props) {
 
     return (
         <Fragment>
-            <h4 className="category">{category} books</h4>
-            <Slider {...sliderSettings}>
-                {
-                    books.map((book) => {
-                        return <BookCard key={book} book={book} />
-                    })
-                }
-            </Slider>
+            <h5 className="category">{category} books</h5>
+            {isLoading ?
+                (
+                    <Donut />
+                ) : (
+                    <Slider {...sliderSettings}>
+                        {
+                            books.map((book) => {
+                                return <BookCard key={book} book={book} />
+                            })
+                        }
+                    </Slider>
+                )}
         </Fragment>
     );
 }

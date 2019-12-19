@@ -10,6 +10,13 @@
     font-size: 1em;
     font-weight: bold;
     transition: color 0.2s, background-color 0.2s;
+
+    &:disabled,
+    &:disabled:hover {
+        color: var(--color-donut-border-dark);
+        background: none;
+        cursor: default;
+    }
 }
 
 .form-button:hover {

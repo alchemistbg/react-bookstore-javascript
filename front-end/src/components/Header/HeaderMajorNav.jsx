@@ -4,13 +4,17 @@ import { NavLink } from 'react-router-dom';
 function HeaderMajorNav() {
     return (
         <ul className="major-nav-list">
-            {!true ? (
+            {true ? (
                 <Fragment>
                     <li>
                         <NavLink to="/profile">Welcome, Unufri</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/cart">My Cart</NavLink>
+                        <NavLink to="/cart">
+                            <i class="fas fa-shopping-cart">
+                                <span className="cart-size">5</span>
+                            </i>
+                        </NavLink>
                     </li>
                     <li>
                         <NavLink to="/logout">Logout</NavLink>

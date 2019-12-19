@@ -33,7 +33,10 @@ const userSchema = new Schema({
     orders: [{
         type: Schema.Types.ObjectId,
         res: 'order'
-    }]
+    }],
+    // cart: {
+
+    // }
 });
 
 userSchema.virtual('fullName')
@@ -44,8 +47,9 @@ userSchema.virtual('fullName')
     )
 
 userSchema.methods = {
-    //async-based version
     matchPassword: async function (password) {
+        // console.log(password)
+        // console.log(this.password)
         return await bcrypt.compare(password, this.password);
     }
 
@@ -60,7 +64,9 @@ userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         try {
             const salt = await bcrypt.genSalt(saltRounds);
+            console.log(salt);
             const hashedPassword = await bcrypt.hash(this.password, salt);
+            console.log(hashedPassword)
             this.password = hashedPassword;
             // next();
         } catch (error) {

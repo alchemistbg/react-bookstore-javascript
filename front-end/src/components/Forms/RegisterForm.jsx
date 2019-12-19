@@ -2,7 +2,7 @@ import React, { Fragment, Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import Input from './Input';
-import { registerUser } from '../../utils/requests';
+import { registerUser } from '../../services/requests';
 
 class RegisterForm extends Component {
     constructor(props) {

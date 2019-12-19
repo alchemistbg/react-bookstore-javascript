@@ -3,6 +3,7 @@ import React from 'react'
 
 function NotFound() {
     return (
+        document.title = 'Page not found',
         <h2>404 Not found!</h2>
     );
 }

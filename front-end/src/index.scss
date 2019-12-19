@@ -7,11 +7,19 @@
 @import './scss/layout.scss';
 @import './scss/buttons.scss';
 
-@import './components/Donut.scss';
-@import './components/Navigation/Header.scss';
-@import './components/Navigation/Footer.scss';
-@import './components/BookList.scss';
+@import './components/Common/Preloader/Donut.scss';
+@import './components/Common/Pagination/Pagination.scss';
+@import './components/Header/Header.scss';
+@import './components/Footer/Footer.scss';
+
+@import './components/Home/Home.scss';
+
+@import './components/BookList/Sidebar.scss';
+@import './components/BookList/BookList.scss';
+
 @import './components/BookCard/BookCard.scss';
 @import './components/BookDetails/BookDetails.scss';
 
 @import './components/Forms/Forms.scss';
+
+@import '../node_modules/toastr/build/toastr.css';

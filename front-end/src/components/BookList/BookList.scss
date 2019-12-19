@@ -6,6 +6,7 @@
 .book-list-container {
     width: var(--width-main-content);
     display: flex;
+    // flex-direction: column;
     align-items: flex-start;
 }
 
@@ -23,10 +24,10 @@
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    // justify-content: space-between;
 
     li {
-        flex-basis: 14vw;
+        flex: 0 0 14vw;
         margin: 0;
         padding: 0;
     }

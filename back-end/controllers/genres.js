@@ -1,20 +1,31 @@
-const genreModel = require('../models/genre');
+const genreModel = require('../models/Genre');
 
 module.exports = {
 
     getGenres: (req, res) => {
         genreModel.find()
+            .sort({ 'name': 1 })
             .then((genres) => {
-                console.log(genres);
+                res.status(200).json({
+                    message: "",
+                    genres
+                });
+                // console.log(genres);
             })
             .catch();
     },
 
     genreAdd: (req, res) => {
-        // console.log(req.body)
         const { genreName } = req.body;
-        const genre = new genreModel({ name: genreName });
-        genre.save();
+        genreModel.create({ name: genreName })
+            .then((genre) => {
+                res.status(201)
+                    .json({
+                        message: "Added new genre",
+                        genre
+                    });
+            })
+            .catch();
     },
 
     genreDetails: () => {

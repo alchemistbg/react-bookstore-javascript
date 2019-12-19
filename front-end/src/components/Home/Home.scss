@@ -1,12 +1,12 @@
 .home-page {
-    width: calc(var(--width-main-content) - 4em);
+    width: var(--width-main-content);
 
     .category {
-        text-transform: capitalize;
+        text-transform: uppercase;
     }
 
     .slick-slider {
-        // background: var(--color-comment-background);
+        padding: 2em 0;
     }
 
     .slick-prev,
@@ -22,8 +22,13 @@
     }
 
     .book-item {
-        padding: 0 2em;
-        // margin-right: 2em;
-        // width: 80%;
+        margin: 0.1em 0.5em;
+        padding: 1em 2em 0.5em 2em;
+        height: 24em;
+
+        .book-cover {
+            height: 15em;
+            width: 10em;
+        }
     }
 }

@@ -1,5 +1,5 @@
 .book-data {
-    border: 2px solid green;
+    // border: 2px solid green;
     width: var(--width-main-content);
 }
 
@@ -49,6 +49,7 @@
     // border: 2px solid purple;
     display: flex;
     flex-direction: column;
+    padding: 2em 0 3em 0;
 
     .comment-area {
         margin-bottom: 1em;

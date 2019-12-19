@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { getBookCover } from '../../utils/requests';
-import Donut from '../Preloader/Donut';
+import { getBookCover } from '../../services/requests';
+import Donut from '../Common/Preloader/Donut';
 
 class BookCover extends Component {
     constructor(props) {

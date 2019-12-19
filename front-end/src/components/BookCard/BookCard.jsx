@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 
-import { getBookCover } from '../../utils/requests';
-import Donut from '../Preloader/Donut';
+import { getBookCover } from '../../services/requests';
+import Donut from '../Common/Preloader/Donut';
 
 class Book extends Component {
     constructor(props) {
@@ -47,8 +47,8 @@ class Book extends Component {
                     <div className="book-title">{book.title}</div>
                 </div>
                 <div className="book-footer">
-                    <div className="book-author">{book.author}</div>
-                    <div className="book-price">{book.price}$</div>
+                    <div className="book-author">from <span>{book.author}</span></div>
+                    <div className="book-price">Price: <span>{book.price}$</span></div>
                 </div>
             </Link>
         </div >

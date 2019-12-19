@@ -1,15 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Redirect } from 'react-router-dom'
-
-// import axios from 'axios';
 
 import Donut from '../Common/Preloader/Donut';
 import BookCard from '../BookCard/BookCard';
-// import Sidebar from './Sidebar';
 import Pagination from './../Common/Pagination/Pagination';
 
 import { paginate } from '../../utils/paginate';
-import { getBooks, getBooksByGenre } from '../../utils/requests';
+import { getBooks, getBooksByGenre } from '../../services/requests';
 
 class BookList extends Component {
     constructor(props) {
@@ -18,9 +14,9 @@ class BookList extends Component {
         this.state = {
             pageName: 'Reactive Bookstore | Books',
             isLoading: true,
-            // fromGenre: false,
+            genre: '',
             books: [],
-            pageSize: 8,
+            pageSize: 6,
             currentPage: 1
         }
     }
@@ -29,38 +25,37 @@ class BookList extends Component {
         this.setState({
             currentPage: page
         });
-        // console.log(page);
+    }
+
+    static getDerivedStateFromProps({ genre }) {
+        return {
+            genre
+        }
     }
 
     async componentDidMount() {
         let booksResponse = undefined;
-        if (this.props.match.url.includes('genres')) {
-            // console.log('skdmflskdmfsldkfm')
-            // this.setState({
-            //     fromGenre: true
-            // });
-            const genre = this.props.match.params.id;
-            console.log(genre)
-            try {
-                booksResponse = await getBooksByGenre(genre);
-            } catch (error) {
-                console.log(error.response);
-                return;
-            }
-        } else {
+        let genreFromUrl = '';
+        if (this.props.match.params.id) {
+            genreFromUrl = this.props.match.params.id;
+            booksResponse = await getBooksByGenre(genreFromUrl);
+        }
+        else {
             booksResponse = await getBooks();
         }
+
         this.setState({
             books: booksResponse.data.books,
             isLoading: false
         });
-
     }
 
     render() {
+        console.log(this.state.genre)
         const { length: booksCount } = this.state.books;
         const { pageName, books: allBooks } = this.state;
         const { pageSize, currentPage } = this.state;
+
         if (this.state.isLoading) {
             return <div className="book-list-loader">
                 <Donut />
@@ -78,25 +73,40 @@ class BookList extends Component {
             )
         }
 
-        const booksPage = paginate(allBooks, currentPage, pageSize);
+        let booksToUse = [];
+        if (this.state.genre) {
+            booksToUse = allBooks.filter((book) => {
+                return book.genres.some((genres) => genres.name === this.state.genre);
+            });
+            console.log(booksToUse)
+        } else {
+            booksToUse = allBooks;
+        }
+
+        const booksPage = paginate(booksToUse, currentPage, pageSize);;
 
         return (
             document.title = pageName,
+
             <Fragment>
-                <ul className='book-list'>
-                    {
-                        booksPage.map((book) => {
-                            return <li key={book._id}>
-                                <BookCard book={book} />
-                            </li>
-                        })
-                    }
-                </ul>
-                <Pagination
-                    itemsCount={allBooks.length}
-                    pageSize={pageSize}
-                    currentPage={currentPage}
-                    onPageChange={this.handlePageChange} />
+                <div className="container">
+                    <h2>Our books</h2>
+                    <ul className='book-list'>
+                        {
+                            booksPage.map((book) => {
+                                return <li key={book._id}>
+                                    <BookCard book={book} />
+                                </li>
+                            })
+                        }
+                    </ul>
+                    <Pagination
+                        link={this.props.location}
+                        itemsCount={booksToUse.length}
+                        pageSize={pageSize}
+                        currentPage={currentPage}
+                        onPageChange={this.handlePageChange} />
+                </div>
             </Fragment>
         );
     }

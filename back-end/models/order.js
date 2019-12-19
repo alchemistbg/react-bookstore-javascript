@@ -4,9 +4,14 @@ const Schema = mongoose.Schema;
 const orderSchema = new Schema({
     customer: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
-
+    orderItem: [{
+        type: Schema.Types.ObjectId,
+        ref: 'orderItem'
+    }]
 });
 
-module.exports = mongoose.model('order', orderSchema)
+
+const Order = mongoose.model('order', orderSchema);
+module.exports = Order;

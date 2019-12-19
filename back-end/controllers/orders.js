@@ -1,5 +1,5 @@
 const orderModel = require('../models/order');
-const userModel = require('../models/user');
+const userModel = require('../models/User');
 
 const mongoose = require('mongoose');
 
@@ -32,6 +32,9 @@ module.exports = {
     },
 
     getOrders: (req, res) => {
+
+        const customerId = req.body.userId;
+
         orderModel.find()
             .populate({ path: 'customer', select: '_id' })
             .then((orders) => {

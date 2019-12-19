@@ -1,12 +1,14 @@
 .form {
+
     width: var(--width-main-content);
+    // background: #fff;
 
     textarea {
         display: block;
     }
 
     &-header {
-        padding-top: 2em;
+        // padding-top: 1em;
         padding-bottom: 0.5em;
     }
 
@@ -178,7 +180,7 @@
             margin-top: 1.3em;
             padding-left: 1.6em;
             color: #999;
-            background: #fff;
+            background: #eeeeee;
             line-height: 1em;
             position: absolute;
             top: 0;
@@ -359,4 +361,17 @@
     // .form-file {
     //     flex: 1 1 66%;
     // }
+
+    .danger input {
+        border: 2px solid red;
+    }
+}
+
+.message {
+    visibility: hidden;
+}
+
+.message-error {
+    color: red;
+    visibility: visible;
 }
