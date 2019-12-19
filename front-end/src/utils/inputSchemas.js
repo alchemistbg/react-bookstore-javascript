@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 const loginFormSchema = yup.object().shape({
-    username: yup
+    userName: yup
         .string()
         .required('Username is required!')
         .min(5, 'Username must be between 5 and 20 characters long!')

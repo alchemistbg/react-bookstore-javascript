@@ -22,7 +22,6 @@ class BookComments extends Component {
 
     render() {
         const { book } = this.props;
-        console.log(book._id)
         const { length: commentsCount } = book.comments;
         const { comments: allComments } = book;
         const { pageSize, currentPage } = this.state;
@@ -42,12 +41,12 @@ class BookComments extends Component {
                                     commentsPage.map((comment) => {
                                         const commentTime = timeFormat(comment.commentTime);
                                         const content = comment.commentContent;
-                                        const username = comment.commentCreator.username;
+                                        const userName = comment.commentCreator.userName;
 
                                         return <li key={comment.commentTime} className="comment-item">
                                             <div className="comment-meta">
                                                 <span className="comment-time">on {commentTime} </span>
-                                                <span className="comment-author">{username} wrote:</span>
+                                                <span className="comment-author">{userName} wrote:</span>
                                             </div>
                                             <div className="comment-content">
                                                 {content}

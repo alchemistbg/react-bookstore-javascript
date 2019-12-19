@@ -32,8 +32,12 @@ const userSchema = new Schema({
     },
     orders: [{
         type: Schema.Types.ObjectId,
-        res: 'order'
+        ref: 'order'
     }],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'comment'
+    }]
     // cart: {
 
     // }
@@ -118,6 +122,7 @@ module.exports.seedUsers = () => {
                     "email": "unufri@unufri.com",
                     "userRole": "user",
                     "orders": [],
+                    "comments": []
                 },
                 {
                     "firstName": "Petar",
@@ -127,6 +132,7 @@ module.exports.seedUsers = () => {
                     "email": "pesho@pesho.com",
                     "userRole": "user",
                     "orders": [],
+                    "comments": []
                 },
 
             ];

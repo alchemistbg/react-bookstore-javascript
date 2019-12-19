@@ -19,8 +19,8 @@ async function getBooksByGenre(genre) {
     return await axios.get(`${baseUrl}/books/genres/${genre}`);
 }
 
-async function getBookDetails(isbn) {
-    return await axios.get(`${baseUrl}/books/${isbn}`);
+async function getBookDetails(bookId) {
+    return await axios.get(`${baseUrl}/books/${bookId}`);
 }
 
 async function getGenres() {

@@ -1,0 +1,27 @@
+.profile-wrapper {
+    // border: 2px solid green;
+    width: var(--width-main-content);
+
+    .personal-info {
+        margin-bottom: 5em;
+
+        .info-table {
+            padding: 1em 0 2em 0;
+
+            h6 {
+                font-weight: normal;
+
+            }
+
+            span {
+                padding-left: 2em;
+                font-weight: bold;
+            }
+
+        }
+
+        .form-button {}
+    }
+
+
+}

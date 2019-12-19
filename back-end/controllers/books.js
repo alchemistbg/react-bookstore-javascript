@@ -1,7 +1,7 @@
 const bookModel = require('../models/Book');
 const commentModel = require('../models/Comment');
 const genreModel = require('../models/Genre');
-
+const userModel = require('../models/User');
 module.exports = {
 
     getBooks: (req, res) => {
@@ -31,6 +31,15 @@ module.exports = {
             .sort("-addedOn")
             .limit(5)
             .populate({ path: 'genres', select: 'name' })
+            .populate({
+                path: 'comments',
+                model: 'comment',
+                populate: {
+                    path: 'commentCreator',
+                    model: 'user',
+                    select: ('username')
+                }
+            })
             .then((books) => {
                 res.status(200).json({
                     message: "",
@@ -90,7 +99,6 @@ module.exports = {
 
     getBooksByGenre: (req, res) => {
         const genre = req.params.id;
-        // console.log(genre);
         genreModel.findOne({ name: genre })
             .then((genre) => {
                 if (!genre) {
@@ -118,17 +126,6 @@ module.exports = {
                     .catch()
             })
             .catch();
-        // bookModel.findOne({ 'genres.name': genre })
-        //     // .populate({ path: 'genres', select: 'name' })
-        //     .then((books) => {
-        //         res.status(200).json({
-        //             message: "",
-        //             books
-        //         });
-        //     })
-        //     .catch((error) => {
-
-        //     });
     },
 
     bookCreate: (req, res) => {
@@ -136,8 +133,6 @@ module.exports = {
 
         bookModel.create({ title, author, publisher, isbn, genres })
             .then((book) => {
-                // bookModel.populate({ path: 'genre' });
-                // console.log(book)
                 res.status(201).json({
                     message: "Book Added",
                     book
@@ -150,14 +145,12 @@ module.exports = {
         const bookId = req.params.id;
         bookModel.findById(bookId)
             .populate({ path: 'genres', select: 'name' })
-            // .populate({ path: 'comments' })
             .populate({
                 path: 'comments',
-                model: 'comment',
                 populate: {
                     path: 'commentCreator',
                     model: 'user',
-                    select: ('username')
+                    select: ('userName')
                 }
             })
             .then((book) => {
@@ -202,7 +195,6 @@ module.exports = {
                 }
             })
             .then((comments) => {
-                console.log(comments)
                 res.status(200).json({
                     message: "Book comments:",
                     comments: comments.comments
@@ -212,32 +204,30 @@ module.exports = {
 
     },
 
-    bookPostComment: (req, res) => {
+    bookPostComment: async (req, res) => {
         const bookId = req.params.id;
         const { commentCreator, commentContent } = req.body;
 
-        commentModel.create({ commentCreator, commentContent })
-            .then((comment) => {
-                bookModel.findById(bookId)
-                    .then((book) => {
-                        book.comments.push(comment._id);
-                        book.save()
-                            .then((book) => {
-                                res.status(201).json({
-                                    message: "Comment created",
-                                    book
-                                });
-                            })
-                            .catch();
-                        console.log(comment._id)
-                    })
-                    .catch();
-            })
-            .catch((error) => console.log(error));
-        // console.log(`
-        //     User ${commentCreator} commented book ${bookId}:
-        //     ${commentContent}
-        // `);
+        try {
+            const comment = await commentModel({ commentCreator, commentContent, bookCommented: bookId });
+            await comment.save();
+
+            const book = await bookModel.findById(bookId);
+            book.comments.push(comment._id);
+            await book.save();
+
+            const user = await userModel.findById(commentCreator);
+            user.comments.push(comment._id);
+            await user.save();
+
+            res.status(201).json({
+                message: "sldkmvmk f",
+                book,
+                user
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 }

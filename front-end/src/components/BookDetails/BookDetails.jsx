@@ -46,7 +46,7 @@ class BookDetails extends Component {
     }
 
     handleCommentButton = () => {
-        console.log(this.state.bookComment)
+        console.log(this.state.bookComment);
     }
 
     async componentDidMount() {
@@ -55,9 +55,11 @@ class BookDetails extends Component {
             bookData = { ...this.props.location.state.book };
         } else {
             const bookId = this.props.match.params.id;
+            // console.log(bookId)
             try {
                 const bookDataResponse = await getBookDetails(bookId);
                 bookData = bookDataResponse.data.book;
+                // console.log(bookData.comments)
             } catch (error) {
                 bookData = {};
             }

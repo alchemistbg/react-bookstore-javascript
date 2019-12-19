@@ -6,6 +6,10 @@ const commentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'user'
     },
+    bookCommented: {
+        type: Schema.Types.ObjectId,
+        ref: 'book'
+    },
     commentTime: {
         type: Date,
         default: Date.now

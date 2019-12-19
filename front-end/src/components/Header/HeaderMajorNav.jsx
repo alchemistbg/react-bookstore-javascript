@@ -1,13 +1,23 @@
-import React, { Fragment } from 'react'
-import { NavLink } from 'react-router-dom';
+import React, { Fragment, useContext } from 'react'
+import { NavLink, Redirect } from 'react-router-dom';
+
+import AuthContext from './../../context/authContext/AuthContext';
 
 function HeaderMajorNav() {
+    const [{ isLoggedIn, userName, error }, dispatch] = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        dispatch({
+            type: 'LOGOUT'
+        });
+    }
+
     return (
         <ul className="major-nav-list">
-            {true ? (
+            {isLoggedIn ? (
                 <Fragment>
                     <li>
-                        <NavLink to="/profile">Welcome, Unufri</NavLink>
+                        <NavLink to="/profile">Welcome, {userName}</NavLink>
                     </li>
                     <li>
                         <NavLink to="/cart">
@@ -17,7 +27,7 @@ function HeaderMajorNav() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/logout">Logout</NavLink>
+                        <NavLink to="/logout" onClick={handleLogOut}>Logout</NavLink>
                     </li>
                 </Fragment>
             ) : (

@@ -1,56 +1,89 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, Fragment } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import Input from './Input';
 import { loginUser } from '../../services/requests';
 import { validateForm, validateInput } from '../../utils/inputValidation';
 import { showToast } from '../../utils/helpers';
 
-class LoginForm extends Component {
-    constructor(props) {
-        super(props);
+import AuthContext from './../../context/authContext/AuthContext';
 
-        this.state = {
-            pageName: 'Reactive Bookstore | Login',
-            editing: undefined,
-            loginInfo: {
-                username: '',
-                password: ''
-            },
-            loginErrors: {
+const LoginForm = () => {
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        userName: '',
+        password: ''
+    });
 
-            },
-            inputError: {
-                username: false,
-                password: false,
-            }
-        }
-    }
+    const [{ isLoggedIn, error }, dispatch] = useContext(AuthContext);
+    console.log(isLoggedIn);
 
-    handleChange = ({ currentTarget: input }) => {
+    const handleChange = ({ currentTarget: input }) => {
         if (input.value) {
             input.className = "filled-input";
         }
         else {
             input.className = "";
         }
-        const { loginInfo } = { ...this.state }
-        loginInfo[input.name] = input.value;
-        this.setState({
-            loginInfo
-        });
+        setFormData((formData) => ({
+            ...formData,
+            [input.name]: input.value
+        }));
     }
 
-    handleSubmit = (event) => {
-        const { loginInfo } = this.state;
+    const handleFocus = () => {
+        // console.log('FOCUS');
+        // this.setState({
+        //     editing: true
+        // });
+    }
+
+    const handleBlur = ({ currentTarget: input }) => {
+        // validateInput('login', input.name, this.state.loginInfo)
+        //     .then((errors) => {
+        //         console.log(errors);
+        //         this.setState({
+        //             inputError: {
+        //                 userName: (!!errors.),
+        //                 password: (!!errors.password)
+        //             }
+        //             // userNameError: !(!!errors.userName),
+        //             // passwordError: !(!!errors.password)
+        //         });
+        //     })
+        //     .catch(errors => {
+        //         console.log(errors)
+        //         if (errors.userName) {
+        //             this.setState({
+        //                 inputError: {
+        //                     userName: (!!errors.userName)
+        //                 }
+        //             });
+        //         }
+        //         if (errors.password) {
+        //             this.setState({
+        //                 inputError: {
+        //                     password: (!!errors.password)
+        //                 }
+        //             });
+        //         }
+        //     });
+    }
+
+    const handleSubmit = (event) => {
         event.preventDefault();
-        validateForm('login', loginInfo)
+        validateForm('login', formData)
             .then(() => {
-                loginUser(this.state.loginInfo)
+                loginUser(formData)
                     .then((response) => {
-                        console.log(response)
+                        dispatch({
+                            type: 'LOGIN',
+                            payload: {
+                                userName: response.data.userName
+                            }
+                        });
                         showToast('success', {
-                            title: `Welcome, ${response.data.username}.`,
+                            title: `Welcome, ${response.data.userName}.`,
                             message: `You will be now redirected to home page.`
                         });
                     })
@@ -62,112 +95,80 @@ class LoginForm extends Component {
                     });
             })
             .catch((errors) => {
-
-                this.setState({
-                    loginErrors: errors
-                });
-                showToast('error', this.state.loginErrors)
-            });
-    }
-
-    handleFocus = () => {
-        // console.log('FOCUS');
-        // this.setState({
-        //     editing: true
-        // });
-    }
-
-    handleBlur = ({ currentTarget: input }) => {
-        validateInput('login', input.name, this.state.loginInfo)
-            .then((errors) => {
-                console.log(errors);
-                this.setState({
-                    inputError: {
-                        username: (!!errors.username),
-                        password: (!!errors.password)
-                    }
-                    // usernameError: !(!!errors.username),
-                    // passwordError: !(!!errors.password)
-                });
-            })
-            .catch(errors => {
                 console.log(errors)
-                if (errors.username) {
-                    this.setState({
-                        inputError: {
-                            username: (!!errors.username)
-                        }
-                    });
-                }
-                if (errors.password) {
-                    this.setState({
-                        inputError: {
-                            password: (!!errors.password)
-                        }
-                    });
-                }
+                // this.setState({
+                //     loginErrors: errors
+                // });
+                // showToast('error', this.state.loginErrors)
             });
     }
 
-    render() {
-        const { pageName, loginInfo } = this.state;
-        const { username, password } = this.state.inputError;
-        // console.log(username, password);
-        return (
-            document.title = pageName,
-            < Fragment >
-                <h2 className="form-header">Login</h2>
-                <div id="login-form">
-                    <form className="form login-form" onSubmit={this.handleSubmit}>
-                        <Input
-                            divClassNames={
-                                username ? (
-                                    "form-field-wrapper uname-wrapper danger"
-                                ) : (
-                                        "form-field-wrapper uname-wrapper"
-                                    )
-                            }
-                            isAutoFocus={false}
-                            value={loginInfo.username}
-                            onFocus={this.handleFocus}
-                            onChange={this.handleChange}
-                            onBlur={this.handleBlur}
-                            type="text"
-                            nameAndId="username"
-                            labelClassName="placeholder"
-                            labelTextValue="Username"
-                            error="no errors" />
-                        <Input
-                            divClassNames={
-                                password ? (
-                                    "form-field-wrapper pass-rep-wrapper danger"
-                                ) : (
-                                        "form-field-wrapper pass-rep-wrapper"
-                                    )
-                            }
-                            isAutoFocus={false}
-                            value={loginInfo.password}
-                            onChange={this.handleChange}
-                            onChange={this.handleChange}
-                            onBlur={this.handleBlur}
-                            type="password"
-                            nameAndId="password"
-                            labelClassName="placeholder"
-                            labelTextValue="Password"
-                            error="no errors" />
-                        {
-                            !!(username || password) ? (
+    return (
+        // <div>FUCK</div>
+        // document.title = pageName,
+
+        <Fragment>
+            {isLoggedIn ? (
+                <Redirect to="/" />
+            ) : (
+                    <Fragment>
+
+                        <h2 className="form-header">Login</h2>
+                        <div id="login-form">
+                            <form className="form login-form" onSubmit={handleSubmit}>
+                                <Input
+                                    divClassNames={"form-field-wrapper uname-wrapper"}
+                                    // divClassNames={
+                                    //     formData.userName ? (
+                                    //         "form-field-wrapper uname-wrapper danger"
+                                    //     ) : (
+                                    //             "form-field-wrapper uname-wrapper"
+                                    //         )
+                                    // }
+                                    isAutoFocus={false}
+                                    value={formData.userName}
+                                    onChange={handleChange}
+                                    // onFocus={handleFocus}
+                                    // onBlur={handleBlur}
+                                    type="text"
+                                    nameAndId="userName"
+                                    labelClassName="placeholder"
+                                    labelTextValue="Username"
+                                    error="no errors" />
+                                <Input
+                                    divClassNames={"form-field-wrapper uname-wrapper"}
+                                    // divClassNames={
+                                    //     formData.password ? (
+                                    //         "form-field-wrapper pass-rep-wrapper danger"
+                                    //     ) : (
+                                    //             "form-field-wrapper pass-rep-wrapper"
+                                    //         )
+                                    // }
+                                    isAutoFocus={false}
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    // onFocus={handleFocus}
+                                    // onBlur={handleBlur}
+                                    type="password"
+                                    nameAndId="password"
+                                    labelClassName="placeholder"
+                                    labelTextValue="Password"
+                                    error="no errors" />
+                                < button className="form-button" type="submit">Login</button>
+                                {/* {
+                            !!(formData.userName || formData.password) ? (
                                 <button className="form-button" disabled={true} type="submit">Login</button>
                             ) : (
                                     < button className="form-button" type="submit">Login</button>
                                 )
-                        }
-                    </form>
-                </div>
-                <div>Don't have an account? Please go to {<Link to="/register">Register</Link>} page.</div>
-            </Fragment >
-        );
-    }
+                        } */}
+                            </form>
+                        </div>
+                        <div>Don't have an account? Please go to {<Link to="/register">Register</Link>} page.</div>
+                    </Fragment>
+                )}
+        </Fragment >
+    );
 }
 
 export default LoginForm;

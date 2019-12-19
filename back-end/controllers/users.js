@@ -40,9 +40,10 @@ module.exports = {
     },
 
     login: (req, res, next) => {
-        const { username, password } = req.body;
+        console.log(req.body)
+        const { userName, password } = req.body;
 
-        userModel.findOne({ username })
+        userModel.findOne({ userName })
             //to use with promise-based password check
             // .then((user) => {
             //     user.matchPassword(password)
@@ -63,7 +64,7 @@ module.exports = {
             .then(async (user) => {
                 if (!user) {
                     const error = new Error('User doesn\'t exist!');
-                    error.param = 'username';
+                    error.param = 'userName';
                     error.status = 401;
                     throw error;
                 }
@@ -82,7 +83,7 @@ module.exports = {
                     message: 'Login successful.',
                     token,
                     // userId: user._id.toString(),
-                    username: user.username,
+                    userName: user.userName,
                     // userRole: user.userRole
                 });
                 // console.log(token);
@@ -98,6 +99,20 @@ module.exports = {
         userModel.findOne({ userName })
             // .select('firstName lastName userRole username email orders')
             .populate({ path: 'order' })
+            .populate({
+                path: 'comments',
+                select: 'commentContent commentTime',
+                // populate: {
+                //     path: 'commentCreator',
+                //     model: 'user',
+                //     select: ('username')
+                // },
+                populate: {
+                    path: 'bookCommented',
+                    model: 'book',
+                    select: '_id title'
+                }
+            })
             .then((user) => {
                 if (!user) {
                     res.status(400).json({
