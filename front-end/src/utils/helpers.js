@@ -1,3 +1,27 @@
+import toastr from 'toastr';
+
+const toastOptions = {
+    closeButton: true,
+    newestOnTop: false,
+    timeOut: 10000,
+    extendedTimeOut: 10000,
+    progressBar: true,
+    // timeOut: 0,
+    // extendedTimeOut: 0
+}
+
+function showToast(toastType, toastData) {
+    toastr.remove();
+    if (toastType === 'success') {
+        toastr[toastType](toastData.message, toastData.title, toastOptions);
+        return;
+    }
+
+    Object.keys(toastData).forEach((key) => {
+        toastr[toastType](toastData[key].join('\n'), `Invalid ${key}`, toastOptions);
+    });
+}
+
 function timeFormat(commentTime) {
     const time = new Date(commentTime).toDateString();
     const timeArr = time.split(' ');
@@ -9,5 +33,7 @@ function timeFormat(commentTime) {
 }
 
 export {
+    // toastrOptions,
+    showToast,
     timeFormat
 }
