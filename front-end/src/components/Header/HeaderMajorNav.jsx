@@ -11,7 +11,7 @@ function HeaderMajorNav() {
                     </li>
                     <li>
                         <NavLink to="/cart">
-                            <i class="fas fa-shopping-cart">
+                            <i className="fas fa-shopping-cart">
                                 <span className="cart-size">5</span>
                             </i>
                         </NavLink>

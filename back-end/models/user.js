@@ -4,15 +4,15 @@ const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const userSchema = new Schema({
-    firstname: {
+    firstName: {
         type: String,
         required: true
     },
-    lastname: {
+    lastName: {
         type: String,
         required: true
     },
-    username: {
+    userName: {
         type: String,
         required: true
     },
@@ -42,14 +42,12 @@ const userSchema = new Schema({
 userSchema.virtual('fullName')
     .get(
         function () {
-            return `${this.firstname} ${this.lastname}`;
+            return `${this.firstName} ${this.lastName}`;
         }
     )
 
 userSchema.methods = {
     matchPassword: async function (password) {
-        // console.log(password)
-        // console.log(this.password)
         return await bcrypt.compare(password, this.password);
     }
 
@@ -113,18 +111,18 @@ module.exports.seedUsers = () => {
             console.log('User collection is empty. It will be seeded with sample collection.');
             const userSeed = [
                 {
-                    "firstname": "Unufri",
-                    "lastname": "Penchev",
-                    "username": "UnChev",
+                    "firstName": "Unufri",
+                    "lastName": "Penchev",
+                    "userName": "UnChev",
                     "password": "unufriPass",
                     "email": "unufri@unufri.com",
                     "userRole": "user",
                     "orders": [],
                 },
                 {
-                    "firstname": "Petar",
-                    "lastname": "Ivanov",
-                    "username": "peshov",
+                    "firstName": "Petar",
+                    "lastName": "Ivanov",
+                    "userName": "peshov",
                     "password": "peshoPass",
                     "email": "pesho@pesho.com",
                     "userRole": "user",

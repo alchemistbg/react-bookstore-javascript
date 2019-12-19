@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+const baseUrl = 'http://localhost:3000/routes';
+
 async function getBookCover(isbn, size) {
     const cover = await axios.get(`https://cors-anywhere.herokuapp.com/http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
         {
@@ -10,40 +12,31 @@ async function getBookCover(isbn, size) {
 }
 
 async function getBooks(category = '') {
-    // if (!genre) {
-    //     return await axios.get(`http://localhost:3000/routes/books`);
-    // }
-    // console.log(genre)
-    return await axios.get(`http://localhost:3000/routes/books/${category}`);
-    // const books = await axios.get(`http://localhost:3000/routes/books/${category}`);
-    // const booksData = books.data.books;
-    // return booksData;
+    return await axios.get(`${baseUrl}/books/${category}`);
 }
 
 async function getBooksByGenre(genre) {
-    return await axios.get(`http://localhost:3000/routes/books/genres/${genre}`);
+    return await axios.get(`${baseUrl}/books/genres/${genre}`);
 }
 
 async function getBookDetails(isbn) {
-    return await axios.get(`http://localhost:3000/routes/books/${isbn}`);
-    // const book = await axios.get(`http://localhost:3000/routes/books/${isbn}`);
-    // const bookData = book.data.book;
-    // return bookData;
+    return await axios.get(`${baseUrl}/books/${isbn}`);
 }
 
 async function getGenres() {
-    return await axios.get('http://localhost:3000/routes/genres');
-    // const genres = await axios.get('http://localhost:3000/routes/genres');
-    // const genresData = genres.data.genres;
-    // return genresData;
+    return await axios.get(`${baseUrl}/genres`);
 }
 
 async function registerUser(registerData) {
-    return axios.post('http://localhost:3000/routes/users/', registerData);
+    return axios.post(`${baseUrl}/genres`, registerData);
 }
 
 async function loginUser(loginData) {
-    return axios.post('http://localhost:3000/routes/users/auth', loginData);
+    return axios.post(`${baseUrl}/users/auth`, loginData);
+}
+
+async function getUserProfile(userName) {
+    return axios.get(`${baseUrl}/users/${userName}`);
 }
 
 export {
@@ -53,5 +46,6 @@ export {
     getBookCover,
     getGenres,
     registerUser,
-    loginUser
+    loginUser,
+    getUserProfile
 }

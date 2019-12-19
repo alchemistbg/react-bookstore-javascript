@@ -68,8 +68,9 @@
             position: absolute;
             padding: 0.2em 0.4em;
             border-radius: 50%;
-            font-size: 0.4em;
             background: var(--color-highlight-text);
+            font-size: 0.4em;
+            font-family: var(--default-font-family);
             top: -7px;
             right: -5px;
         }

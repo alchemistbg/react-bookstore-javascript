@@ -71,7 +71,7 @@ class LoginForm extends Component {
     }
 
     handleFocus = () => {
-        // console.log('FUCK FOCUS');
+        // console.log('FOCUS');
         // this.setState({
         //     editing: true
         // });

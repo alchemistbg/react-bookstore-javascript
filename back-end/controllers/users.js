@@ -93,12 +93,18 @@ module.exports = {
     },
 
     profileRead: (req, res) => {
-        const userId = req.params.id;
+        const userName = req.params.id;
 
-        userModel.findById(userId)
-            .select('firstName lastName userRole username email orders')
+        userModel.findOne({ userName })
+            // .select('firstName lastName userRole username email orders')
             .populate({ path: 'order' })
             .then((user) => {
+                if (!user) {
+                    res.status(400).json({
+                        message: "User not found!"
+                    });
+                    return;
+                }
                 res.status(200).json({
                     message: "",
                     user,

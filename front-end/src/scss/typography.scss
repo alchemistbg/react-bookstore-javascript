@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Serif:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext');
 
 html {
-    font: var(--font-size-body-normal)/1.5 'PT Sans', sans-serif;
+    font: var(--font-size-body-normal)/1.5 var(--default-font-family), sans-serif;
 }
 
 @media (min-width: 768px) {
@@ -99,6 +99,10 @@ ol {
 
 span.vip-text {
     font-weight: bold;
+}
+
+.fas span {
+    font-family: inherit;
 }
 
 ul ul,
