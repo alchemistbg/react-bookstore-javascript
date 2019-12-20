@@ -9,14 +9,13 @@ import { showToast } from '../../utils/helpers';
 import AuthContext from './../../context/authContext/AuthContext';
 
 const LoginForm = () => {
-    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         userName: '',
         password: ''
     });
 
     const [{ isLoggedIn, error }, dispatch] = useContext(AuthContext);
-    console.log(isLoggedIn);
 
     const handleChange = ({ currentTarget: input }) => {
         if (input.value) {
@@ -76,10 +75,12 @@ const LoginForm = () => {
             .then(() => {
                 loginUser(formData)
                     .then((response) => {
+                        console.log(response.data)
                         dispatch({
                             type: 'LOGIN',
                             payload: {
-                                userName: response.data.userName
+                                userName: response.data.userName,
+                                userId: response.data.userId
                             }
                         });
                         showToast('success', {
@@ -104,9 +105,6 @@ const LoginForm = () => {
     }
 
     return (
-        // <div>FUCK</div>
-        // document.title = pageName,
-
         <Fragment>
             {isLoggedIn ? (
                 <Redirect to="/" />

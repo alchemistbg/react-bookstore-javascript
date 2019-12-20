@@ -10,7 +10,7 @@ function Sidebar(props) {
         getGenres()
             .then((genresResponse) => {
                 setGenres(genresResponse.data.genres);
-                console.log(genresResponse.data.genres)
+                // console.log(genresResponse.data.genres)
             })
             .catch((error) => {
                 console.log(error);

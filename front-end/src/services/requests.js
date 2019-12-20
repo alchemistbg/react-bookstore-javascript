@@ -23,6 +23,10 @@ async function getBookDetails(bookId) {
     return await axios.get(`${baseUrl}/books/${bookId}`);
 }
 
+async function postComment(comment, bookId) {
+    return await axios.post(`${baseUrl}/books/${bookId}/comments`, comment);
+}
+
 async function getGenres() {
     return await axios.get(`${baseUrl}/genres`);
 }
@@ -44,6 +48,7 @@ export {
     getBooksByGenre,
     getBookDetails,
     getBookCover,
+    postComment,
     getGenres,
     registerUser,
     loginUser,

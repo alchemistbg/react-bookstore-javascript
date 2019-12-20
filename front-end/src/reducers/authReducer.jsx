@@ -1,6 +1,7 @@
 export const initialAuthState = {
     isLoggedIn: false,
-    username: '',
+    userName: '',
+    userId: '',
     error: ''
 };
 
@@ -10,18 +11,21 @@ export const authReducer = (state, action) => {
             return {
                 isLoggedIn: true,
                 userName: action.payload.userName,
+                userId: action.payload.userId,
                 error: ''
             };
         case 'LOGIN_ERROR':
             return {
                 isLoggedIn: false,
-                username: '',
+                userName: '',
+                userId: '',
                 error: action.payload.error
             };
         case 'LOGOUT':
             return {
                 isLoggedIn: false,
-                username: '',
+                userName: '',
+                userId: '',
                 error: ''
             };
         default:

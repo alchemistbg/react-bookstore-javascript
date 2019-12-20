@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 
 const userModel = require('../models/User');
 
-
 function validateUserInfo(req, res) {
 
     const errors = validationResult(req);
@@ -40,7 +39,7 @@ module.exports = {
     },
 
     login: (req, res, next) => {
-        console.log(req.body)
+        // console.log(req.body)
         const { userName, password } = req.body;
 
         userModel.findOne({ userName })
@@ -82,11 +81,9 @@ module.exports = {
                 res.status(200).json({
                     message: 'Login successful.',
                     token,
-                    // userId: user._id.toString(),
                     userName: user.userName,
-                    // userRole: user.userRole
+                    userId: user._id
                 });
-                // console.log(token);
             })
             .catch((error) => {
                 next(error);

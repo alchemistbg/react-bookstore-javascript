@@ -12,8 +12,14 @@ const toastOptions = {
 
 function showToast(toastType, toastData) {
     toastr.remove();
+
     if (toastType === 'success') {
         toastr[toastType](toastData.message, toastData.title, toastOptions);
+        return;
+    }
+
+    if (toastType === 'simpleError') {
+        toastr['error'](toastData.message, toastData.title, toastOptions);
         return;
     }
 
@@ -28,12 +34,10 @@ function timeFormat(commentTime) {
     const date = timeArr[2];
     const month = timeArr[1];
     const year = timeArr[3];
-    // console.log(`${date} ${month} ${year}`);
     return `${date} ${month} ${year}`;
 }
 
 export {
-    // toastrOptions,
     showToast,
     timeFormat
 }
