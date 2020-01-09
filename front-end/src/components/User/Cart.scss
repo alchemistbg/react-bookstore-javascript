@@ -1,0 +1,45 @@
+.cart-header {
+    text-align: center;
+}
+
+.cart-list {
+    width: var(--width-main-content);
+    margin-bottom: 3em;
+
+    .form-button {
+        font-size: 0.8em;
+        margin-left: auto;
+    }
+
+    th {
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
+    td {
+        padding: 1em 2em;
+    }
+}
+
+.total-price-wrapper {
+    text-align: right;
+    margin: auto;
+    display: flex;
+    align-items: center;
+
+    // justify-content: space-evenly;
+    // .class {
+    //     margin-top: 10em;
+
+    // }
+
+    .total-price {
+        font-size: 1.5em;
+        font-weight: bold;
+
+    }
+
+    .form-button {
+        margin-left: auto;
+    }
+}

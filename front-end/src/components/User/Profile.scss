@@ -3,14 +3,13 @@
     width: var(--width-main-content);
 
     .personal-info {
-        margin-bottom: 5em;
+        margin-bottom: 2em;
 
         .info-table {
             padding: 1em 0 2em 0;
 
             h6 {
                 font-weight: normal;
-
             }
 
             span {
@@ -20,8 +19,131 @@
 
         }
 
-        .form-button {}
+        // .form-button {}
     }
 
+    .orders-list {
+        width: 100%;
+        font-size: 1.5em;
+        margin: auto;
+        margin-bottom: 3em;
 
+        thead {
+            font-weight: bold;
+        }
+    }
+
+    // .orders-info {
+    //     padding-bottom: 2em;
+
+    //     .order-list {
+    //         font-size: 2em;
+    //     }
+
+    //     .order-item {
+    //         display: flex;
+    //         font-size: 2em;
+    //         justify-content: space-between;
+    //     }
+    // }
+
+    .comments-info {
+        padding-bottom: 2em;
+    }
+
+}
+
+.tabs {
+    // max-width: 59vw;
+    margin: auto;
+    // padding: 1vw;
+    display: flex;
+    flex-wrap: wrap;
+    // border: 2px solid green;
+    /* background: #efefef; */
+    /* box-shadow: 0 48px 80px -32px rgba(0, 0, 0, 0.3); */
+}
+
+.input {
+    position: absolute;
+    opacity: 0;
+}
+
+/* .label { */
+.ilabel {
+    width: 100%;
+    padding: 20px 30px;
+    background: #e5e5e5;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    color: #7f7f7f;
+    transition: background 0.1s, color 0.1s;
+    /* test triangles */
+    // display: flex;
+    // flex-direction: column;
+    position: relative;
+
+}
+
+/* .label:hover { */
+.ilabel:hover {
+    background: #d8d8d8;
+}
+
+/* .label:active { */
+.ilabel:active {
+    background: #ccc;
+}
+
+/* .input:checked+.label { */
+.input:checked+.ilabel {
+    background: #fff;
+    background: rgb(144, 200, 144);
+    color: #000;
+}
+
+/* .triangle, */
+.panel {
+    width: 100%;
+    display: none;
+    padding: 20px 30px 30px;
+    background: lightgreen;
+}
+
+/* .input:checked+.label+.panel { */
+.input:checked+.ilabel+.panel {
+    display: block;
+    /* background: blue; */
+    /* background: red; */
+}
+
+@media (min-width: 600px) {
+
+    /* .label { */
+    .ilabel {
+        width: auto;
+    }
+
+    .panel {
+        order: 99;
+    }
+}
+
+.triangle {
+    height: 0;
+    width: 0;
+    border-left: 1em solid transparent;
+    border-right: 1em solid transparent;
+    border-top: 1em solid rgb(144, 200, 144);
+    /* margin-top: -1.5em; */
+    margin: auto;
+
+    position: absolute;
+    bottom: -18px;
+    display: none;
+}
+
+.input:checked+.ilabel .triangle {
+    display: block;
 }
