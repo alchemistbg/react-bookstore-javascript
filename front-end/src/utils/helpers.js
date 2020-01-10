@@ -3,8 +3,8 @@ import toastr from 'toastr';
 const toastOptions = {
     closeButton: true,
     newestOnTop: false,
-    timeOut: 10000,
-    extendedTimeOut: 10000,
+    timeOut: 5000,
+    extendedTimeOut: 3000,
     progressBar: true,
     // timeOut: 0,
     // extendedTimeOut: 0
@@ -24,7 +24,9 @@ function showToast(toastType, toastData) {
     }
 
     Object.keys(toastData).forEach((key) => {
-        toastr[toastType](toastData[key].join('\n'), `Invalid ${key}`, toastOptions);
+        if (toastData[key].length > 0) {
+            toastr[toastType](toastData[key].join('\n'), `Invalid ${key}`, toastOptions);
+        }
     });
 }
 
