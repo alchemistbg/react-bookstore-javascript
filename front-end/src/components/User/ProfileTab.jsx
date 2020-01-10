@@ -3,18 +3,21 @@ import React, { Fragment } from 'react'
 const ProfileTab = (props) => {
     const { profile } = props;
 
+
+    function handleEditProfile() {
+        console.log('Edit user profile')
+    }
     return <Fragment>
 
-        <input className="input" type="radio" name="tabs" id="tab-1" />
-
+        <input className="input" type="radio" name="tabs" id="tab-1" defaultChecked />
         <div className="ilabel">
-            <label className="label" htmlFor="tab-1">Blah</label>
+            <label className="label" htmlFor="tab-1">Personal</label>
             <div className="triangle"></div>
         </div>
 
         <div className="panel">
 
-            <h4 className="header">Personal info</h4>
+            <h4 className="header">Personal information</h4>
 
             <div className="personal-info">
                 <table className="info-table">
@@ -33,7 +36,7 @@ const ProfileTab = (props) => {
                         </tr>
                     </tbody>
                 </table>
-                {/* <input className="form-button" type="button" value="Edit profile" onClick={handleEditProfile} /> */}
+                <input className="form-button" type="button" value="Edit profile" onClick={handleEditProfile} />
             </div>
 
         </div>
