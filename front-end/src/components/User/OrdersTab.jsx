@@ -8,15 +8,14 @@ const OrdersTab = (props) => {
     return <Fragment>
 
         <input className="input" type="radio" name="tabs" id="tab-2" />
-
         <div className="ilabel">
-            <label className="label" htmlFor="tab-2">Blah</label>
+            <label className="label" htmlFor="tab-2">Orders</label>
             <div className="triangle"></div>
         </div>
 
         <div className="panel">
 
-            <h4 className="header">Orders info</h4>
+            <h4 className="header">Orders information</h4>
             <div className="orders-info">
                 {
                     orders.length === 0 ? (
