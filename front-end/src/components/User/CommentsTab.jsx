@@ -11,15 +11,14 @@ const CommentsTab = (props) => {
     return <Fragment>
 
         <input className="input" type="radio" name="tabs" id="tab-3" />
-
         <div className="ilabel">
-            <label className="label" htmlFor="tab-3">Blah</label>
+            <label className="label" htmlFor="tab-3">Comments</label>
             <div className="triangle"></div>
         </div>
 
         <div className="panel">
 
-            <h4 className="header">Comments info</h4>
+            <h4 className="header">Comments information</h4>
             <div className="comments-info">
                 {
                     comments.length === 0 ?
