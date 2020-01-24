@@ -11,31 +11,9 @@
     font-weight: bold;
     transition: color 0.2s, background-color 0.2s;
 
-    &:disabled,
-    &:disabled:hover {
-        color: var(--color-donut-border-dark);
-        background: none;
-        cursor: default;
+    &:hover {
+        color: var(--color-main-background);
+        background-color: var(--color-main-text);
+        cursor: pointer;
     }
 }
-
-.form-button:hover {
-    color: var(--color-main-background);
-    background-color: var(--color-main-text);
-    cursor: pointer;
-    // animation: button-hover 0.1s ease-in;
-    // animation-fill-mode: both;
-}
-
-// .form-button,
-// .form-button:hover,
-// .form-button:focus {
-//     display: block;
-//     background-color: var(--color-link-main);
-//     // color: white;
-// }
-
-// .form-button:hover {
-//     // background-color: var(--color-link-hover);
-//     // animation: fadeIn 0.2s ease-in;
-// }
