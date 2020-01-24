@@ -20,7 +20,7 @@
         display: flex;
         flex-wrap: wrap;
 
-        @include bp (phonel) {
+        @include bp (tablets) {
             display: flex;
             flex-direction: column;
         }
@@ -224,7 +224,7 @@
         flex: 1 1 48%;
         margin-right: 1em;
 
-        @include bp (phonel) {
+        @include bp (tablets) {
             margin-right: 0em;
         }
 
@@ -246,7 +246,7 @@
         flex: 1 1 48%;
         margin-right: 1em;
 
-        @include bp (phonel) {
+        @include bp (tablets) {
             margin-right: 0em;
         }
 
@@ -267,7 +267,7 @@
         flex: 1 1 48%;
         margin-right: 1em;
 
-        @include bp (phonel) {
+        @include bp (tablets) {
             margin-right: 0em;
         }
 
@@ -280,7 +280,7 @@
     .pass-rep-wrapper {
         flex: 1 1 48%;
 
-        @include bp (phonel) {
+        @include bp (tablets) {
             margin-right: 0em;
         }
 
@@ -364,6 +364,19 @@
 
     .danger input {
         border: 2px solid red;
+    }
+
+    .form-button {
+        margin: 1em 0 2em 0;
+    }
+
+}
+
+a .redirects {
+    color: var(--color-highlight-text);
+
+    &:hover {
+        text-decoration: underline;
     }
 }
 
