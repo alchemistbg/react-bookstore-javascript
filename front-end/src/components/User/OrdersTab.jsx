@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 
+import BookTable from './BookTable';
+
 import { timeFormat } from '../../utils/helpers';
 
 const OrdersTab = (props) => {
     const { orders } = props;
 
     return <Fragment>
-
         <input className="input" type="radio" name="tabs" id="tab-2" />
         <div className="ilabel">
             <label className="label" htmlFor="tab-2">Orders</label>
@@ -21,32 +22,24 @@ const OrdersTab = (props) => {
                     orders.length === 0 ? (
                         <h6>You haven't made any orders yet!</h6>
                     ) : (
-                            <table className="orders-list">
-                                <thead>
-                                    <tr>
-                                        <td>Order date</td>
-                                        <td>Order size</td>
-                                        <td>Order price</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        orders.map((order) => {
-                                            return <tr key={order._id} className="order-item">
-                                                <td className="order-date">
-                                                    {timeFormat(order.orderDate)}
-                                                </td>
-                                                <td className="order-size">
-                                                    {order.orderedBooks.length}
-                                                </td>
-                                                <td className="order-price">
-                                                    {order.totalPrice}
-                                                </td>
-                                            </tr>
-                                        })
-                                    }
-                                </tbody>
-                            </table>
+                            <ul className="orders-list">{
+                                orders.map((order, index) => {
+                                    return <Fragment>
+                                        <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
+                                        <li key={order._id} className="orders-list-item">
+                                            <label htmlFor={"cb-" + index} className="orders-list-item-label">
+                                                <span className="order-date">{timeFormat(order.orderDate)}</span>
+                                                <span className="order-size">{order.orderedBooks.length}</span>
+                                                <span className="order-sum">{order.totalPrice.toFixed(2)}</span>
+                                            </label>
+                                            <span className="orders-list-item-data">
+                                                <BookTable source="ordersTab" bookTable={order.orderedBooks} />
+                                            </span>
+                                        </li>
+                                    </Fragment>
+                                })
+                            }
+                            </ul>
                         )
                 }
             </div>
