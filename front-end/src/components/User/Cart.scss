@@ -5,6 +5,9 @@
 .cart-list {
     width: var(--width-main-content);
     margin-bottom: 3em;
+    text-align: left;
+
+    border-collapse: collapse;
 
     .form-button {
         font-size: 0.8em;
@@ -17,7 +20,8 @@
     }
 
     td {
-        padding: 1em 2em;
+        border: 1px solid red;
+        // padding: 1em 2em;
     }
 }
 
@@ -42,4 +46,19 @@
     .form-button {
         margin-left: auto;
     }
+}
+
+.cart-link {
+    // background: red;
+    // text-decoration: underline;
+    font-weight: bold;
+}
+
+.cart-link:hover {
+    text-decoration: underline;
+    color: var(--color-donut-border-dark);
+}
+
+.cart-wrapper {
+    width: var(--width-main-content)
 }

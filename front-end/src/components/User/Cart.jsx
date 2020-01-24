@@ -1,40 +1,65 @@
-import React, { Fragment, useContext, useState } from 'react'
+import React, { Fragment, useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 
 import AuthContext from './../../context/authContext/AuthContext';
 import CartContext from './../../context/cartContext/CartContext';
 
-import { postOrder } from '../../services/requests';
+import BookTable from './BookTable';
+import { showToast, calcCartTotalSum } from './../../utils/helpers';
 
-import { showToast } from '../../utils/helpers';
+import { postOrder } from '../../services/requests';
 
 const Cart = (props) => {
     const [{ isLoggedIn, userName, userId }] = useContext(AuthContext);
 
     const [{ cart }, dispatch] = useContext(CartContext);
 
-    const handleRemoveFromCart = () => {
+    const handleDecrement = (book) => {
         dispatch({
-            type: 'REMOVE_FROM_CART'
-        })
+            type: 'DECREMENT',
+            item: book
+        });
+    }
+
+    const handleIncrement = (book) => {
+        dispatch({
+            type: 'INCREMENT',
+            item: book
+        });
+    }
+
+    const handleRemoveFromCart = (book) => {
+        dispatch({
+            type: 'REMOVE_FROM_CART',
+            item: book
+        });
     }
 
     const handleCheckout = () => {
         dispatch({
             type: 'CHECKOUT'
         })
+
         let totalPrice = 0;
         cart.map((book) => {
-            return totalPrice += book.price;
+            totalPrice += +book.totalPrice;
+            return totalPrice;
         });
-        const bookIds = cart.map(book => {
-            return book._id;
+
+        const orderedBooks = cart.map(book => {
+            return {
+                _id: book._id,
+                qty: book.qty,
+                totalPrice: book.totalPrice
+            };
         });
+
         const requestData = {
             customer: userId,
-            orderedBooks: bookIds,
-            totalPrice
+            orderedBooks,
+            totalPrice: totalPrice * 100 / 100
         }
+
         postOrder(requestData)
             .then((response) => {
                 showToast('success', {
@@ -47,7 +72,6 @@ const Cart = (props) => {
             });
     }
 
-    let totalPrice = 0;
     return (
         document.title = "Reactive Bookstore | Cart",
         <Fragment>
@@ -61,37 +85,18 @@ const Cart = (props) => {
                             <h2 className="cart-header">Your shopping bag, {userName}</h2>
                             {
                                 cart.length !== 0 ? (
-                                    <div>
-                                        <table className="cart-list">
-                                            <thead>
-                                                <tr>
-                                                    <th>Name</th>
-                                                    <th>Price</th>
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-                                            {
-                                                cart.map((cartItem) => {
-                                                    totalPrice += cartItem.price;
-                                                    return <tbody>
-                                                        <tr key={cartItem._id}>
-                                                            <td>{cartItem.title}</td>
-                                                            <td>{cartItem.price}</td>
-                                                            <td><button className="form-button" onClick={handleRemoveFromCart}>Remove</button></td>
-                                                        </tr>
-                                                    </tbody>
-                                                    // <li key={cartItem._id} className="cart-item">
-                                                    //     {cartItem.name}
-                                                    //     <button className="form-button" onClick={handleRemoveFromCart}>Remove</button>
-                                                    // </li>
-                                                })
-                                            }
-                                        </table>
+                                    <div className="cart-wrapper">
+                                        <BookTable
+                                            source="cart"
+                                            bookTable={cart}
+                                            handleRemoveFromCart={handleRemoveFromCart}
+                                            handleCheckout={handleCheckout}
+                                            handleIncrement={handleIncrement}
+                                            handleDecrement={handleDecrement}
+                                        />
                                         {
                                             <div className="total-price-wrapper">
-                                                <div className="class">
-                                                    Total Price: <span className="total-price">{totalPrice}</span>
-                                                </div>
+                                                Total Price: <span className="total-price">{calcCartTotalSum(cart).toFixed(2)}</span>
                                                 <input className="form-button" type="button" value="CheckOut" onClick={handleCheckout} />
                                             </div>
                                         }
