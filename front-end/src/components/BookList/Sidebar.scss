@@ -1,8 +1,15 @@
 .sidebar {
 
+    // font-size: 1.1em;
+
     .active,
     li {
         color: var(--color-navigation-background);
+        font-weight: bold;
+
+        :hover {
+            color: var(--color-highlight-text);
+        }
     }
 
     &-list {

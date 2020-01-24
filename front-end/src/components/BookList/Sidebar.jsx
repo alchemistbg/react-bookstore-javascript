@@ -19,7 +19,7 @@ function Sidebar(props) {
 
     return (
         < aside className="sidebar" >
-            <h3>Sidebar</h3>
+            <h2>Select a category</h2>
             <ul className="sidebar-list">
                 {
                     genres.map((genre) => {
