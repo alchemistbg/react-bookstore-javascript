@@ -51,7 +51,6 @@ class BookList extends Component {
     }
 
     render() {
-        console.log(this.state.genre)
         const { length: booksCount } = this.state.books;
         const { pageName, books: allBooks } = this.state;
         const { pageSize, currentPage } = this.state;
@@ -78,7 +77,6 @@ class BookList extends Component {
             booksToUse = allBooks.filter((book) => {
                 return book.genres.some((genres) => genres.name === this.state.genre);
             });
-            console.log(booksToUse)
         } else {
             booksToUse = allBooks;
         }
