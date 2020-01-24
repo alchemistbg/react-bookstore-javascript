@@ -2,9 +2,11 @@ import React, { Fragment, useContext } from 'react'
 import { NavLink, Redirect } from 'react-router-dom';
 
 import AuthContext from './../../context/authContext/AuthContext';
+import CartContext from './../../context/cartContext/CartContext';
 
 function HeaderMajorNav() {
-    const [{ isLoggedIn, userName, error }, dispatch] = useContext(AuthContext);
+    const [{ isLoggedIn, userName }, dispatch] = useContext(AuthContext);
+    const [{ cart }] = useContext(CartContext);
 
     const handleLogOut = () => {
         dispatch({
@@ -22,7 +24,7 @@ function HeaderMajorNav() {
                     <li>
                         <NavLink to="/cart">
                             <i className="fas fa-shopping-cart">
-                                <span className="cart-size">5</span>
+                                <span className="cart-size">{cart.length}</span>
                             </i>
                         </NavLink>
                     </li>
