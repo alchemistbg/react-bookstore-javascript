@@ -32,7 +32,7 @@ async function getGenres() {
 }
 
 async function registerUser(registerData) {
-    return axios.post(`${baseUrl}/genres`, registerData);
+    return axios.post(`${baseUrl}/users`, registerData);
 }
 
 async function loginUser(loginData) {
@@ -41,6 +41,14 @@ async function loginUser(loginData) {
 
 async function getUserProfile(userName) {
     return axios.get(`${baseUrl}/users/${userName}`);
+}
+
+async function postOrder(requestData) {
+    return axios.post(`${baseUrl}/orders`, requestData);
+}
+
+async function getOrders(userId) {
+    return axios.get(`${baseUrl}/users/${userId}/orders`)
 }
 
 export {
@@ -52,5 +60,7 @@ export {
     getGenres,
     registerUser,
     loginUser,
-    getUserProfile
+    getUserProfile,
+    postOrder,
+    getOrders
 }
