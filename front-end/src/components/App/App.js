@@ -19,46 +19,52 @@ import About from '../Static/About';
 import Contacts from '../Static/Contacts';
 import NotFound from '../Static/NotFound';
 
-import { Provider } from '../../context/authContext/AuthContext';
+import { AuthProvider } from '../../context/authContext/AuthContext';
 import { authReducer, initialAuthState } from '../../reducers/authReducer';
+
+import { CartProvider } from '../../context/cartContext/CartContext';
+import { cartReducer, initialCartState } from '../../reducers/cartReducer';
 
 function App() {
 	const useAuthState = useReducer(authReducer, initialAuthState);
+	const useCartState = useReducer(cartReducer, initialCartState);
 
 	return (
-		// document.title = "Reactive Bookstore",
-		<Provider value={useAuthState}>
+		document.title = "Reactive Bookstore",
+		<AuthProvider value={useAuthState}>
 			<div>
 				<div className='site-container'>
 					<Router>
-						<Header />
-						<main className='site-main'>
-							<Switch>
-								<Route exact path="/" component={Home} />
-								<Route path="/login" component={LoginForm} />
-								<Route path="/logout" >
-									<Redirect to="/" />
-									{/* {isLoggedIn ? <Redirect to="/" /> : null} */}
-								</Route>
-								<Route path="/register" component={RegisterForm} />
-								<Route path="/cart" component={Cart} />
-								<Route path="/profile" component={Profile} />
+						<CartProvider value={useCartState}>
+							<Header />
+							<main className='site-main'>
+								<Switch>
+									<Route exact path="/" component={Home} />
+									<Route path="/login" component={LoginForm} />
+									<Route path="/logout" >
+										<Redirect to="/" />
+									</Route>
+									<Route path="/register" component={RegisterForm} />
+									<Route path="/profile" component={Profile} />
+									<Route exact path="/books" render={(props) => <BookListView {...props} />} />
 
-								<Route exact path="/books" render={(props) => <BookListView {...props} />} />
-								<Route exact path="/books/:id" component={BookDetails} />
-								<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
-								<Route path="/about" component={About} />
-								<Route path="/contacts" component={Contacts} />
-								<Route path="/not-found" component={NotFound} />
-								{/* <Redirect to="/not-found" /> */}
-							</Switch>
-						</main>
-						<Footer />
+									<Route exact path="/books/:id" component={BookDetails} />
+									<Route path="/cart" component={Cart} />
+
+									<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
+									<Route path="/about" component={About} />
+									<Route path="/contacts" component={Contacts} />
+									<Route path="/not-found" component={NotFound} />
+									{/* <Redirect to="/not-found" /> */}
+								</Switch>
+							</main>
+							<Footer />
+						</CartProvider>
 					</Router>
 				</div >
-				);
-		</div>
-		</Provider>
+				{/* ); */}
+			</div>
+		</AuthProvider>
 	)
 }
 
