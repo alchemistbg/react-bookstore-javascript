@@ -1,16 +1,15 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 import ProfileTab from './ProfileTab';
 import OrdersTab from './OrdersTab';
 import CommentsTab from './CommentsTab';
 
-// import { timeFormat } from '../../utils/helpers';
 import { getUserProfile, getOrders } from '../../services/requests';
 
 import AuthContext from './../../context/authContext/AuthContext';
 
-const Profile = (props) => {
+const Profile = () => {
     const [{ isLoggedIn, userName, userId, error }, dispatch] = useContext(AuthContext);
 
     const [profile, setProfile] = useState({});
@@ -33,11 +32,13 @@ const Profile = (props) => {
                 setOrders(userOrders.data.orders);
             })
             .catch((error) => {
-                console.log(error.response)
+                // console.log(error.response)
             });
     }, []);
 
-    // function handleEditProfile() {
+    // const handleCheck = (event) => {
+    //     console.log('radio was checked');
+    //     console.log(event.target.name, event.target.id, event.target.checked);
     // }
 
     return (
@@ -50,8 +51,9 @@ const Profile = (props) => {
 
                             <h2>Profile page of {profile.fullName}</h2>
 
-                            <div class="tabs">
+                            <div className="tabs">
                                 <ProfileTab profile={profile} />
+                                {/* <ProfileTab profile={profile} onCheck={handleCheck} /> */}
                                 <OrdersTab orders={orders} />
                                 <CommentsTab comments={comments} />
                             </div>
