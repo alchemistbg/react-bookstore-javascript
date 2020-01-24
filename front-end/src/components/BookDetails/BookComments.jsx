@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 
 import { timeFormat } from '../../utils/helpers';
 import Pagination from './../Common/Pagination/Pagination';
@@ -9,7 +9,8 @@ function BookComments(props) {
     const { length: commentsCount } = book.comments;
     const { comments: allComments } = book;
 
-    const [pageSize, setPageSize] = useState(5);
+    // const [pageSize, setPageSize] = useState(5);
+    const pageSize = 5;
     const [currentPage, setCurrentPage] = useState(1);
 
     const commentsPage = paginate(allComments, currentPage, pageSize);
