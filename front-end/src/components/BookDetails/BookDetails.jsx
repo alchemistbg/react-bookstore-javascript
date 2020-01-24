@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react'
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
 
 import BookCover from './BookCover';
 import BookInfo from './BookInfo';
@@ -13,7 +13,6 @@ import AuthContext from './../../context/authContext/AuthContext';
 function BookDetails(props) {
 
     const [{ isLoggedIn, userId }] = useContext(AuthContext);
-    // console.log(userId);
 
     const bookCommentPlaceholder = 'Type your comment here...';
     const [isLoading, setLoading] = useState(true);
@@ -28,7 +27,6 @@ function BookDetails(props) {
             const bookId = props.match.params.id;
             getBookDetails(bookId)
                 .then((book) => {
-                    console.log(book.data.book)
                     setBook(book.data.book);
                     setLoading(false);
                 })
@@ -38,19 +36,9 @@ function BookDetails(props) {
         }
     }, []);
 
-    const handleAddToCartClick = () => {
-        console.log(this.state.book.title + " added to cart")
-    }
-
     const handleCommentAreaChange = (event) => {
         const comment = event.target.value;
         setComment(comment);
-        // if (comment === '') {
-        //     event.target.placeholder = this.state.bookCommentPlaceholder;
-        // }
-        // this.setState({
-        //     bookComment: comment
-        // });
     }
 
     const handleCommentAreaFocus = (event) => {
@@ -62,7 +50,8 @@ function BookDetails(props) {
         // }
     }
 
-    const handleCommentButton = () => {
+    const handleSubmit = (event) => {
+        event.preventDefault();
         if (bookComment.length < 5) {
             showToast('simpleError', {
                 title: 'Invalid comment!',
@@ -93,7 +82,7 @@ function BookDetails(props) {
                     <div className="book-data">
                         <div className="book-details">
                             <BookCover isbn={book.isbn} />
-                            <BookInfo book={book} />
+                            <BookInfo {...props} book={book} />
                         </div>
                         <div className="book-comments">
                             <BookComments book={book} />
@@ -104,16 +93,18 @@ function BookDetails(props) {
                                     <hr />
                                     <div className="book-comment-form">
                                         <h5>Comment this book</h5>
-                                        <textarea
-                                            className="comment-area"
-                                            name="comment"
-                                            id="comment"
-                                            rows="4"
-                                            placeholder={bookCommentPlaceholder}
-                                            onFocus={handleCommentAreaFocus}
-                                            onChange={handleCommentAreaChange} >
-                                        </textarea>
-                                        <button className="form-button comment-button" type="submit" onClick={handleCommentButton}>Comment</button>
+                                        <form onSubmit={handleSubmit}>
+                                            <textarea
+                                                className="comment-area"
+                                                name="comment"
+                                                id="comment"
+                                                rows="4"
+                                                placeholder={bookCommentPlaceholder}
+                                                onFocus={handleCommentAreaFocus}
+                                                onChange={handleCommentAreaChange} >
+                                            </textarea>
+                                            <button className="form-button comment-button" type="submit" >Comment</button>
+                                        </form>
                                     </div>
                                 </Fragment>
                             ) : (

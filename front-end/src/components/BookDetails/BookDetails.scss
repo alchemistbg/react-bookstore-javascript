@@ -1,10 +1,58 @@
 .book-data {
     // border: 2px solid green;
+    padding-top: 2em;
     width: var(--width-main-content);
 }
 
 .book-details {
     display: flex;
+
+    .book-cover {
+        margin-right: 4em;
+        width: 30%;
+
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.book-info {
+    table {
+        line-height: 2em;
+
+        .column-header {
+            text-align: right;
+            padding-right: 1em;
+        }
+
+        .column-data {
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        td {
+            // margin: 0;
+            // padding: 0;
+        }
+    }
+
+
+    .qty-wrapper {
+        .form-button {
+            margin-top: 2em;
+        }
+
+        .e {
+            border: none;
+            background: none;
+
+            &:hover {
+                background: none;
+                color: var(--color-highlight-text);
+            }
+        }
+    }
 }
 
 .book-comments {}
