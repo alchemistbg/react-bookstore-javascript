@@ -19,7 +19,6 @@
         list-style-type: none;
 
         li:hover {
-            // color: #61DAFB;
             text-decoration: underline;
         }
     }
@@ -46,18 +45,13 @@
     }
 
     .second-row {
-        // background: rgba(255, 255, 255, 0.4);
         padding-bottom: 1em;
     }
 
 
     .minor-nav-list {
         display: flex;
-        padding: 0em 0em 0.5em 0;
-
-        li {
-            padding-right: 2em;
-        }
+        font-size: 1.5em;
     }
 
     .fa-shopping-cart {
@@ -74,11 +68,5 @@
             top: -7px;
             right: -5px;
         }
-
     }
-
-    // .active {
-    //     font-weight: bold;
-    //     text-decoration: underline;
-    // }
 }
