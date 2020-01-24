@@ -1,0 +1,108 @@
+.book-list-table {
+    list-style: none;
+    padding: 0;
+
+    .book-list-item {
+        text-align: center;
+        display: flex;
+        align-items: center;
+
+        &.header {
+            font-weight: bold;
+            color: var(--color-navigation-text);
+            background: var(--color-donut-border-dark);
+
+        }
+
+        &.data-row:nth-child(2n) {
+            // background: yellow;
+        }
+
+        button {
+            display: inline;
+        }
+    }
+
+    .book-list-item-title {
+        border: 2px solid red;
+        text-align: left;
+        width: 50%;
+
+        a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .book-list-item-sprice {
+        border: 2px solid red;
+        width: 15%;
+    }
+
+    .book-list-item-qty {
+        border: 2px solid red;
+        width: 20%;
+    }
+
+    .book-list-item-tprice {
+        border: 2px solid red;
+        width: 15%;
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+    }
+
+    .book-list-item-delete {
+        border: 2px solid red;
+        width: 15%;
+    }
+
+    @media (max-width: 768px) {
+        .book-list-item-title {
+            width: 35%;
+        }
+
+        .book-list-item-sprice {
+            width: 15%;
+        }
+
+        .book-list-item-qty {
+            width: 25%;
+        }
+
+        .book-list-item-tprice {
+            width: 25%;
+        }
+
+    }
+
+    .form-button.book-table {
+        // padding: 0.3em 0.5em;
+        // margin: 0 0.9em;
+        padding: 0;
+        margin: calc(0.6em + 2px) 0.5em;
+
+        border: none;
+        // border: 2px solid green;
+        background: none;
+
+
+        &:hover {
+            background: none;
+            color: var(--color-highlight-text);
+        }
+
+        &:disabled {
+            color: var(--color-donut-border-light);
+        }
+
+        &:disabled:hover {
+            cursor: default;
+        }
+
+    }
+
+    .button-delete {
+        margin: 0;
+        margin-left: 2em;
+    }
+}
