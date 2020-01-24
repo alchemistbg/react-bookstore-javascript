@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 const userModel = require('../models/User');
+const orderModel = require('../models/order');
 
 function validateUserInfo(req, res) {
 
@@ -20,16 +21,14 @@ function validateUserInfo(req, res) {
 module.exports = {
 
     register: (req, res) => {
-
         if (validateUserInfo(req, res)) {
-            // console.log(req.body)
-            const { firstname, lastname, username, password, email, userRole } = req.body;
-            userModel.create({ firstname, lastname, username, password, email, userRole })
+            const { firstName, lastName, userName, password, email, userRole } = req.body;
+            userModel.create({ firstName, lastName, userName, password, email, userRole })
                 .then((user) => {
                     res.status(201).json({
                         message: 'Registration successful.',
                         userId: user._id,
-                        username
+                        userName
                     });
                 })
                 .catch((error) => {
@@ -39,55 +38,58 @@ module.exports = {
     },
 
     login: (req, res, next) => {
-        // console.log(req.body)
-        const { userName, password } = req.body;
 
-        userModel.findOne({ userName })
-            //to use with promise-based password check
-            // .then((user) => {
-            //     user.matchPassword(password)
-            //         .then((match) => {
-            //             if (!match) {
-            //                 const error = new Error('Wrong password');
-            //                 error.statusCode = 401;
-            //                 throw error;
-            //             }
-            //             console.log(match);
-            //         })
-            //         .catch((error) => {
-            //             next(error);
-            //         });
-            // }
+        if (validateUserInfo(req, res)) {
+            const { userName, password } = req.body;
 
-            ////to used with async-based password check
-            .then(async (user) => {
-                if (!user) {
-                    const error = new Error('User doesn\'t exist!');
-                    error.param = 'userName';
-                    error.status = 401;
-                    throw error;
-                }
+            userModel.findOne({ userName })
+                //to use with promise-based password check
+                // .then((user) => {
+                //     user.matchPassword(password)
+                //         .then((match) => {
+                //             if (!match) {
+                //                 const error = new Error('Wrong password');
+                //                 error.statusCode = 401;
+                //                 throw error;
+                //             }
+                //             console.log(match);
+                //         })
+                //         .catch((error) => {
+                //             next(error);
+                //         });
+                // }
 
-                if (! await user.matchPassword(password)) {
-                    const error = new Error('Wrong password!');
-                    error.param = 'password';
-                    error.status = 401;
-                    throw error;
-                }
+                ////to used with async-based password check
+                .then(async (user) => {
+                    if (!user) {
+                        const error = new Error('User doesn\'t exist!');
+                        error.param = 'userName';
+                        error.status = 401;
+                        throw error;
+                    }
 
-                const token = jwt.sign({
-                }, 'verysecretstring', { expiresIn: '24h' });
+                    if (! await user.matchPassword(password)) {
+                        const error = new Error('Wrong password!');
+                        error.param = 'password';
+                        error.status = 401;
+                        throw error;
+                    }
 
-                res.status(200).json({
-                    message: 'Login successful.',
-                    token,
-                    userName: user.userName,
-                    userId: user._id
+                    const token = jwt.sign({
+                    }, 'verysecretstring', { expiresIn: '24h' });
+
+                    res.status(200).json({
+                        message: 'Login successful.',
+                        token,
+                        userName: user.userName,
+                        userId: user._id
+                    });
+                })
+                .catch((error) => {
+                    next(error);
                 });
-            })
-            .catch((error) => {
-                next(error);
-            });
+        }
+
     },
 
     profileRead: (req, res) => {
@@ -132,5 +134,21 @@ module.exports = {
     profileDelete: (req, res) => {
 
     },
+
+    getOrders: (req, res) => {
+        orderModel.find({ customer: req.params.id })
+            .populate({
+                path: 'orderedBooks._id',
+                model: 'book',
+                select: 'title price'
+            })
+            .then((orders) => {
+                res.status(200).json({
+                    message: "OK",
+                    orders
+                });
+            })
+            .catch();
+    }
 
 }

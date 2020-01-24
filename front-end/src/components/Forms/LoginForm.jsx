@@ -8,7 +8,7 @@ import { showToast } from '../../utils/helpers';
 
 import AuthContext from './../../context/authContext/AuthContext';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
 
     const [formData, setFormData] = useState({
         userName: '',
@@ -24,6 +24,12 @@ const LoginForm = () => {
         else {
             input.className = "";
         }
+        validateInput('login', input.name, input.value)
+            .then()
+            .catch((errors) => {
+                // console.log(errors);
+            });
+
         setFormData((formData) => ({
             ...formData,
             [input.name]: input.value
@@ -75,7 +81,6 @@ const LoginForm = () => {
             .then(() => {
                 loginUser(formData)
                     .then((response) => {
-                        console.log(response.data)
                         dispatch({
                             type: 'LOGIN',
                             payload: {
@@ -87,30 +92,33 @@ const LoginForm = () => {
                             title: `Welcome, ${response.data.userName}.`,
                             message: `You will be now redirected to home page.`
                         });
+                        props.history.goBack();
                     })
                     .catch((error) => {
-                        const { param, message } = error.response.data;
+                        console.log(error.response)
+                        const { info, message } = error.response.data;
                         const serverError = {};
-                        serverError[param] = [message];
+                        serverError[info] = [message];
                         showToast('error', serverError);
                     });
             })
             .catch((errors) => {
-                console.log(errors)
+                // console.log(errors);
+                // console.log(errors)
                 // this.setState({
                 //     loginErrors: errors
                 // });
-                // showToast('error', this.state.loginErrors)
+                showToast('error', errors)
             });
     }
 
     return (
+        document.title = 'Reactive Bookstore | Login',
         <Fragment>
             {isLoggedIn ? (
                 <Redirect to="/" />
             ) : (
                     <Fragment>
-
                         <h2 className="form-header">Login</h2>
                         <div id="login-form">
                             <form className="form login-form" onSubmit={handleSubmit}>
@@ -132,7 +140,8 @@ const LoginForm = () => {
                                     nameAndId="userName"
                                     labelClassName="placeholder"
                                     labelTextValue="Username"
-                                    error="no errors" />
+                                // error="no errors"
+                                />
                                 <Input
                                     divClassNames={"form-field-wrapper uname-wrapper"}
                                     // divClassNames={
@@ -151,7 +160,8 @@ const LoginForm = () => {
                                     nameAndId="password"
                                     labelClassName="placeholder"
                                     labelTextValue="Password"
-                                    error="no errors" />
+                                // error="no errors"
+                                />
                                 < button className="form-button" type="submit">Login</button>
                                 {/* {
                             !!(formData.userName || formData.password) ? (
@@ -162,7 +172,7 @@ const LoginForm = () => {
                         } */}
                             </form>
                         </div>
-                        <div>Don't have an account? Please go to {<Link to="/register">Register</Link>} page.</div>
+                        <div>Don't have an account? Please go to {<Link to="/register"><b className="redirects">Register</b></Link>} page.</div>
                     </Fragment>
                 )}
         </Fragment >

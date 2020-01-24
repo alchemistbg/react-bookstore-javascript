@@ -14,7 +14,7 @@ function Input(props) {
                 name={nameAndId}
                 id={nameAndId} />
             <label className={labelClassName} htmlFor={nameAndId}>{labelTextValue}</label>
-            {error && <div className="message message-error">{error}</div>}
+            {/* {error && <div className="message message-error">{error}</div>} */}
         </div >
     );
 }

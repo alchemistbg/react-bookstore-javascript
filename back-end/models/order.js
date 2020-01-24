@@ -6,10 +6,21 @@ const orderSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    orderItem: [{
-        type: Schema.Types.ObjectId,
-        ref: 'orderItem'
-    }]
+    orderedBooks: [{
+        bookId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Book',
+        },
+        qty: Number,
+        totalPrice: Number
+    }],
+    totalPrice: {
+        type: Number
+    },
+    orderDate: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 

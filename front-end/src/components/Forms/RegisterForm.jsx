@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import Input from './Input';
 import { registerUser } from '../../services/requests';
+import { validateForm, validateInput } from '../../utils/inputValidation';
+import { showToast } from '../../utils/helpers';
 
 class RegisterForm extends Component {
     constructor(props) {
@@ -11,15 +13,15 @@ class RegisterForm extends Component {
         this.state = {
             pageName: 'Reactive Bookstore | Register',
             registerInfo: {
-                firstname: '',
-                lastname: '',
+                firstName: '',
+                lastName: '',
                 email: '',
-                username: '',
+                userName: '',
                 password: '',
                 repeatPassword: ''
             },
             registerErrors: {
-                username: [],
+                userName: [],
                 email: [],
                 password: [],
                 repeatPassword: []
@@ -28,27 +30,44 @@ class RegisterForm extends Component {
     }
 
     handleSubmit = async (event) => {
+        const { registerInfo } = this.state;
         event.preventDefault();
-        try {
-            const user = await registerUser(this.state.registerInfo);
-        } catch (error) {
-            this.setState({
-                registerErrors: {
-                    username: [],
-                    email: [],
-                    password: [],
-                    repeatPassword: []
+        validateForm('register', registerInfo)
+            .then(async () => {
+                try {
+                    const user = await registerUser(this.state.registerInfo);
+                    showToast('success', {
+                        title: `Registration successful.`,
+                        message: `You will be now redirected to login page.`
+                    });
+                    this.props.history.push('/login');
+                } catch (error) {
+                    this.setState({
+                        registerErrors: {
+                            userName: [],
+                            email: [],
+                            password: [],
+                            repeatPassword: []
+                        }
+                    });
+                    const registerErrors = { ...this.state.registerErrors };
+                    error.response.data.info.map((err) => {
+                        registerErrors[err.param].push(err.msg);
+                        return undefined;
+                    });
+                    this.setState({
+                        registerErrors
+                    });
+                    showToast('error', this.state.registerErrors);
                 }
+            })
+            .catch((errors) => {
+                this.setState({
+                    registerErrors: errors
+                });
+                showToast('error', this.state.registerErrors);
             });
-            const registerErrors = { ...this.state.registerErrors };
-            error.response.data.info.map((err) => {
-                registerErrors[err.param].push(err.msg);
-                return undefined;
-            });
-            this.setState({
-                registerErrors
-            });
-        }
+
     }
 
     handleChange = ({ currentTarget: input }) => {
@@ -74,12 +93,13 @@ class RegisterForm extends Component {
                 <div id="register-form">
                     <form className="form register-form" onSubmit={this.handleSubmit}>
                         <Input
-                            isAutoFocus={true}
+                            // isAutoFocus={true}
+                            isAutoFocus={false}
                             divClassNames="form-field-wrapper uname-wrapper"
-                            value={registerInfo.username}
+                            value={registerInfo.userName}
                             onChange={this.handleChange}
                             type="text"
-                            nameAndId="username"
+                            nameAndId="userName"
                             labelClassName="placeholder"
                             labelTextValue="Username" />
                         <Input
@@ -87,26 +107,26 @@ class RegisterForm extends Component {
                             divClassNames="form-field-wrapper email-wrapper"
                             value={registerInfo.email}
                             onChange={this.handleChange}
-                            type="email"
+                            type="test"
                             nameAndId="email"
                             labelClassName="placeholder"
                             labelTextValue="Email" />
                         <Input
                             isAutoFocus={false}
                             divClassNames="form-field-wrapper fname-wrapper"
-                            value={registerInfo.firstname}
+                            value={registerInfo.firstName}
                             onChange={this.handleChange}
                             type="text"
-                            nameAndId="firstname"
+                            nameAndId="firstName"
                             labelClassName="placeholder"
                             labelTextValue="First Name" />
                         <Input
                             isAutoFocus={false}
                             divClassNames="form-field-wrapper lname-wrapper"
-                            value={registerInfo.lastname}
+                            value={registerInfo.lastName}
                             onChange={this.handleChange}
                             type="text"
-                            nameAndId="lastname"
+                            nameAndId="lastName"
                             labelClassName="placeholder"
                             labelTextValue="Last Name" />
                         <Input
@@ -130,7 +150,7 @@ class RegisterForm extends Component {
                         <button className="form-button" type="submit">Register</button>
                     </form>
                 </div>
-                <div>Already have an account? Please go to {<Link to="/login">Login</Link>} page</div>
+                <div>Already have an account? Please go to {<Link to="/login"><b className="redirects">Login</b></Link>} page</div>
             </Fragment>
         );
     }
