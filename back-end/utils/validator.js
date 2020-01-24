@@ -1,14 +1,30 @@
 const { check } = require('express-validator');
 const userModel = require('../models/User');
 
-
-function registrationDataValidator() {
+function loginDataValidator() {
     return [
-        check('username')
+        check('userName')
             .isLength({ min: 5, max: 20 }).withMessage('Username must be between 5 and 20 characters long!')
             .isAlphanumeric().withMessage('Username must contains only latin letters and digits!')
             .custom(async (username, { req }) => {
-                const user = await userModel.findOne({ username });
+                const user = await userModel.findOne({ userName: username });
+                if (!user) {
+                    return Promise.reject('User with this username does not exists!');
+                }
+            }),
+        check('password')
+            .isLength({ min: 8 }).withMessage('Password must at least 8 symbols long!')
+            .isAlphanumeric().withMessage('Password must contains only latin letters and digits!')
+    ]
+}
+
+function registrationDataValidator() {
+    return [
+        check('userName')
+            .isLength({ min: 5, max: 20 }).withMessage('Username must be between 5 and 20 characters long!')
+            .isAlphanumeric().withMessage('Username must contains only latin letters and digits!')
+            .custom(async (username, { req }) => {
+                const user = await userModel.findOne({ userName: username });
                 if (user) {
                     return Promise.reject('User with this username is already registered!');
                 }
@@ -25,7 +41,6 @@ function registrationDataValidator() {
             .isLength({ min: 8 }).withMessage('Password must at least 8 symbols long!')
             .isAlphanumeric().withMessage('Password must contains only latin letters and digits!')
             .custom((password, { req }) => {
-                console.log(req.body.repeatPassword)
                 if (req.body.repeatPassword.length < 8) {
                     throw new Error(`Repeat password field can't be empty!`);
                 }
@@ -42,5 +57,6 @@ function registrationDataValidator() {
 }
 
 module.exports = {
-    registrationDataValidator
+    registrationDataValidator,
+    loginDataValidator
 }
