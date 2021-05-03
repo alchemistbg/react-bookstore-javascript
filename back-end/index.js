@@ -5,12 +5,13 @@ const app = express();
 
 require('./config/database')();
 
-const genresRouter = require('./routes/genres');
-const booksRouter = require('./routes/books');
-const usersRouter = require('./routes/users');
-const ordersRouter = require('./routes/orders');
+const genresRouter = require('./api/genres');
+const booksRouter = require('./api/books');
+const usersRouter = require('./api/users');
+const ordersRouter = require('./api/orders');
 
 app.use(bodyParser.json());
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -18,13 +19,13 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/routes/genres', genresRouter);
-app.use('/routes/orders', ordersRouter);
-app.use('/routes/books', booksRouter);
-app.use('/routes/users', usersRouter);
+app.use('/api/genres', genresRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/books', booksRouter);
+app.use('/api/users', usersRouter);
 
 app.use((error, req, res, next) => {
-    console.log(error);
+    // console.log(error);
     const status = error.status || 500;
     const { message, info } = error;
     res.status(status).json({ message, info });
