@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const port = 3000;
+const port = 5001;
 const app = express();
 
 require('./config/database')();
