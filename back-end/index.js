@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 const port = 5001;
 const app = express();
 
@@ -10,7 +10,8 @@ const booksRouter = require('./api/books');
 const usersRouter = require('./api/users');
 const ordersRouter = require('./api/orders');
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json());
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
