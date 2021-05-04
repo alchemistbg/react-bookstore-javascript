@@ -127,8 +127,26 @@ module.exports = {
             .catch();
     },
 
-    profileEdit: (req, res) => {
+    profileEdit: (req, res, next) => {
+        userModel.findById(req.user.userId).exec()
+            .then((user) => {
+                if (!user) {
+                    return res.status(400).json({});
+                }
 
+                let origAddress = { ...user.address };
+                origAddress = { ...req.body.address };
+                user.address = { ...origAddress };
+                return user.save();
+            })
+            .then((result) => {
+                return res.status(200).json({
+                    message: "User profile updated successfully",
+                });
+            })
+            .catch((error) => {
+                next(error)
+            });
     },
 
     profileDelete: (req, res) => {
