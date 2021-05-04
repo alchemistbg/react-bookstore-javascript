@@ -1,0 +1,10 @@
+.qty-wrapper {
+    display: flex;
+    align-items: baseline;
+
+    .book-list-item-qty {
+        display: flex;
+        align-items: baseline;
+        text-align: center;
+    }
+}
