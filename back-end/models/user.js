@@ -24,6 +24,12 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    address: {
+        street: { type: String },
+        zipCode: { type: String },
+        city: { type: String },
+        country: { type: String }
+    },
     userRole: {
         type: String,
         enum: ['user', 'admin'],
