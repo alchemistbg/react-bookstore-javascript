@@ -43,7 +43,12 @@ const userSchema = new Schema({
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comment'
-    }]
+    }],
+    // userInfo: {
+    //     p1: { type: String },
+    //     p2: { type: String },
+    //     p3: { type: String }
+    // }
     // cart: {
 
     // }
