@@ -149,7 +149,35 @@ module.exports = {
             });
         }
         else {
+            const bookId = req.params.id;
+            const newBookData = { ...req.body };
+            bookModel.findByIdAndUpdate(bookId, newBookData, { new: true })
+                // .then((oldBook) => {
+                //     console.log(oldBook);
+                //     if (Object.keys(oldBook).length < 1) {
+                //         return res.status(404).json({
+                //             message: "Book not found"
+                //         });
+                //     }
+                // })
+                .then((newBook) => {
+                    if (newBook === null) {
+                        return res.status(404).json({
+                            message: "Book not found",
 
+                        });
+                    }
+                    return res.status(200).json({
+                        message: "Book updated successfully",
+                        newBook
+                    });
+                })
+                .catch((error) => {
+                    return res.status(400).json({
+                        message: "Something went wrong!",
+                        error
+                    });
+                });
         }
     },
 
