@@ -143,7 +143,14 @@ module.exports = {
     },
 
     bookUpdate: (req, res) => {
+        if (req.user.userRole !== "admin") {
+            return res.status(403).json({
+                message: "Forbidden! You do not have rights for this operation."
+            });
+        }
+        else {
 
+        }
     },
 
     bookDelete: (req, res) => {
