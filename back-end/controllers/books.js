@@ -166,18 +166,24 @@ module.exports = {
         }
         else {
             const bookId = req.params.id;
-            const newBookData = { ...req.body };
-            bookModel.findByIdAndUpdate(bookId, newBookData, { new: true })
-                .then((newBook) => {
-                    if (newBook === null) {
+            const newBook = { ...req.body };
+            bookModel.findById(bookId)
+                .then((oldBook) => {
+                    if (!oldBook) {
                         return res.status(404).json({
                             message: "Book not found",
-
                         });
+                    } else {
+                        return bookModel.updateOne(newBook);
                     }
+                })
+                .then((result) => {
+                    return bookModel.findById(bookId);
+                })
+                .then((book) => {
                     return res.status(200).json({
                         message: "Book updated successfully",
-                        newBook
+                        book
                     });
                 })
                 .catch((error) => {
