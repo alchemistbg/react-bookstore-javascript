@@ -6,7 +6,8 @@ const User = require('../models/User');
 module.exports = () => {
     mongoose.connect('mongodb://localhost:27017/reactive', {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false
     });
 
     const db = mongoose.connection;
