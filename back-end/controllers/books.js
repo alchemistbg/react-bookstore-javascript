@@ -104,17 +104,33 @@ module.exports = {
             .catch();
     },
 
-    bookCreate: (req, res) => {
-        const { title, author, publisher, isbn, genres } = req.body;
+    bookCreate: (req, res, next) => {
+        if (req.user.userRole !== "admin") {
+            return res.status(403).json({
+                message: "Forbidden! You do not have rights for this operation."
+            });
+        }
 
-        bookModel.create({ title, author, publisher, isbn, genres })
+        const bookData = { ...req.body };
+        bookModel.find({ isbn: bookData.isbn })
             .then((book) => {
-                res.status(201).json({
-                    message: "Book Added",
+                if (book.length > 0) {
+                    return res.status(409).json("The book already exist");
+                } else {
+                    return bookModel.create(bookData);
+                }
+            })
+            .then((book) => {
+                return res.status(201).json({
+                    message: "Book created successfully",
                     book
                 });
             })
-            .catch();
+            .catch((error) => {
+                error.status = 400;
+
+                // next(error);
+            });
     },
 
     bookDetails: (req, res, next) => {
