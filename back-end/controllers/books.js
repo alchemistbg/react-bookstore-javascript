@@ -201,7 +201,28 @@ module.exports = {
                 message: "Forbidden! You do not have rights for this operation."
             });
         } else {
+            const bookId = req.params.id;
+            bookModel.findById(bookId)
+                .then((book) => {
+                    if (!book) {
+                        return res.status(404).json({
+                            message: "Book not found"
+                        });
+                    } else {
+                        return bookModel.deleteOne(book);
+                    }
+                })
+                .then((result) => {
+                    return res.status(200).json({
+                        message: `Book with id '${bookId}' was deleted successfully`,
+                        result
+                    });
+                })
+                .catch((error) => {
+                    error.status = 400;
 
+                    // next(error);
+                });
         }
     },
 
