@@ -14,17 +14,11 @@ module.exports = (req, res, next) => {
     jwt.verify(token, 'verysecretstring', (error, decoded) => {
         if (error) {
             error.status = 403;
-            // return res.status(403).json({
-            //     error: "Invalid credentials"
-            // });
             next(error);
-            // return next(error);
         }
 
         req.user = decoded;
-        console.log(req.user)
         next();
-        // return next();
     });
 
 }
