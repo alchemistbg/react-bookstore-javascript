@@ -5,8 +5,8 @@ module.exports = (req, res, next) => {
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
         token = req.headers.authorization.split('Bearer ')[1];
     } else {
-        return res.status(403).json({
-            error: "Unauthorized"
+        return res.status(401).json({
+            error: "Unauthenticated"
         });
 
     }
