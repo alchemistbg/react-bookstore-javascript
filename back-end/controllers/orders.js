@@ -5,8 +5,7 @@ const mongoose = require('mongoose');
 
 module.exports = {
 
-    orderAdd: (req, res) => {
-
+    postOrder: (req, res, next) => {
         const { customer, orderedBooks, totalPrice } = req.body;
         orderModel.create({ customer, orderedBooks, totalPrice })
             .then((order) => {
@@ -15,15 +14,12 @@ module.exports = {
                     order
                 });
             })
-            .catch();
-        // const customer = mongoose.mongo.ObjectId(userId);
-        // orderModel.create({ customer })
-        //     .then((order) => {
+            .catch((error) => {
+                error.status = 400;
 
-        //         userModel.findById(userId)
-        //             .populate({ path: 'order' })
-        //             .select('username orders')
-        //             .then((user) => {
+                next(error);
+            });
+    },
 
         //                 user.orders.push(order._id);
         //                 user.save();
