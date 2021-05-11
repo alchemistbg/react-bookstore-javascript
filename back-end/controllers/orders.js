@@ -73,8 +73,34 @@ module.exports = {
         // .catch();
     },
 
-    // getOrderById: (req, res) => {
-    //     const orderId = req.params.id;
+    getOrder: (req, res, next) => {
+        const orderId = req.params.id;
+
+        orderModel.findById(orderId)
+            .then((order) => {
+                if (!order) {
+                    return res.status(444).json({
+                        message: "Order was not found!"
+                    });
+                } else {
+                    if (req.user.userId !== order.customer || req.user.userRole !== 'admin') {
+                        return res.status(403).json({
+                            message: "Unauthorized"
+                        });
+                    }
+
+                    return res.status(200).json({
+                        message: "Order OK",
+                        order
+                    });
+                }
+            })
+            .catch((error) => {
+                error.status = 488;
+
+                next(error);
+            });
+    },
 
     //     orderModel.findById(orderId)
     //         .then((order) => {
