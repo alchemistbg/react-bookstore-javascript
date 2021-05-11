@@ -21,18 +21,29 @@ module.exports = {
             });
     },
 
-        //                 user.orders.push(order._id);
-        //                 user.save();
+    getOrders: (req, res, next) => {
+        orderModel.find({})
+            .populate({
+                path: 'customer',
+                model: 'user',
+                select: ('userName')
+            })
+            .populate({
+                path: 'orderedBooks._id',
+                model: 'book',
+                select: 'title price'
+            })
+            .then((orders) => {
+                res.status(200).json({
+                    message: "OK",
+                    orders
+                });
+            })
+            .catch((error) => {
+                error.status = 400;
 
-        //                 res.status(201).json({
-        //                     message: "Order created",
-        //                     order,
-        //                     user
-        //                 })
-        //             })
-        //         // .catch();
-        //     })
-        //     .catch();
+                next(error);
+            });
     },
 
     getOrders: (req, res) => {
