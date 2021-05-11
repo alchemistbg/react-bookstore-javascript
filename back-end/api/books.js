@@ -10,14 +10,14 @@ router.get('/upcoming', bookController.getUpcomingBooks);
 router.get('/newest', bookController.getNewestBooks);
 router.get('/bestselling', bookController.getBestsellingBooks);
 
-router.post('/', utils.auth, bookController.bookCreate);
-router.get('/:id', bookController.bookDetails);
-router.patch('/:id', utils.auth, bookController.bookUpdate);
-router.delete('/:id', utils.auth, bookController.bookDelete);
+router.post('/', utils.auth, bookController.postBook);
+router.get('/:id', bookController.getBookDetails);
+router.patch('/:id', utils.auth, bookController.patchBook);
+router.delete('/:id', utils.auth, bookController.deleteBook);
 
 router.get('/genres/:id', bookController.getBooksByGenre);
 
-router.get('/:id/comments', bookController.bookGetComments);
-router.post('/:id/comments', utils.auth, bookController.bookPostComment);
+router.get('/:id/comments', bookController.getBookComments);
+router.post('/:id/comments', utils.auth, bookController.postBookComment);
 
 module.exports = router;

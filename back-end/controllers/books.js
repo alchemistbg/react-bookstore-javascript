@@ -104,7 +104,7 @@ module.exports = {
             .catch();
     },
 
-    bookCreate: (req, res, next) => {
+    postBook: (req, res, next) => {
         if (req.user.userRole !== "admin") {
             return res.status(403).json({
                 message: "Forbidden! You do not have rights for this operation."
@@ -133,7 +133,7 @@ module.exports = {
             });
     },
 
-    bookDetails: (req, res, next) => {
+    getBookDetails: (req, res, next) => {
         const bookId = req.params.id;
         bookModel.findById(bookId)
             .populate(populateGenreOption)
@@ -158,7 +158,7 @@ module.exports = {
             });
     },
 
-    bookUpdate: (req, res) => {
+    patchBook: (req, res) => {
         if (req.user.userRole !== "admin") {
             return res.status(403).json({
                 message: "Forbidden! You do not have rights for this operation."
@@ -195,7 +195,7 @@ module.exports = {
         }
     },
 
-    bookDelete: (req, res, next) => {
+    deleteBook: (req, res, next) => {
         if (req.user.userRole !== "admin") {
             return res.status(403).json({
                 message: "Forbidden! You do not have rights for this operation."
@@ -226,7 +226,7 @@ module.exports = {
         }
     },
 
-    bookGetComments: (req, res) => {
+    getBookComments: (req, res) => {
         const bookId = req.params.id;
         bookModel.findById(bookId)
             .select('comments')
@@ -241,7 +241,7 @@ module.exports = {
 
     },
 
-    bookPostComment: async (req, res) => {
+    postBookComment: async (req, res) => {
         const bookId = req.params.id;
         const { commentCreator, commentContent } = req.body;
 
