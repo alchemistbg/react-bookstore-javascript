@@ -102,10 +102,11 @@ module.exports = {
             });
     },
 
-    //     orderModel.findById(orderId)
-    //         .then((order) => {
-    //             console.log(order)
-    //         })
-    //         .catch();
-    // }
+    patchOrder: (req, res) => {
+        if (req.user.userRole !== 'admin') {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        }
+    }
 }
