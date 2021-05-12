@@ -153,20 +153,28 @@ module.exports = {
 
     },
 
-    getOrders: (req, res) => {
-        orderModel.find({ customer: req.params.id })
-            .populate({
-                path: 'orderedBooks._id',
-                model: 'book',
-                select: 'title price'
-            })
-            .then((orders) => {
-                res.status(200).json({
-                    message: "OK",
-                    orders
+    getUserOrders: (req, res) => {
+        if (req.user.userRole !== "admin" || req.user.userId !== req.params.id) {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        } else {
+            orderModel.find({ customer: req.params.id })
+                .populate({
+                    path: 'orderedBooks._id',
+                    model: 'book',
+                    select: 'title price'
+                })
+                .then((orders) => {
+                    return res.status(200).json({
+                        message: "OK",
+                        orders
+                    });
+                })
+                .catch((error) => {
+                    console.log(error);
                 });
-            })
-            .catch();
+        }
     }
 
 }
