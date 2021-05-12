@@ -127,7 +127,7 @@ module.exports = {
             .catch();
     },
 
-    profileEdit: (req, res, next) => {
+    patchProfile: (req, res, next) => {
         userModel.findById(req.user.userId).exec()
             .then((user) => {
                 if (!user) {
