@@ -79,17 +79,17 @@ function BookInfo(props) {
                     </tr>
                 </tbody>
             </table>
-            <div>
-                <span className="qty-wrapper">
-                    <button className="form-button e">
-                        <i className="far fa-minus-square"></i>
-                    </button>
-                    1
-                    <button className="form-button e">
-                        <i className="far fa-plus-square"></i>
-                    </button>
-                </span>
-            </div>
+            <span className="qty-wrapper">
+                <Quantity
+                    book={book}
+                    qty={book.qty}
+                    // handleDecrement={() => handleDecrement(book)}
+                    // handleDecrement={() => handleDecrement(book)}
+                    handleDecrement={handleDecrement}
+                    handleIncrement={handleIncrement}
+                />
+                <input className="form-button" type="button" value="Add to cart" onClick={handleAddToCartClick} />
+            </span>
             <input className="form-button" type="button" value="Add to cart" onClick={handleAddToCartClick} />
         </div>
     );
