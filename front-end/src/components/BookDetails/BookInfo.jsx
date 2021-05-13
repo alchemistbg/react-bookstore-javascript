@@ -1,13 +1,18 @@
-import React, { useContext, useReducer } from 'react'
+import React, { useState, useContext, useReducer } from 'react'
 // import { Redirect } from 'react-router-dom';
+
+import Quantity from './../Common/Quantity/Quantity';
+
 import { showToast } from '../../utils/helpers';
 
 import AuthContext from './../../context/authContext/AuthContext';
-
 import CartContext from './../../context/cartContext/CartContext';
-// import { initialCartState, cartReducer } from '../../reducers/cartReducer';
 
 function BookInfo(props) {
+    const { book } = props;
+    let [bookQty, setBookQty] = useState(1);
+    book.qty = bookQty;
+
     const [{ isLoggedIn }] = useContext(AuthContext);
 
     const [{ cart }, dispatch] = useContext(CartContext);
@@ -40,7 +45,6 @@ function BookInfo(props) {
         }
     }
 
-    const { book } = props;
     return (
         <div className="book-info">
             <h4>{book.title}</h4>
@@ -90,7 +94,6 @@ function BookInfo(props) {
                 />
                 <input className="form-button" type="button" value="Add to cart" onClick={handleAddToCartClick} />
             </span>
-            <input className="form-button" type="button" value="Add to cart" onClick={handleAddToCartClick} />
         </div>
     );
 }
