@@ -75,8 +75,13 @@ module.exports = {
                         throw error;
                     }
 
-                    const token = jwt.sign({
-                    }, 'verysecretstring', { expiresIn: '24h' });
+                    const userPayload = {
+                        userId: user._id,
+                        userName: user.userName,
+                        userRole: user.userRole
+                    }
+
+                    const token = jwt.sign(userPayload, 'verysecretstring', { expiresIn: '24h' });
 
                     res.status(200).json({
                         message: 'Login successful.',
