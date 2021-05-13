@@ -2,10 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 function HeaderMinorNav() {
+    const test = () => {
+        console.log("Check")
+    }
     return (
         <ul className="minor-nav-list">
             <li>
-                <NavLink to="/books">Books</NavLink>
+                <NavLink to="/books" onClick={test()}>Books</NavLink>
             </li>
             {/* <li>
                 <NavLink to="/books">Books</NavLink>
