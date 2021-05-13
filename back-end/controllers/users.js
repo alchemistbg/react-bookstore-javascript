@@ -98,10 +98,11 @@ module.exports = {
     },
 
     getProfile: (req, res, next) => {
+        const userName = req.user.userName;
 
         userModel.findOne({ userName })
             // .select('firstName lastName userRole username email orders')
-            .populate({ path: 'order' })
+            // .populate({ path: 'orders' })
             .populate({
                 path: 'comments',
                 select: 'commentContent commentTime',
@@ -118,12 +119,11 @@ module.exports = {
             })
             .then((user) => {
                 if (!user) {
-                    res.status(400).json({
+                    return res.status(400).json({
                         message: "User not found!"
                     });
-                    return;
                 }
-                res.status(200).json({
+                return res.status(200).json({
                     message: "",
                     user,
                 });
