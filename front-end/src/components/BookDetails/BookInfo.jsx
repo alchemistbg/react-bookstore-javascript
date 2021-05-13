@@ -19,6 +19,13 @@ function BookInfo(props) {
         }
         console.log(bookQty);
     }
+
+    const handleIncrement = () => {
+        bookQty += 1;
+        setBookQty(bookQty);
+        console.log(bookQty);
+    }
+
     const handleAddToCartClick = () => {
         if (!isLoggedIn) {
             props.history.push('/login');
