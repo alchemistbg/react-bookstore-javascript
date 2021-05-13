@@ -97,8 +97,7 @@ module.exports = {
 
     },
 
-    profileRead: (req, res) => {
-        const userName = req.params.id;
+    getProfile: (req, res, next) => {
 
         userModel.findOne({ userName })
             // .select('firstName lastName userRole username email orders')
@@ -129,7 +128,10 @@ module.exports = {
                     user,
                 });
             })
-            .catch();
+            .catch((error) => {
+                console.error(error);
+                next(error);
+            });
     },
 
     patchProfile: (req, res, next) => {
