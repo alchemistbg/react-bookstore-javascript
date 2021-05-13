@@ -12,6 +12,13 @@ function BookInfo(props) {
 
     const [{ cart }, dispatch] = useContext(CartContext);
 
+    const handleDecrement = () => {
+        if (bookQty > 1) {
+            bookQty -= 1;
+            setBookQty(bookQty);
+        }
+        console.log(bookQty);
+    }
     const handleAddToCartClick = () => {
         if (!isLoggedIn) {
             props.history.push('/login');
