@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 
-import AuthContext from './../../context/authContext/AuthContext';
-import CartContext from './../../context/cartContext/CartContext';
+import AuthContext from '../../context/authContext/AuthContext';
+import CartContext from '../../context/cartContext/CartContext';
 
-import BookTable from './BookTable';
-import { showToast, calcCartTotalSum } from './../../utils/helpers';
+import BookTable from '../Common/BookTable/BookTable';
+import { showToast, calcCartTotalSum } from '../../utils/helpers';
 
 import { postOrder } from '../../services/requests';
 
@@ -81,34 +81,34 @@ const Cart = (props) => {
                         return <Redirect to='/login' />
                     </div>
                 ) : (
-                        <Fragment>
-                            <h2 className="cart-header">Your shopping bag, {userName}</h2>
-                            {
-                                cart.length !== 0 ? (
-                                    <div className="cart-wrapper">
-                                        <BookTable
-                                            source="cart"
-                                            bookTable={cart}
-                                            handleRemoveFromCart={handleRemoveFromCart}
-                                            handleCheckout={handleCheckout}
-                                            handleIncrement={handleIncrement}
-                                            handleDecrement={handleDecrement}
-                                        />
-                                        {
-                                            <div className="total-price-wrapper">
-                                                Total Price: <span className="total-price">{calcCartTotalSum(cart).toFixed(2)}</span>
-                                                <input className="form-button" type="button" value="CheckOut" onClick={handleCheckout} />
-                                            </div>
-                                        }
+                    <Fragment>
+                        <h2 className="cart-header">Your shopping bag, {userName}</h2>
+                        {
+                            cart.length !== 0 ? (
+                                <div className="cart-wrapper">
+                                    <BookTable
+                                        source="cart"
+                                        bookTable={cart}
+                                        handleRemoveFromCart={handleRemoveFromCart}
+                                        handleCheckout={handleCheckout}
+                                        handleIncrement={handleIncrement}
+                                        handleDecrement={handleDecrement}
+                                    />
+                                    {
+                                        <div className="total-price-wrapper">
+                                            Total Price: <span className="total-price">{calcCartTotalSum(cart).toFixed(2)}</span>
+                                            <input className="form-button" type="button" value="CheckOut" onClick={handleCheckout} />
+                                        </div>
+                                    }
 
-                                    </div>
-                                ) : (
-                                        <h4>Your cart is empty</h4>
-                                    )
-                            }
+                                </div>
+                            ) : (
+                                <h4>Your cart is empty</h4>
+                            )
+                        }
 
-                        </Fragment>
-                    )
+                    </Fragment>
+                )
 
             }
         </Fragment >
