@@ -75,32 +75,6 @@
 
     }
 
-    .form-button.book-table {
-        // padding: 0.3em 0.5em;
-        // margin: 0 0.9em;
-        padding: 0;
-        margin: calc(0.6em + 2px) 0.5em;
-
-        border: none;
-        // border: 2px solid green;
-        background: none;
-
-
-        &:hover {
-            background: none;
-            color: var(--color-highlight-text);
-        }
-
-        &:disabled {
-            color: var(--color-donut-border-light);
-        }
-
-        &:disabled:hover {
-            cursor: default;
-        }
-
-    }
-
     .button-delete {
         margin: 0;
         margin-left: 2em;
