@@ -20,10 +20,11 @@
 
 @import './components/BookCard/BookCard.scss';
 @import './components/BookDetails/BookDetails.scss';
+@import './components/Common/Quantity/Quantity.scss';
 
 @import './components/User/Profile.scss';
-@import './components/User/Cart.scss';
-@import './components/User/BookTable.scss';
+@import './components/Cart/Cart.scss';
+@import './components/Common/BookTable/BookTable.scss';
 
 @import './components/Forms/Forms.scss';
 
