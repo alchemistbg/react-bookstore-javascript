@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-const ProfileTab = (props) => {
+const PersonalTab = (props) => {
     const { profile } = props;
 
 
@@ -44,4 +44,4 @@ const ProfileTab = (props) => {
     </Fragment>;
 }
 
-export default ProfileTab;
+export default PersonalTab;
