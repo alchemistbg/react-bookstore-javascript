@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 
-import BookTable from './BookTable';
+import BookTable from './../../Common/BookTable/BookTable';
 
-import { timeFormat } from '../../utils/helpers';
+import { timeFormat } from './../../../utils/helpers';
 
 const OrdersTab = (props) => {
     const { orders } = props;

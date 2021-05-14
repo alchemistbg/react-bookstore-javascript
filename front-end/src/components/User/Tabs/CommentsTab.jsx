@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { timeFormat } from '../../utils/helpers';
+import { timeFormat } from './../../../utils/helpers';
 
 const CommentsTab = (props) => {
 
