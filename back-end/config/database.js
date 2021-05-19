@@ -4,7 +4,7 @@ const Book = require('../models/Book');
 const User = require('../models/User');
 
 module.exports = () => {
-    mongoose.connect('mongodb://localhost:27017/reactive', {
+    mongoose.connect(process.env.DATABASE_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false
@@ -25,6 +25,6 @@ module.exports = () => {
     });
 
     db.on('error', (reason) => {
-        console.log(reason)
+        console.log(reason);
     });
 }
