@@ -105,6 +105,14 @@ module.exports = {
 
     },
 
+    logout: (req, res, next) => {
+        console.log(req.cookies)
+        res.clearCookie('x-auth-token', {
+            httpOnly: true,
+            // domain: 'localhost',
+            path: '/'
+        }).status(200).json({ message: 'Logout successfully' });
+    },
     getProfile: (req, res, next) => {
         const userName = req.user.userName;
 
