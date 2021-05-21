@@ -81,14 +81,22 @@ module.exports = {
                         userRole: user.userRole
                     }
 
-                    const token = jwt.sign(userPayload, 'verysecretstring', { expiresIn: '24h' });
+                    const token = jwt.sign(userPayload, process.env.JWT_SECRET, { expiresIn: '24h' });
 
+                    res.cookie('x-auth-token', token, {
+                        httpOnly: true,
+                        // domain: 'localhost',
+                        path: '/',
+                        expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+                    });
+                    // console.log(res.cookies);
                     res.status(200).json({
                         message: 'Login successful.',
-                        token,
-                        userName: user.userName,
-                        userId: user._id
+                        // token,
+                        // userName: user.userName,
+                        // userId: user._id
                     });
+                    // res.cookie('x-auth-token', token).send(token);
                 })
                 .catch((error) => {
                     next(error);
