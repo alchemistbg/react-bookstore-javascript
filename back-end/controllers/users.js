@@ -172,7 +172,31 @@ module.exports = {
             });
     },
 
-    profileDelete: (req, res) => {
+    deleteProfile: (req, res) => {
+        if (req.user.userRole !== 'admin') {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        }
+
+        const { profileIdToDelete } = req.body;
+        if (profileIdToDelete === req.user.userId) {
+            return res.status(405).json({
+                message: "Not allowed"
+            });
+        } else {
+            userModel.findOneAndDelete({ _id: profileIdToDelete })
+                .then((deletedProfile) => {
+                    res.status(200).json({
+                        message: "Profile was deleted successfully",
+                        deletedProfile
+                    });
+                })
+                .catch((error) => {
+
+                });
+        }
+
 
     },
 
