@@ -13,9 +13,9 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 
+app.use(helmet());
 app.use(cookieParser(process.env.CP_SECRET));
 app.use(express.json());
-app.use(helmet());
 
 require('./config/database')();
 
@@ -47,7 +47,7 @@ app.use('/api/users', usersRouter);
 app.use('/api/orders', ordersRouter);
 
 app.use((error, req, res, next) => {
-    console.log(error);
+    // console.log(error);
     const status = error.status || 500;
     const { message, info } = error;
     res.status(status).json({ message, info });
