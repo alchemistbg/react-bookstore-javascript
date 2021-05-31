@@ -28,3 +28,4 @@ yarn-error.log*
 
 #environmental variables
 back-end/envs/*
+front-end/.env.development
