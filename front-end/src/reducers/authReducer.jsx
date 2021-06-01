@@ -1,3 +1,5 @@
+const requests = require('./../services/requests');
+
 export const initialAuthState = {
     isLoggedIn: false,
     userName: '',
@@ -7,6 +9,15 @@ export const initialAuthState = {
 
 export const authReducer = (state, action) => {
     switch (action.type) {
+
+        case "CHECK_IF_LOGGED":
+            return {
+                isLoggedIn: true,
+                userName: action.payload.userName,
+                userId: action.payload.userId,
+                error: ''
+            };
+
         case 'LOGIN':
             return {
                 isLoggedIn: true,
