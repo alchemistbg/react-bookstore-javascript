@@ -31,8 +31,12 @@ async function getGenres() {
     return await axios.get(`${baseUrl}/genres`);
 }
 
-async function registerUser(registerData) {
-    return axios.post(`${baseUrl}/users`, registerData);
+async function checkIsLogged() {
+    console.log("Check if user is logged in!!!")
+    return axios.post(`${baseUrl}/users`, {
+        withCredentials: true
+    });
+}
 }
 
 async function loginUser(loginData) {
