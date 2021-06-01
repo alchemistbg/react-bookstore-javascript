@@ -8,6 +8,26 @@ function HeaderMajorNav() {
     const [{ isLoggedIn, userName }, dispatch] = useContext(AuthContext);
     const [{ cart }] = useContext(CartContext);
 
+    useEffect(() => {
+
+        checkIsLogged()
+            .then((response) => {
+                console.log(response);
+                const decodedToken = jwt(response.data.token);
+                dispatch({
+                    type: "CHECK_IF_LOGGED",
+                    payload: {
+                        userName: decodedToken.userName,
+                        userId: decodedToken.userId,
+                    },
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        return;
+    }, [])
+
     const handleLogOut = () => {
         dispatch({
             type: 'LOGOUT'
