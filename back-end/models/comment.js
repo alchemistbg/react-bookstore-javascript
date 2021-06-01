@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 const commentSchema = new Schema({
     commentCreator: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'user',
+        required: true
     },
     bookCommented: {
         type: Schema.Types.ObjectId,
-        ref: 'book'
+        ref: 'book',
+        required: true
     },
     commentTime: {
         type: Date,
