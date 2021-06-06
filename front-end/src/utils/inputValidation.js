@@ -45,6 +45,16 @@ const validateInput = (form, inputName, inputData) => {
                 return Promise.reject(parseErrors(error));
             });
     }
+    if (form === "register") {
+        return registerFormSchema
+            .validateAt(inputName, inputData, { abortEarly: false })
+            .then(() => {
+                return Promise.resolve();
+            })
+            .catch((error) => {
+                return Promise.reject(parseErrors(error));
+            });
+    }
 }
 
 export {
