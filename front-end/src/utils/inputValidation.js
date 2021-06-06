@@ -26,7 +26,7 @@ const validateForm = (form, data) => {
         return registerFormSchema
             .validate(data, { abortEarly: false })
             .then(() => {
-                return data
+                return data;
             })
             .catch((error) => {
                 return Promise.reject(parseErrors(error));
@@ -45,6 +45,7 @@ const validateInput = (form, inputName, inputData) => {
                 return Promise.reject(parseErrors(error));
             });
     }
+
     if (form === "register") {
         return registerFormSchema
             .validateAt(inputName, inputData, { abortEarly: false })
