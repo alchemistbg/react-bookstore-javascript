@@ -24,6 +24,7 @@ const booksRouter = require('./api/books');
 const usersRouter = require('./api/users');
 const ordersRouter = require('./api/orders');
 const commentsRouter = require('./api/comments');
+const cartsRouter = require('./api/carts');
 
 // app.use(bodyParser.json());
 
@@ -45,6 +46,7 @@ app.use('/api/genres', genresRouter);
 app.use('/api/books', booksRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/orders', ordersRouter);
+app.use('/api/carts', cartsRouter);
 
 app.use((error, req, res, next) => {
     // console.log(error);
