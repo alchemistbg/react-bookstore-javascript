@@ -6,6 +6,7 @@ import { timeFormat } from './../../../utils/helpers';
 
 const OrdersTab = (props) => {
     const { orders } = props;
+    // console.log("Orders: ", orders);
 
     return <Fragment>
         <input className="input" type="radio" name="tabs" id="tab-2" />
@@ -24,13 +25,13 @@ const OrdersTab = (props) => {
                     ) : (
                             <ul className="orders-list">{
                                 orders.map((order, index) => {
-                                    return <Fragment>
+                                    return <Fragment key={order._id} >
                                         <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
-                                        <li key={order._id} className="orders-list-item">
+                                        <li className="orders-list-item">
                                             <label htmlFor={"cb-" + index} className="orders-list-item-label">
                                                 <span className="order-date">{timeFormat(order.orderDate)}</span>
                                                 <span className="order-size">{order.orderedBooks.length}</span>
-                                                <span className="order-sum">{order.totalPrice.toFixed(2)}</span>
+                                                <span className="order-sum">{order.totalPrice.toFixed(2) || "NaN"}</span>
                                             </label>
                                             <span className="orders-list-item-data">
                                                 <BookTable source="ordersTab" bookTable={order.orderedBooks} />
