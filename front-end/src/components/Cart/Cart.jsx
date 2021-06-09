@@ -7,7 +7,7 @@ import CartContext from '../../context/cartContext/CartContext';
 import BookTable from '../Common/BookTable/BookTable';
 import { showToast, calcCartTotalSum } from '../../utils/helpers';
 
-import { postOrder } from '../../services/requests';
+import { postOrder } from '../../requests/userRequests';
 
 const Cart = (props) => {
     const [{ isLoggedIn, userName, userId }] = useContext(AuthContext);
@@ -96,7 +96,7 @@ const Cart = (props) => {
                                     />
                                     {
                                         <div className="total-price-wrapper">
-                                            Total Price: <span className="total-price">{calcCartTotalSum(cart).toFixed(2)}</span>
+                                            Total Price:<span className="total-price">{calcCartTotalSum(cart).toFixed(2)}</span>
                                             <input className="form-button" type="button" value="CheckOut" onClick={handleCheckout} />
                                         </div>
                                     }
