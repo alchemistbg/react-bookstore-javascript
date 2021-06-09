@@ -1,17 +1,32 @@
-import React, { useState, useContext, useReducer } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 // import { Redirect } from 'react-router-dom';
 
-import Quantity from './../Common/Quantity/Quantity';
+import Quantity from '../../Common/Quantity/Quantity';
 
-import { showToast } from '../../utils/helpers';
+import { showToast } from '../../../utils/helpers';
 
-import AuthContext from './../../context/authContext/AuthContext';
-import CartContext from './../../context/cartContext/CartContext';
+import AuthContext from '../../../context/authContext/AuthContext';
+import CartContext from '../../../context/cartContext/CartContext';
+import { useRef } from 'react';
 
-function BookInfo(props) {
-    const { book } = props;
+const BookInfo = (props) => {
     let [bookQty, setBookQty] = useState(1);
+
+    let bookRef = useRef(props.book);
+    let book = bookRef.current;
     book.qty = bookQty;
+    // book.qty = 1;
+
+    useEffect(() => {
+        book = bookRef.current;
+        // return;
+        book.qty = bookQty;
+        // book.qty = 1;
+        return () => {
+            book = bookRef.current;
+        }
+    }, [bookRef.current])
+
 
     const [{ isLoggedIn }] = useContext(AuthContext);
 
@@ -22,13 +37,11 @@ function BookInfo(props) {
             bookQty -= 1;
             setBookQty(bookQty);
         }
-        console.log(bookQty);
     }
 
     const handleIncrement = () => {
         bookQty += 1;
         setBookQty(bookQty);
-        console.log(bookQty);
     }
 
     const handleAddToCartClick = () => {
@@ -42,6 +55,7 @@ function BookInfo(props) {
                 type: 'ADD_TO_CART',
                 item: props.book
             });
+            book.qty = bookQty;
         }
     }
 
@@ -59,7 +73,7 @@ function BookInfo(props) {
                         <td className="column-data">{book.publisher}</td>
                     </tr>
                     <tr>
-                        <td className="column-header">Categories: </td>
+                        <td className="column-header">Categories: {book.genres}</td>
                         <td className="column-data">
 
                             {
@@ -79,6 +93,7 @@ function BookInfo(props) {
                     </tr>
                     <tr>
                         <td className="column-header">Price:</td>
+                        {/* <td className="column-data">{(book.price).toFixed(2)}$</td> */}
                         <td className="column-data">{book.price}$</td>
                     </tr>
                 </tbody>

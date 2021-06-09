@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react'
 
-import { timeFormat } from '../../utils/helpers';
-import Pagination from './../Common/Pagination/Pagination';
-import { paginate } from './../../utils/paginate';
+import { timeFormat } from './../../../utils/helpers';
+import { paginate } from './../../../utils/paginate';
+import Pagination from './../../Common/Pagination/Pagination';
 
 function BookComments(props) {
     const { book } = props;
