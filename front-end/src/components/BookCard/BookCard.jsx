@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-import { getBookCover } from '../../services/requests';
+import { getBookCover } from '../../requests/bookRequests';
 import Donut from '../Common/Preloader/Donut';
 
 class Book extends Component {
@@ -38,10 +37,10 @@ class Book extends Component {
                             <Donut />
                         </div>
                     ) : (
-                            <div className="book-cover">
-                                <img className="img" src={bookCover} alt={book.title} />
-                            </div>
-                        )
+                        <div className="book-cover">
+                            <img className="img" src={bookCover} alt={book.title} />
+                        </div>
+                    )
                 }
                 <div className="book-meta">
                     <div className="book-title">{book.title}</div>
