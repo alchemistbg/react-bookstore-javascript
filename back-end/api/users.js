@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const utils = require('../utils');
+const utils = require('./../utils');
 
-const userController = require('../controllers/users');
+const userController = require('./../controllers/users');
 
+router.post('/', utils.auth, userController.isLogged);
 router.post('/register', utils.validator.registrationDataValidator(), userController.register);
 router.post('/login', utils.validator.loginDataValidator(), userController.login);
 router.post('/logout', utils.auth, userController.logout);
