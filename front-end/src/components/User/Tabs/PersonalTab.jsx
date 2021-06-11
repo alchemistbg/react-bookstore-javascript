@@ -1,14 +1,13 @@
 import React, { Fragment } from 'react'
 
 const PersonalTab = (props) => {
-    const { profile } = props;
-
+    const { profile } = props
 
     function handleEditProfile() {
         console.log('Edit user profile')
     }
-    return <Fragment>
 
+    return <Fragment>
         <input className="input" type="radio" name="tabs" id="tab-1" defaultChecked />
         <div className="ilabel">
             <label className="label" htmlFor="tab-1">Personal</label>
@@ -22,6 +21,10 @@ const PersonalTab = (props) => {
             <div className="personal-info">
                 <table className="info-table">
                     <tbody>
+                        <tr>
+                            <td><h6 className="user-name">username:</h6></td>
+                            <td><h6><span>{profile.userName}</span></h6></td>
+                        </tr>
                         <tr>
                             <td><h6 className="first-name">First Name:</h6></td>
                             <td><h6><span>{profile.firstName}</span></h6></td>
