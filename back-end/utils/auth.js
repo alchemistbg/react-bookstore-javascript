@@ -1,17 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-    console.log(req.cookies)
+    // console.log(req);
+    console.log(req.cookies);
 
     const token = req.cookies['x-auth-token'] || '';
-    // if (req.headers.authorization && req.headers.authorization.startsWith('Bearer ')) {
-    //     token = req.headers.authorization.split('Bearer ')[1];
-    // } else {
-    //     return res.status(401).json({
-    //         error: "Unauthenticated"
-    //     });
-
-    // }
 
     jwt.verify(token, process.env.JWT_SECRET, (error, decodedUser) => {
         if (error) {
