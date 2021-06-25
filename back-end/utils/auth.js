@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-    // console.log(req);
-    console.log(req.cookies);
 
     const token = req.cookies['x-auth-token'] || '';
 
@@ -18,5 +16,4 @@ module.exports = (req, res, next) => {
         req.token = token;
         next();
     });
-
 }
