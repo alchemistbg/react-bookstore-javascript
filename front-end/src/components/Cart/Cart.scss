@@ -19,25 +19,20 @@
         font-size: 1.5em;
     }
 
-    td {
-        border: 1px solid red;
-        // padding: 1em 2em;
-    }
+    // td {
+    //     border: 1px solid red;
+    //     // padding: 1em 2em;
+    // }
 }
 
 .total-price-wrapper {
+    padding: 2em 0em;
     text-align: right;
     margin: auto;
     display: flex;
     align-items: center;
-
-    // justify-content: space-evenly;
-    // .class {
-    //     margin-top: 10em;
-
-    // }
-
     .total-price {
+        padding-left: 1em;
         font-size: 1.5em;
         font-weight: bold;
 
@@ -49,8 +44,6 @@
 }
 
 .cart-link {
-    // background: red;
-    // text-decoration: underline;
     font-weight: bold;
 }
 
