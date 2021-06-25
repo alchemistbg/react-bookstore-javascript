@@ -6,10 +6,17 @@ import BookTableHeader from './BookTableHeader';
 import Quantity from './../Quantity/Quantity';
 
 const BookTable = (props) => {
+
+    const books = props.bookTable;
+
     return <ul className="book-list-table">
         <BookTableHeader key={"header"} source={props.source} />
         {
-            props.bookTable.map((book) => {
+            books.map((book) => {
+
+                const bookSinglePrice = book._id.price || book.price;
+                const bookTotalPrice = book._id.totalPrice || book.totalPrice;
+
                 return <li key={book._id._id || book._id} className="book-list-item data-row">
                     <span className="book-list-item-title">
                         <Link to={"books/" + (book._id._id || book._id)}>
@@ -17,7 +24,8 @@ const BookTable = (props) => {
                         </Link>
                     </span>
                     <span className="book-list-item-sprice">
-                        {book._id.price || book.price}
+                        {/* {book._id.price || book.price} */}
+                        {bookSinglePrice.toFixed(2)}
                     </span>
                     {
                         props.source === "cart" ? (
@@ -26,23 +34,6 @@ const BookTable = (props) => {
                                 handleDecrement={props.handleDecrement}
                                 handleIncrement={props.handleIncrement}
                             />
-                            // <span className="book-list-item-qty">
-                            //     {
-                            //         book.qty < 2 ? (
-                            //             <button className="form-button book-table" disabled>
-                            //                 <i className="far fa-minus-square"></i>
-                            //             </button>
-                            //         ) : (
-                            //                 <button className="form-button book-table" onClick={() => props.handleDecrement(book)}>
-                            //                     <i className="far fa-minus-square"></i>
-                            //                 </button>
-                            //             )
-                            //     }
-                            //     {book.qty}
-                            //     <button className="form-button book-table" onClick={() => props.handleIncrement(book)}>
-                            //         <i className="far fa-plus-square"></i>
-                            //     </button>
-                            // </span>
                         ) : (
                             <span className="book-list-item-qty">
                                 {book.qty}
@@ -50,7 +41,10 @@ const BookTable = (props) => {
                         )
                     }
                     <span className="book-list-item-tprice">
-                        {book._id.totalPrice || book.totalPrice}
+                        {/* {book._id.totalPrice || book.totalPrice} */}
+                        {
+                            bookTotalPrice.toFixed(2)
+                        }
                     </span>
                     {
                         props.source === "cart" ? (
