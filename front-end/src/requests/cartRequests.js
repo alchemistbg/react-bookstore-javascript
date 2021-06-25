@@ -1,11 +1,23 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-// const baseUrl = 'http://localhost:3000/routes';
-const baseUrl = 'http://localhost:5001/api';
+const baseUrl = 'http://localhost:5001/api/carts';
 
 export const getCart = async (userId) => {
-    return axios.get(`${baseUrl}/carts/${userId}`, {
+    return axios.get(`${baseUrl}/${userId}`, {
+        withCredentials: true
+    });
+}
+
+export const postCart = async (userId, cartData) => {
+    return axios.post(`${baseUrl}/${userId}`, cartData, {
+        withCredentials: true
+    });
+}
+
+export const deleteCart = async (userId) => {
+    console.log(userId)
+    return axios.delete(`${baseUrl}/${userId}`, {
         withCredentials: true
     });
 }
