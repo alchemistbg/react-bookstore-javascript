@@ -1,16 +1,16 @@
-const requests = require('./../services/requests');
+const { logoutUser } = require('../requests/userRequests');
 
-export const initialAuthState = {
+export const initialUserState = {
     isLoggedIn: false,
     userName: '',
     userId: '',
     error: ''
 };
 
-export const authReducer = (state, action) => {
+export const userReducer = (state, action) => {
     switch (action.type) {
-
         case "CHECK_IF_LOGGED":
+            // console.log(action.type);
             return {
                 isLoggedIn: true,
                 userName: action.payload.userName,
@@ -19,12 +19,14 @@ export const authReducer = (state, action) => {
             };
 
         case 'LOGIN':
+            localStorage.setItem("test", "test");
             return {
                 isLoggedIn: true,
                 userName: action.payload.userName,
                 userId: action.payload.userId,
                 error: ''
             };
+
         case 'LOGIN_ERROR':
             return {
                 isLoggedIn: false,
@@ -32,13 +34,16 @@ export const authReducer = (state, action) => {
                 userId: '',
                 error: action.payload.error
             };
+
         case 'LOGOUT':
-            return {
-                isLoggedIn: false,
-                userName: '',
-                userId: '',
-                error: ''
-            };
+            return logoutUser()
+                .then((res) => {
+                    // console.log(res);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+
         default:
             return state;
     }
