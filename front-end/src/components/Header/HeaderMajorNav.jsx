@@ -1,20 +1,24 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import { NavLink, Redirect } from 'react-router-dom';
 
-import AuthContext from './../../context/authContext/AuthContext';
+import { checkIsLogged, logoutUser } from './../../requests/userRequests';
+import { getCart } from './../../requests/cartRequests';
+
+import UserContext from '../../context/userContext/UserContext';
 import CartContext from './../../context/cartContext/CartContext';
+import jwt from 'jwt-decode';
 
 function HeaderMajorNav() {
-    const [{ isLoggedIn, userName }, dispatch] = useContext(AuthContext);
-    const [{ cart }] = useContext(CartContext);
+    const [{ isLoggedIn, userName, userId }, userDispatch] = useContext(UserContext);
+    const [{ cart }, cartDispatch] = useContext(CartContext);
 
     useEffect(() => {
-
+        console.log("Checking if user is logged in");
         checkIsLogged()
             .then((response) => {
-                console.log(response);
+                console.log(response.data);
                 const decodedToken = jwt(response.data.token);
-                dispatch({
+                userDispatch({
                     type: "CHECK_IF_LOGGED",
                     payload: {
                         userName: decodedToken.userName,
@@ -23,13 +27,46 @@ function HeaderMajorNav() {
                 });
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.message);
             });
-        return;
-    }, [])
+    }, [userDispatch]);
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            console.log("LOGGED IN as: ", userName);
+            console.log("With userId: ", userId);
+            getCart(userId)
+                .then((response) => {
+                    console.log(response.data.cart);
+                    // if (response.data.cart.length > 0) {
+                    cartDispatch({
+                        type: 'LOAD_CART_FROM_DATABASE',
+                        payload: {
+                            ...response.data.cart[0]
+                        }
+                    });
+                    // }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    }, [cartDispatch, isLoggedIn, userName, userId]);
+
+    // const handleOnLoad = () => {
+    //     console.log("Loaded...");
+    // }
 
     const handleLogOut = () => {
-        dispatch({
+        // logoutUser()
+        //     .then((res) => {
+        //         console.log(res);
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+        // <Redirect to='/' />
+        userDispatch({
             type: 'LOGOUT'
         });
     }
@@ -41,7 +78,7 @@ function HeaderMajorNav() {
                     <li>
                         <NavLink to="/profile">Welcome, {userName}</NavLink>
                     </li>
-                    <li>
+                    <li >
                         <NavLink to="/cart">
                             <i className="fas fa-shopping-cart">
                                 <span className="cart-size">{cart.length}</span>
@@ -53,16 +90,17 @@ function HeaderMajorNav() {
                     </li>
                 </Fragment>
             ) : (
-                    <Fragment>
-                        <li>
-                            <NavLink to="/login">Login</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/register">Register</NavLink>
-                        </li>
-                    </Fragment>
-                )}
-        </ul>
+                <Fragment>
+                    <li>
+                        <NavLink to="/login">Login</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/register">Register</NavLink>
+                    </li>
+                </Fragment>
+            )
+            }
+        </ul >
     );
 }
 

@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 
 import BookCover from './BookCover';
 import BookInfo from './BookInfo';
 import BookComments from './BookComments';
 
-import { getBookDetails } from '../../services/requests'
+import { getBookDetails } from '../../requests/bookRequests'
 
 class BookDetails extends Component {
     constructor(props) {

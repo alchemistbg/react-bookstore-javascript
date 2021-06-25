@@ -4,7 +4,10 @@ const { validationResult } = require('express-validator');
 const userModel = require('../models/User');
 const orderModel = require('../models/order');
 
-function validateUserInfo(req, res) {
+const axios = require('axios');
+const mongoose = require('mongoose');
+
+const validateUserInfo = (req, res) => {
 
     const errors = validationResult(req);
 
@@ -18,9 +21,36 @@ function validateUserInfo(req, res) {
     return true;
 }
 
-module.exports = {
+const validateReCaptchaToken = (token) => {
+    const isCaptchaValid = axios.post(`https://google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET}&response=${token}`)
+        .then((response) => {
+            return response.data.success;
+        })
+        .catch((error) => {
 
-    register: (req, res) => {
+        });
+    return isCaptchaValid;
+}
+
+module.exports = {
+    isLogged: (req, res) => {
+        // console.log(req);
+        res.status(200).json({
+            message: "User is still logged in",
+            token: req.token
+        });
+    },
+
+    register: async (req, res) => {
+        // const isCaptchaValid = await validateReCaptchaToken(req.body.reCaptchaToken);
+        // if (!isCaptchaValid) {
+        //     res.status(400).json({
+        //         message: "Something went wrong! NON HUMAN"
+        //     });
+        //     return;
+        // }
+
+        // console.log(req.body.reCaptchaToken);
         if (validateUserInfo(req, res)) {
             const { firstName, lastName, userName, password, email, userRole } = req.body;
             userModel.create({ firstName, lastName, userName, password, email, userRole })
@@ -92,7 +122,7 @@ module.exports = {
                     // console.log(res.cookies);
                     res.status(200).json({
                         message: 'Login successful.',
-                        // token,
+                        token,
                         // userName: user.userName,
                         // userId: user._id
                     });
@@ -102,21 +132,21 @@ module.exports = {
                     next(error);
                 });
         }
-
     },
 
     logout: (req, res, next) => {
-        console.log(req.cookies)
         res.clearCookie('x-auth-token', {
             httpOnly: true,
-            // domain: 'localhost',
             path: '/'
         }).status(200).json({ message: 'Logout successfully' });
     },
-    getProfile: (req, res, next) => {
-        const userName = req.user.userName;
 
-        userModel.findOne({ userName })
+    getProfile: (req, res, next) => {
+        console.log(req.user);
+        const { userId, userName } = req.user;
+
+        // userModel.findOne({ userName })
+        userModel.findById(userId)
             // .select('firstName lastName userRole username email orders')
             // .populate({ path: 'orders' })
             .populate({
@@ -145,7 +175,7 @@ module.exports = {
                 });
             })
             .catch((error) => {
-                console.error(error);
+                // console.error(error);
                 next(error);
             });
     },
@@ -168,7 +198,7 @@ module.exports = {
                 });
             })
             .catch((error) => {
-                next(error)
+                next(error);
             });
     },
 
@@ -196,23 +226,22 @@ module.exports = {
 
                 });
         }
-
-
     },
 
     getUserOrders: (req, res) => {
-        if (req.user.userRole !== "admin" || req.user.userId !== req.params.id) {
+        if (req.user.userRole !== "admin" && req.user.userId !== req.params.id) {
             return res.status(403).json({
                 message: "Unauthorized"
             });
         } else {
-            orderModel.find({ customer: req.params.id })
+            orderModel.find({ customerId: mongoose.Types.ObjectId(req.user.userId) })
                 .populate({
                     path: 'orderedBooks._id',
                     model: 'book',
                     select: 'title price'
                 })
                 .then((orders) => {
+                    console.log("orders: ", orders);
                     return res.status(200).json({
                         message: "OK",
                         orders

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function HeaderMinorNav() {
     const test = () => {
-        console.log("Check")
+        // console.log("Check")
     }
     return (
         <ul className="minor-nav-list">

@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import Input from './Input';
-import { loginUser } from '../../services/requests';
-import { validateForm, validateInput } from '../../utils/inputValidation';
-import { showToast } from '../../utils/helpers';
+import { loginUser } from './../../requests/userRequests';
+import { validateForm, validateInput } from './../../utils/inputValidation';
+import { showToast } from './../../utils/helpers';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -124,8 +124,8 @@ class LoginForm extends Component {
                                 username ? (
                                     "form-field-wrapper uname-wrapper danger"
                                 ) : (
-                                        "form-field-wrapper uname-wrapper"
-                                    )
+                                    "form-field-wrapper uname-wrapper"
+                                )
                             }
                             isAutoFocus={false}
                             value={loginInfo.username}
@@ -142,8 +142,8 @@ class LoginForm extends Component {
                                 password ? (
                                     "form-field-wrapper pass-rep-wrapper danger"
                                 ) : (
-                                        "form-field-wrapper pass-rep-wrapper"
-                                    )
+                                    "form-field-wrapper pass-rep-wrapper"
+                                )
                             }
                             isAutoFocus={false}
                             value={loginInfo.password}
@@ -159,8 +159,8 @@ class LoginForm extends Component {
                             !!(username || password) ? (
                                 <button className="form-button" disabled={true} type="submit">Login</button>
                             ) : (
-                                    < button className="form-button" type="submit">Login</button>
-                                )
+                                < button className="form-button" type="submit">Login</button>
+                            )
                         }
                     </form>
                 </div>

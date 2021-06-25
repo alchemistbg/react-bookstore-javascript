@@ -23,25 +23,25 @@ const OrdersTab = (props) => {
                     orders.length === 0 ? (
                         <h6>You haven't made any orders yet!</h6>
                     ) : (
-                            <ul className="orders-list">{
-                                orders.map((order, index) => {
-                                    return <Fragment key={order._id} >
-                                        <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
-                                        <li className="orders-list-item">
-                                            <label htmlFor={"cb-" + index} className="orders-list-item-label">
-                                                <span className="order-date">{timeFormat(order.orderDate)}</span>
-                                                <span className="order-size">{order.orderedBooks.length}</span>
-                                                <span className="order-sum">{order.totalPrice.toFixed(2) || "NaN"}</span>
-                                            </label>
-                                            <span className="orders-list-item-data">
-                                                <BookTable source="ordersTab" bookTable={order.orderedBooks} />
-                                            </span>
-                                        </li>
-                                    </Fragment>
-                                })
-                            }
-                            </ul>
-                        )
+                        <ul className="orders-list">{
+                            orders.map((order, index) => {
+                                return <Fragment key={order._id} >
+                                    <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
+                                    <li className="orders-list-item">
+                                        <label htmlFor={"cb-" + index} className="orders-list-item-label">
+                                            <span className="order-date">{timeFormat(order.orderDate)}</span>
+                                            <span className="order-size">{order.orderedBooks.length}</span>
+                                            <span className="order-sum">{order.orderTotalPrice.toFixed(2) || "NaN"}</span>
+                                        </label>
+                                        <span className="orders-list-item-data">
+                                            <BookTable source="ordersTab" bookTable={order.orderedBooks} />
+                                        </span>
+                                    </li>
+                                </Fragment>
+                            })
+                        }
+                        </ul>
+                    )
                 }
             </div>
 

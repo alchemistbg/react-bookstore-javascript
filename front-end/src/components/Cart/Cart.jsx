@@ -1,42 +1,46 @@
 import React, { Fragment, useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 
-import AuthContext from '../../context/authContext/AuthContext';
+import UserContext from '../../context/userContext/UserContext';
 import CartContext from '../../context/cartContext/CartContext';
 
 import BookTable from '../Common/BookTable/BookTable';
 import { showToast, calcCartTotalSum } from '../../utils/helpers';
 
 import { postOrder } from '../../requests/userRequests';
+import { deleteCart } from '../../requests/cartRequests';
 
 const Cart = (props) => {
-    const [{ isLoggedIn, userName, userId }] = useContext(AuthContext);
+    const [{ isLoggedIn, userName, userId }] = useContext(UserContext);
 
-    const [{ cart }, dispatch] = useContext(CartContext);
+    const [{ cart }, cartDispatch] = useContext(CartContext);
+    console.log(cart);
 
     const handleDecrement = (book) => {
-        dispatch({
+        cartDispatch({
             type: 'DECREMENT',
             item: book
         });
     }
 
     const handleIncrement = (book) => {
-        dispatch({
+        cartDispatch({
             type: 'INCREMENT',
             item: book
         });
     }
 
     const handleRemoveFromCart = (book) => {
-        dispatch({
+        cartDispatch({
             type: 'REMOVE_FROM_CART',
-            item: book
+            item: book,
+            userId
         });
     }
 
     const handleCheckout = () => {
-        dispatch({
+        // console.log(cart);
+        cartDispatch({
             type: 'CHECKOUT'
         })
 
@@ -50,14 +54,15 @@ const Cart = (props) => {
             return {
                 _id: book._id,
                 qty: book.qty,
+                price: book.price,
                 totalPrice: book.totalPrice
             };
         });
 
         const requestData = {
-            customer: userId,
+            customerId: userId,
             orderedBooks,
-            totalPrice: totalPrice * 100 / 100
+            orderTotalPrice: totalPrice * 100 / 100
         }
 
         postOrder(requestData)
@@ -66,9 +71,13 @@ const Cart = (props) => {
                     title: response.data.message,
                     // message: `You will be now redirected to home page.`
                 });
+                return deleteCart(userId)
+            })
+            .then((response) => {
+                console.log(response);
             })
             .catch((error) => {
-                console.log(error.response)
+                console.log(error.response);
             });
     }
 

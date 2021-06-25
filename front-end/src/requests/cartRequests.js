@@ -16,7 +16,6 @@ export const postCart = async (userId, cartData) => {
 }
 
 export const deleteCart = async (userId) => {
-    console.log(userId)
     return axios.delete(`${baseUrl}/${userId}`, {
         withCredentials: true
     });

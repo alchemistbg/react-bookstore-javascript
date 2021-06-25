@@ -47,6 +47,7 @@ function calcCartTotalSum(cart) {
     let cartTotalPrice = 0;
     cart.map((cartItem) => {
         cartTotalPrice += +cartItem.totalPrice;
+        return cartTotalPrice;
     });
     return cartTotalPrice;
 }

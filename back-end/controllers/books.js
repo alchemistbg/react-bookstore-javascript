@@ -26,8 +26,15 @@ module.exports = {
             .populate(populateGenreOption)
             .populate(populateCommentsOption)
             .then((books) => {
+                /*
+                    A simple test
+                    books = books.map((book) => {
+                        return book = { ...book._doc, test: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }
+                    });
+                    console.log(books[0])
+                */
                 res.status(200).json({
-                    message: "",
+                    message: "Books retrieved successfully",
                     books
                 });
             })
@@ -42,7 +49,7 @@ module.exports = {
             .populate(populateCommentsOption)
             .then((books) => {
                 res.status(200).json({
-                    message: "",
+                    message: "Books retrieved successfully",
                     books
                 });
             })
@@ -57,7 +64,7 @@ module.exports = {
             .populate(populateCommentsOption)
             .then((books) => {
                 res.status(200).json({
-                    message: "",
+                    message: "Books retrieved successfully",
                     books
                 });
             })
@@ -226,51 +233,51 @@ module.exports = {
         }
     },
 
-    getBookComments: (req, res) => {
-        const bookId = req.params.id;
-        bookModel.findById(bookId)
-            .select('comments')
-            .populate(populateCommentsOption)
-            .then((comments) => {
-                res.status(200).json({
-                    message: "Book comments:",
-                    comments: comments.comments
-                });
-            })
-            .catch();
+    // getBookComments: (req, res) => {
+    //     const bookId = req.params.id;
+    //     bookModel.findById(bookId)
+    //         .select('comments')
+    //         .populate(populateCommentsOption)
+    //         .then((comments) => {
+    //             res.status(200).json({
+    //                 message: "Book comments:",
+    //                 comments: comments.comments
+    //             });
+    //         })
+    //         .catch();
 
-    },
+    // },
 
-    postBookComment: async (req, res) => {
-        const bookId = req.params.id;
-        const { commentCreator, commentContent } = req.body;
+    // postBookComment: async (req, res) => {
+    //     const bookId = req.params.id;
+    //     const { commentCreator, commentContent } = req.body;
 
-        try {
-            const comment = await commentModel({ commentCreator, commentContent, bookCommented: bookId });
-            await comment.save();
+    //     try {
+    //         const comment = await commentModel({ commentCreator, commentContent, bookCommented: bookId });
+    //         await comment.save();
 
-            const book = await bookModel.findById(bookId);
-            book.comments.push(comment._id);
-            await book.save();
+    //         const book = await bookModel.findById(bookId);
+    //         book.comments.push(comment._id);
+    //         await book.save();
 
-            const updatedBook = await bookModel.findById(bookId)
-                .populate(populateGenreOption)
-                .populate(populateCommentsOption);
-            console.log(updatedBook)
+    //         const updatedBook = await bookModel.findById(bookId)
+    //             .populate(populateGenreOption)
+    //             .populate(populateCommentsOption);
+    //         console.log(updatedBook)
 
 
-            const user = await userModel.findById(commentCreator);
-            user.comments.push(comment._id);
-            await user.save();
+    //         const user = await userModel.findById(commentCreator);
+    //         user.comments.push(comment._id);
+    //         await user.save();
 
-            res.status(201).json({
-                message: "Comment created successfully!",
-                book: updatedBook,
-                user
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    //         res.status(201).json({
+    //             message: "Comment created successfully!",
+    //             book: updatedBook,
+    //             user
+    //         });
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
 
 }

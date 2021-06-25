@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
 import LoginForm from '../Forms/LoginForm';
 import RegisterForm from '../Forms/RegisterForm';
-import Cart from '../User/Cart';
+import Cart from './../Cart/Cart';
 import Profile from '../User/Profile';
 // import BookList from './components/BookList/BookList';
 import BookListView from '../BookList/BookListView';
@@ -19,19 +19,19 @@ import About from '../Static/About';
 import Contacts from '../Static/Contacts';
 import NotFound from '../Static/NotFound';
 
-import { AuthProvider } from '../../context/authContext/AuthContext';
-import { authReducer, initialAuthState } from '../../reducers/authReducer';
+import { UserProvider } from '../../context/userContext/UserContext';
+import { userReducer, initialUserState } from '../../reducers/userReducer';
 
 import { CartProvider } from '../../context/cartContext/CartContext';
 import { cartReducer, initialCartState } from '../../reducers/cartReducer';
 
 function App() {
-	const useAuthState = useReducer(authReducer, initialAuthState);
+	const useAuthState = useReducer(userReducer, initialUserState);
 	const useCartState = useReducer(cartReducer, initialCartState);
 
 	return (
 		document.title = "Reactive Bookstore",
-		<AuthProvider value={useAuthState}>
+		<UserProvider value={useAuthState}>
 			<div>
 				<div className='site-container'>
 					<Router>
@@ -46,12 +46,13 @@ function App() {
 									</Route>
 									<Route path="/register" component={RegisterForm} />
 									<Route path="/profile" component={Profile} />
+
 									<Route exact path="/books" render={(props) => <BookListView {...props} />} />
+									<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
 
 									<Route exact path="/books/:id" component={BookDetails} />
 									<Route path="/cart" component={Cart} />
 
-									<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
 									<Route path="/about" component={About} />
 									<Route path="/contacts" component={Contacts} />
 									<Route path="/not-found" component={NotFound} />
@@ -64,16 +65,8 @@ function App() {
 				</div >
 				{/* ); */}
 			</div>
-		</AuthProvider>
+		</UserProvider>
 	)
 }
 
 export default App;
-
-// class App extends Component {
-// 	render() {
-
-// 	}
-// }
-
-// export default App;

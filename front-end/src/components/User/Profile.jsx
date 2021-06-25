@@ -1,34 +1,38 @@
 import React, { useContext, useState, useEffect, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 
-import ProfileTab from './ProfileTab';
-import OrdersTab from './OrdersTab';
-import CommentsTab from './CommentsTab';
+import PersonalTab from './Tabs/PersonalTab';
+import OrdersTab from './Tabs/OrdersTab';
+import CommentsTab from './Tabs/CommentsTab';
 
-import { getUserProfile, getOrders } from '../../services/requests';
+import { getUserProfile, getOrders } from '../../requests/userRequests';
 
-import AuthContext from './../../context/authContext/AuthContext';
+import UserContext from './../../context/userContext/UserContext';
 
 const Profile = () => {
-    const [{ isLoggedIn, userName, userId, error }, dispatch] = useContext(AuthContext);
+    console.log("Profile");
+    const [{ isLoggedIn, userName, userId, error }, dispatch] = useContext(UserContext);
 
     const [profile, setProfile] = useState({});
     const [orders, setOrders] = useState([]);
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        getUserProfile(userName)
+        getUserProfile(userId)
             .then((userProfile) => {
+                console.log("Profile: ", userProfile.data);
                 setProfile(userProfile.data.user);
                 setComments(userProfile.data.user.comments);
             })
             .catch((error) => {
+                console.log(error);
             });
     }, []);
 
     useEffect(() => {
         getOrders(userId)
             .then((userOrders) => {
+                // console.log(userOrders);
                 setOrders(userOrders.data.orders);
             })
             .catch((error) => {
@@ -52,7 +56,7 @@ const Profile = () => {
                             <h2>Profile page of {profile.fullName}</h2>
 
                             <div className="tabs">
-                                <ProfileTab profile={profile} />
+                                <PersonalTab profile={profile} />
                                 {/* <ProfileTab profile={profile} onCheck={handleCheck} /> */}
                                 <OrdersTab orders={orders} />
                                 <CommentsTab comments={comments} />

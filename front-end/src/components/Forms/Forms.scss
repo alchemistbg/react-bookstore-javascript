@@ -1,15 +1,10 @@
 .form {
 
+    border: 2px solid red;
     width: var(--width-main-content);
-    // background: #fff;
 
     textarea {
         display: block;
-    }
-
-    &-header {
-        // padding-top: 1em;
-        padding-bottom: 0.5em;
     }
 
     &.login-form,
@@ -19,10 +14,14 @@
     &.job-form {
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
+        align-content: flex-start;
 
-        @include bp (tablets) {
-            display: flex;
-            flex-direction: column;
+        // width: 100%;
+        // width: var(--width-main-content);
+        @include bp (tabletl) {
+            // display: flex;
+            align-content: center;
         }
     }
 
@@ -126,6 +125,19 @@
     .form-field-wrapper {
         margin-bottom: 0.5em;
         position: relative;
+        width: 40%;
+
+        @include bp(tablets) {
+            width: 60%;
+        }
+
+        @include bp(phonel) {
+            width: 80%;
+        }
+
+        @include bp(phones) {
+            width: 100%;
+        }
 
         input,
         textarea,
@@ -222,7 +234,7 @@
 
     .uname-wrapper {
         flex: 1 1 48%;
-        margin-right: 1em;
+        // margin-right: 1em;
 
         @include bp (tablets) {
             margin-right: 0em;
@@ -244,7 +256,7 @@
 
     .fname-wrapper {
         flex: 1 1 48%;
-        margin-right: 1em;
+        // margin-right: 1em;
 
         @include bp (tablets) {
             margin-right: 0em;
@@ -265,7 +277,7 @@
 
     .pass-wrapper {
         flex: 1 1 48%;
-        margin-right: 1em;
+        // margin-right: 1em;
 
         @include bp (tablets) {
             margin-right: 0em;
@@ -387,4 +399,14 @@ a .redirects {
 .message-error {
     color: red;
     visibility: visible;
+}
+
+.form-header {
+    // padding-top: 1em;
+    padding-bottom: 0.5em;
+    // color: red;
+}
+
+.form-footer {
+    padding-bottom: 1em;
 }

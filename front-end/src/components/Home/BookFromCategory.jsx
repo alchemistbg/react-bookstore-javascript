@@ -6,7 +6,7 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 
 import BookCard from '../BookCard/BookCard';
 
-import { getBooks } from '../../services/requests';
+import { getBooks } from '../../requests/bookRequests';
 import Donut from '../Common/Preloader/Donut';
 
 

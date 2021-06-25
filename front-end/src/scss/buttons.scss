@@ -16,4 +16,27 @@
         background-color: var(--color-main-text);
         cursor: pointer;
     }
+
+    &.book-table {
+        padding: 0;
+        margin: calc(0.6em + 2px) 0.5em;
+
+        border: none;
+        background: none;
+
+
+        &:hover {
+            background: none;
+            color: var(--color-highlight-text);
+        }
+
+        &:disabled {
+            color: var(--color-donut-border-light);
+        }
+
+        &:disabled:hover {
+            cursor: default;
+        }
+
+    }
 }

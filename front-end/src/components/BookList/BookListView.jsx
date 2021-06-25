@@ -11,6 +11,7 @@ function BookListView(props) {
         setGenre(selectedGenre);
     }
 
+    // console.log(props);
     return <div className="book-list-container">
         <Sidebar {...props} onClick={handleClick} />
         <BookList {...props} genre={genre} />

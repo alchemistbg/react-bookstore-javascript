@@ -63,30 +63,29 @@
     opacity: 0;
 }
 
-/* .label { */
 .ilabel {
     width: 100%;
-    // padding: 20px 40px;
     font-weight: bold;
     font-size: 18px;
-    // cursor: pointer;
     color: var(--color-navigation-text);
     background: var(--color-donut-border-dark);
-    // border: 2px solid var(--color-donut-border-dark);
     transition: background 0.1s, color 0.1s;
     position: relative;
 
     .label {
-        padding: 0 2em;
+        padding: 1em 2em;
         line-height: 3em;
+        user-select: none;
     }
 }
 
-
-/* .label:hover { */
 .ilabel:hover {
-    // border: 2px solid var(--color-donut-border-dark);
     background: var(--color-donut-border-darker);
+
+    // &,
+    .label:hover {
+        cursor: pointer;
+    }
 }
 
 /* .label:active { */

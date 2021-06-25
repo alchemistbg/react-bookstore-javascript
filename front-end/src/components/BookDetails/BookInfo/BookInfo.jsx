@@ -5,7 +5,7 @@ import Quantity from '../../Common/Quantity/Quantity';
 
 import { showToast } from '../../../utils/helpers';
 
-import AuthContext from '../../../context/authContext/AuthContext';
+import UserContext from '../../../context/userContext/UserContext';
 import CartContext from '../../../context/cartContext/CartContext';
 import { useRef } from 'react';
 
@@ -28,7 +28,7 @@ const BookInfo = (props) => {
     }, [bookRef.current])
 
 
-    const [{ isLoggedIn }] = useContext(AuthContext);
+    const [{ isLoggedIn, userId }] = useContext(UserContext);
 
     const [{ cart }, dispatch] = useContext(CartContext);
 
@@ -53,7 +53,8 @@ const BookInfo = (props) => {
             });
             dispatch({
                 type: 'ADD_TO_CART',
-                item: props.book
+                item: props.book,
+                userId
             });
             book.qty = bookQty;
         }

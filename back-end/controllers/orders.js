@@ -36,8 +36,9 @@ module.exports = {
     },
 
     postOrder: (req, res, next) => {
-        const { customer, orderedBooks, totalPrice } = req.body;
-        orderModel.create({ customer, orderedBooks, totalPrice })
+        console.log(req.body);
+        const { customerId, orderedBooks, orderTotalPrice } = req.body;
+        orderModel.create({ customerId, orderedBooks, orderTotalPrice })
             .then((order) => {
                 res.status(201).json({
                     message: "Successful order.",
@@ -46,7 +47,6 @@ module.exports = {
             })
             .catch((error) => {
                 error.status = 400;
-
                 next(error);
             });
     },

@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const orderSchema = new Schema({
-    customer: {
+    customerId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        get: v => v.toString()
+        get: v => v.toString(),
+        required: true
     },
     orderedBooks: [{
         bookId: {
@@ -13,11 +14,14 @@ const orderSchema = new Schema({
             ref: 'Book',
             get: v => v.toString()
         },
+        price: Number,
         qty: Number,
         totalPrice: Number
     }],
-    totalPrice: {
-        type: Number
+    orderTotalPrice: {
+        type: Number,
+        default: 0,
+        required: true
     },
     status: {
         type: String,
@@ -29,7 +33,6 @@ const orderSchema = new Schema({
         default: Date.now
     }
 });
-
 
 const Order = mongoose.model('order', orderSchema);
 module.exports = Order;

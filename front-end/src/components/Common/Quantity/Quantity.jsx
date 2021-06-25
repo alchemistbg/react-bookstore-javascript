@@ -2,6 +2,7 @@ import React from 'react';
 
 const Quantity = (props) => {
 
+    // console.log(props.book.qty);
     return <span className="book-list-item-qty">
         {
             props.book.qty < 2 ? (
@@ -9,10 +10,10 @@ const Quantity = (props) => {
                     <i className="far fa-minus-square"></i>
                 </button>
             ) : (
-                    <button className="form-button book-table" onClick={() => props.handleDecrement(props.book)}>
-                        <i className="far fa-minus-square"></i>
-                    </button>
-                )
+                <button className="form-button book-table" onClick={() => props.handleDecrement(props.book)}>
+                    <i className="far fa-minus-square"></i>
+                </button>
+            )
         }
         {props.book.qty}
         <button className="form-button book-table" onClick={() => props.handleIncrement(props.book)}>
