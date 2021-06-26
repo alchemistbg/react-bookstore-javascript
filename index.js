@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 const cookieParser = require('cookie-parser');
 // const bodyParser = require('body-parser');
-const cors = require('cors');
+// const cors = require('cors');
 
 const app = express();
 
@@ -30,10 +30,10 @@ const cartsRouter = require('./api/carts');
 
 // app.use(bodyParser.json());
 
-app.use(cors({
-    origin: 'https://mern-bookstore.herokuapp.com',
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'https://mern-bookstore.herokuapp.com',
+//     credentials: true
+// }));
 
 app.use((req, res, next) => {
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5002');
@@ -63,8 +63,8 @@ app.use((error, req, res, next) => {
 
 if (process.env.NODE_ENV === "production") {
     // console.log("Production");
-    console.log(path.join(__dirname, '/client/build'));
-    console.log(`http://mern-bookstore.herokuapp.com:${process.env.PORT}/api`);
+    // console.log(path.join(__dirname, '/client/build'));
+    // console.log(`http://mern-bookstore.herokuapp.com:${process.env.PORT}/api`);
 
     app.use(express.static(path.join(__dirname, '/client/build')));
 
