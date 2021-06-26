@@ -25,6 +25,7 @@ class BookCover extends Component {
             isLoading: false,
             bookCover: cover
         });
+        console.log(cover);
     }
 
 
@@ -33,7 +34,8 @@ class BookCover extends Component {
         return (
             isLoading ? (<Donut />) : (
                 <div className="book-cover">
-                    <img src={bookCover} alt="" crossorigin="anonymous" />
+                    <img src={bookCover} alt="" />
+                    {/* <img src={bookCover} alt="" crossorigin="anonymous" /> */}
                 </div>
             )
         )
