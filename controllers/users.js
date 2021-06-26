@@ -115,7 +115,6 @@ module.exports = {
 
                     res.cookie('x-auth-token', token, {
                         httpOnly: true,
-                        // domain: 'localhost',
                         path: '/',
                         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
                     });

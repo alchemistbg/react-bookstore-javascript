@@ -77,6 +77,9 @@ const LoginForm = (props) => {
 	let prevLocation = useLocation();
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		console.log(formData);
+
 		validateForm("login", formData)
 			.then(() => {
 				loginUser(formData)
