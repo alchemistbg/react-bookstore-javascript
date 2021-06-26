@@ -61,7 +61,9 @@ app.use((error, req, res, next) => {
 })
 
 if (process.env.NODE_ENV === "production") {
-    console.log("Production");
+    // console.log("Production");
+    console.log(`http://mern-bookstore.herokuapp.com:${process.env.PORT}/api`);
+
     console.log(path.join(__dirname, '/client/build'));
     app.use(express.static(path.join(__dirname, '/client/build')));
 
