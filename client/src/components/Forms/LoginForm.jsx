@@ -23,11 +23,12 @@ const LoginForm = (props) => {
 		} else {
 			input.className = "";
 		}
-		validateInput("login", input.name, input.value)
-			.then()
-			.catch((errors) => {
-				console.log(errors);
-			});
+
+		// validateInput("login", input.name, input.value)
+		// 	.then()
+		// 	.catch((errors) => {
+		// 		console.log(errors);
+		// 	});
 
 		setFormData((formData) => ({
 			...formData,
@@ -105,6 +106,7 @@ const LoginForm = (props) => {
 						}
 					})
 					.catch((error) => {
+						console.log(error);
 						const { message } = error.response.data;
 						let info = undefined;
 						if (message === 'Incorrect user data!') {
