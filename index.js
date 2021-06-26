@@ -2,6 +2,7 @@ const dotenv = require('dotenv').config({
     // path: 'envs/.env.development'
     path: 'envs/.env.production'
 });
+const path = require('path');
 
 const express = require('express');
 
@@ -56,6 +57,21 @@ app.use((error, req, res, next) => {
     res.status(status).json({ message, info });
     next();
 })
+
+if (process.env.NODE_ENV === "production") {
+    console.log("Production");
+    console.log(path.join(__dirname, '/client/build'));
+    app.use(express.static(path.join(__dirname, '/client/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '/client/build/index.html'));
+    });
+} else {
+    console.log("Development");
+    app.get('/', (req, res) => {
+        res.send('API running');
+    });
+}
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}!`);
