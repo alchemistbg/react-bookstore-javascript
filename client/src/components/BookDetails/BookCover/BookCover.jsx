@@ -33,7 +33,7 @@ class BookCover extends Component {
         return (
             isLoading ? (<Donut />) : (
                 <div className="book-cover">
-                    <img src={bookCover} alt="" />
+                    <img src={bookCover} alt="" crossorigin="anonymous" />
                 </div>
             )
         )

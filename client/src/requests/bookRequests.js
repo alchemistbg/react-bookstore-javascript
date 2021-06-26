@@ -7,7 +7,7 @@ const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
 
 async function getBookCover(isbn, size) {
     // const cover = await axios.get(`https://cors-anywhere.herokuapp.com/http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
-    const cover = await axios.get(`http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`, { responseType: 'blob', withCredentials: false });
+    const cover = await axios.get(`https://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`, { responseType: 'blob', withCredentials: false });
     return URL.createObjectURL(cover.data);
 }
 
