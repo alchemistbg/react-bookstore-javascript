@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 const cookieParser = require('cookie-parser');
 // const bodyParser = require('body-parser');
-// const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
@@ -30,14 +30,15 @@ const cartsRouter = require('./api/carts');
 
 // app.use(bodyParser.json());
 
-// app.use(cors({
-//     origin: 'http://localhost:5002',
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'https://mern-bookstore.herokuapp.com',
+    credentials: true
+}));
 
 app.use((req, res, next) => {
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5002');
-    res.setHeader('Access-Control-Allow-Origin', `https://mern-bookstore.herokuapp.com${process.env.PORT}`);
+    // res.setHeader('Access-Control-Allow-Origin', `https://mern-bookstore.herokuapp.com:${process.env.PORT}`);
+    res.setHeader('Access-Control-Allow-Origin', `https://mern-bookstore.herokuapp.com`);
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
