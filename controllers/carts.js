@@ -1,7 +1,7 @@
 const { response } = require("express");
 const mongoose = require('mongoose');
 
-const cartModel = require('../models/Cart');
+const cartModel = require('./../models/Cart');
 const { bookPropFilter, cartPriceCalculator } = require('./../utils');
 
 const patchCart = (req, res, next, cart) => {

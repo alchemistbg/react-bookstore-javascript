@@ -3,27 +3,27 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 // import logo from './logo.svg';
 import './App.css';
 
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import Header from './../Header/Header';
+import Footer from './../Footer/Footer';
 
-import Home from '../Home/Home';
-import LoginForm from '../Forms/LoginForm';
-import RegisterForm from '../Forms/RegisterForm';
+import Home from './../Home/Home';
+import LoginForm from './../Forms/LoginForm';
+import RegisterForm from './../Forms/RegisterForm';
 import Cart from './../Cart/Cart';
-import Profile from '../User/Profile';
+import Profile from './../User/Profile';
 // import BookList from './components/BookList/BookList';
-import BookListView from '../BookList/BookListView';
-import BookDetails from '../BookDetails/BookDetails';
+import BookListView from './../BookList/BookListView';
+import BookDetails from './../BookDetails/BookDetails';
 
-import About from '../Static/About';
-import Contacts from '../Static/Contacts';
-import NotFound from '../Static/NotFound';
+import About from './../Static/About';
+import Contacts from './../Static/Contacts';
+import NotFound from './../Static/NotFound';
 
-import { UserProvider } from '../../context/userContext/UserContext';
-import { userReducer, initialUserState } from '../../reducers/userReducer';
+import { UserProvider } from './../../context/userContext/UserContext';
+import { userReducer, initialUserState } from './../../reducers/userReducer';
 
-import { CartProvider } from '../../context/cartContext/CartContext';
-import { cartReducer, initialCartState } from '../../reducers/cartReducer';
+import { CartProvider } from './../../context/cartContext/CartContext';
+import { cartReducer, initialCartState } from './../../reducers/cartReducer';
 
 function App() {
 	const useAuthState = useReducer(userReducer, initialUserState);

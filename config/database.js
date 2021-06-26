@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // mongoose.Promise = global.Promise;
-const Book = require('../models/Book');
-const User = require('../models/User');
+const Book = require('./../models/Book');
+const User = require('./../models/User');
 
 module.exports = () => {
     mongoose.connect(process.env.DATABASE_URL, {

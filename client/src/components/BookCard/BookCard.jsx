@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getBookCover } from '../../requests/bookRequests';
-import Donut from '../Common/Preloader/Donut';
+import { getBookCover } from './../../requests/bookRequests';
+import Donut from './../Common/Preloader/Donut';
 
 class Book extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom'
 
-import { getGenres } from '../../requests/bookRequests';
+import { getGenres } from './../../requests/bookRequests';
 
 function Sidebar(props) {
     const [genres, setGenres] = useState([]);

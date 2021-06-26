@@ -1,14 +1,14 @@
 import React, { Fragment, useState, useContext } from 'react'
 import { Redirect } from 'react-router-dom';
 
-import UserContext from '../../context/userContext/UserContext';
-import CartContext from '../../context/cartContext/CartContext';
+import UserContext from './../../context/userContext/UserContext';
+import CartContext from './../../context/cartContext/CartContext';
 
-import BookTable from '../Common/BookTable/BookTable';
-import { showToast, calcCartTotalSum } from '../../utils/helpers';
+import BookTable from './../Common/BookTable/BookTable';
+import { showToast, calcCartTotalSum } from './../../utils/helpers';
 
-import { postOrder } from '../../requests/userRequests';
-import { deleteCart } from '../../requests/cartRequests';
+import { postOrder } from './../../requests/userRequests';
+import { deleteCart } from './../../requests/cartRequests';
 
 const Cart = (props) => {
     const [{ isLoggedIn, userName, userId }] = useContext(UserContext);

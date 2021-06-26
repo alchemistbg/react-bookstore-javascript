@@ -5,7 +5,7 @@ import BookCover from './BookCover';
 import BookInfo from './BookInfo';
 import BookComments from './BookComments';
 
-import { getBookDetails } from '../../requests/bookRequests'
+import { getBookDetails } from './../../requests/bookRequests'
 
 class BookDetails extends Component {
     constructor(props) {

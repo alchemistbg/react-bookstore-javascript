@@ -1,13 +1,13 @@
 import React, { Fragment, useState, useEffect } from 'react';
 
 import Slider from 'react-slick';
-import "../../../node_modules/slick-carousel/slick/slick-theme.css";
-import "../../../node_modules/slick-carousel/slick/slick.css";
+import "./../../../node_modules/slick-carousel/slick/slick-theme.css";
+import "./../../../node_modules/slick-carousel/slick/slick.css";
 
-import BookCard from '../BookCard/BookCard';
+import BookCard from './../BookCard/BookCard';
 
-import { getBooks } from '../../requests/bookRequests';
-import Donut from '../Common/Preloader/Donut';
+import { getBooks } from './../../requests/bookRequests';
+import Donut from './../Common/Preloader/Donut';
 
 
 function BookFromCategory(props) {

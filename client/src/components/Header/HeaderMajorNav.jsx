@@ -4,7 +4,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 import { checkIsLogged, logoutUser } from './../../requests/userRequests';
 import { getCart } from './../../requests/cartRequests';
 
-import UserContext from '../../context/userContext/UserContext';
+import UserContext from './../../context/userContext/UserContext';
 import CartContext from './../../context/cartContext/CartContext';
 import jwt from 'jwt-decode';
 

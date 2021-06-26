@@ -1,4 +1,4 @@
-const { logoutUser } = require('../requests/userRequests');
+const { logoutUser } = require('./../requests/userRequests');
 
 export const initialUserState = {
     isLoggedIn: false,

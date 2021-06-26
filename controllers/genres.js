@@ -1,4 +1,4 @@
-const genreModel = require('../models/Genre');
+const genreModel = require('./../models/Genre');
 
 module.exports = {
 

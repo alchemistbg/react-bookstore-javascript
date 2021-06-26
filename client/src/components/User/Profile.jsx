@@ -5,7 +5,7 @@ import PersonalTab from './Tabs/PersonalTab';
 import OrdersTab from './Tabs/OrdersTab';
 import CommentsTab from './Tabs/CommentsTab';
 
-import { getUserProfile, getOrders } from '../../requests/userRequests';
+import { getUserProfile, getOrders } from './../../requests/userRequests';
 
 import UserContext from './../../context/userContext/UserContext';
 

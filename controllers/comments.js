@@ -1,6 +1,6 @@
-const bookModel = require('../models/Book');
-const userModel = require('../models/User');
-const commentModel = require('../models/Comment');
+const bookModel = require('./../models/Book');
+const userModel = require('./../models/User');
+const commentModel = require('./../models/Comment');
 const mongoose = require('mongoose');
 
 const populateCommentsOption = {

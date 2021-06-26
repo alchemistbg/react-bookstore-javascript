@@ -1,7 +1,7 @@
-const bookModel = require('../models/Book');
-const commentModel = require('../models/Comment');
-const genreModel = require('../models/Genre');
-const userModel = require('../models/User');
+const bookModel = require('./../models/Book');
+const commentModel = require('./../models/Comment');
+const genreModel = require('./../models/Genre');
+const userModel = require('./../models/User');
 
 const populateCommentsOption = {
     path: 'comments',

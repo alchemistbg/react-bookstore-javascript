@@ -5,8 +5,8 @@ import BookCover from './BookCover/BookCover';
 import BookInfo from './BookInfo/BookInfo';
 import BookComments from './BookComments/BookComments';
 
-import { getBookDetails, postComment } from '../../requests/bookRequests';
-import { showToast } from '../../utils/helpers';
+import { getBookDetails, postComment } from './../../requests/bookRequests';
+import { showToast } from './../../utils/helpers';
 
 import UserContext from './../../context/userContext/UserContext';
 import BookCommentsForm from './BookCommentsForm/BookCommentsForm';

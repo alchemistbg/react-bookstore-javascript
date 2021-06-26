@@ -3,8 +3,8 @@ const router = express.Router();
 
 const utils = require('./../utils');
 
-const bookController = require('../controllers/books');
-const commentsController = require('../controllers/comments');
+const bookController = require('./../controllers/books');
+const commentsController = require('./../controllers/comments');
 
 router.get('/', bookController.getBooks);
 router.get('/upcoming', bookController.getUpcomingBooks);

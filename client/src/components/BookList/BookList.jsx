@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react';
 
-import Donut from '../Common/Preloader/Donut';
-import BookCard from '../BookCard/BookCard';
+import Donut from './../Common/Preloader/Donut';
+import BookCard from './../BookCard/BookCard';
 import Pagination from './../Common/Pagination/Pagination';
 
-import { paginate } from '../../utils/paginate';
-import { getBooks, getBooksByGenre } from '../../requests/bookRequests';
+import { paginate } from './../../utils/paginate';
+import { getBooks, getBooksByGenre } from './../../requests/bookRequests';
 
 class BookList extends Component {
     constructor(props) {

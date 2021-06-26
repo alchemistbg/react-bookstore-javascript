@@ -1,12 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 // import { Redirect } from 'react-router-dom';
 
-import Quantity from '../../Common/Quantity/Quantity';
+import Quantity from './../../Common/Quantity/Quantity';
 
-import { showToast } from '../../../utils/helpers';
+import { showToast } from './../../../utils/helpers';
 
-import UserContext from '../../../context/userContext/UserContext';
-import CartContext from '../../../context/cartContext/CartContext';
+import UserContext from './../../../context/userContext/UserContext';
+import CartContext from './../../../context/cartContext/CartContext';
 import { useRef } from 'react';
 
 const BookInfo = (props) => {
