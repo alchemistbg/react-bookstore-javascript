@@ -1,6 +1,6 @@
 const dotenv = require('dotenv').config({
-    path: 'envs/.env.development'
-    // path: 'envs/.env.production'
+    // path: 'envs/.env.development'
+    path: 'envs/.env.production'
 });
 
 const express = require('express');

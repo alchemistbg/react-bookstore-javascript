@@ -19,7 +19,6 @@ export const userReducer = (state, action) => {
             };
 
         case 'LOGIN':
-            localStorage.setItem("test", "test");
             return {
                 isLoggedIn: true,
                 userName: action.payload.userName,

@@ -26,7 +26,7 @@ const LoginForm = (props) => {
 		validateInput("login", input.name, input.value)
 			.then()
 			.catch((errors) => {
-				// console.log(errors);
+				console.log(errors);
 			});
 
 		setFormData((formData) => ({
@@ -102,11 +102,14 @@ const LoginForm = (props) => {
 						}
 					})
 					.catch((error) => {
-						// console.log(error.response)
-						// const { info, message } = error.response.data;
-						// const serverError = {};
-						// serverError[info] = [message];
-						// showToast('error', serverError);
+						const { message } = error.response.data;
+						let info = undefined;
+						if (message === 'Incorrect user data!') {
+							info = 'USER DATA'
+						}
+						const serverError = {};
+						serverError[info] = ['Wrong username or password! Please try again!'];
+						showToast('error', serverError);
 					});
 			})
 			.catch((errors) => {
