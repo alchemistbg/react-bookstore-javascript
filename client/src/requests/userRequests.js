@@ -1,11 +1,8 @@
-import { NODE_PORT } from './../../../utils/test';
-
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-
 // const baseUrl = 'http://localhost:5001/api';
-const baseUrl = `mern-bookstore.herokuapp.com:${process.env.NODE_PORT}/api`;
+const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
 console.log(baseUrl);
 
 async function checkIsLogged() {
