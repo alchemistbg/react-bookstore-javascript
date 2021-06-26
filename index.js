@@ -43,12 +43,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('./api/genres', genresRouter);
+app.use('/api/genres', genresRouter);
 // app.use('./api/books/:id/comments', commentsRouter);
-app.use('./api/books', booksRouter);
-app.use('./api/users', usersRouter);
-app.use('./api/orders', ordersRouter);
-app.use('./api/carts', cartsRouter);
+app.use('/api/books', booksRouter);
+app.use('/api/users', usersRouter);
+app.use('/api/orders', ordersRouter);
+app.use('/api/carts', cartsRouter);
 
 app.use((error, req, res, next) => {
     // console.log(error);

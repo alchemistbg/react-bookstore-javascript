@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 const userModel = require('./../models/User');
-const orderModel = require('./../models/order');
+const orderModel = require('./../models/Order');
 
 const axios = require('axios');
 const mongoose = require('mongoose');
