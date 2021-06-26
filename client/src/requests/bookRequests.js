@@ -2,7 +2,8 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 // const baseUrl = 'http://localhost:3000/routes';
-const baseUrl = 'http://localhost:5001/api';
+// const baseUrl = 'http://localhost:5001/api';
+const baseUrl = `mern-bookstore.herokuapp.com:${process.env.PORT}/api`;
 
 async function getBookCover(isbn, size) {
     // const cover = await axios.get(`https://cors-anywhere.herokuapp.com/http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
