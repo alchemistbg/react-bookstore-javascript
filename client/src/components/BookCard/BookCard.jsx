@@ -38,7 +38,7 @@ class Book extends Component {
                         </div>
                     ) : (
                         <div className="book-cover">
-                            <img className="img" src={bookCover} alt={book.title} />
+                            <img className="img" src={bookCover} alt={book.title} crossorigin="anonymous" />
                         </div>
                     )
                 }
