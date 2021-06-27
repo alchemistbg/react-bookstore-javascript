@@ -53,7 +53,7 @@ module.exports = {
     },
 
     getCart: (req, res, next) => {
-        console.log(req.user);
+        // console.log(req.user);
         const customerId = req.user.userId;
         cartModel
             .find({ customerId })
@@ -71,12 +71,12 @@ module.exports = {
                 if (cart.length === 0) {
                     // if (!cart) {
                     return res.status(404).json({
-                        message: "The cart is empty"
+                        message: `The cart of user with ID (${req.user.userId}) and username (${req.user.userName}) is empty!`
                     });
                 } else {
                     console.log("CART: ", cart)
                     res.status(200).json({
-                        message: "Get Cart test OK!",
+                        message: `The cart of user with ID (${req.user.userId}) and username (${req.user.userName}) retrieved successfully`,
                         cart: cart
                     });
                 }
