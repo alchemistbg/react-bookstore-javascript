@@ -1,8 +1,8 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-const baseUrl = 'http://localhost:5001/api';
-// const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
+// const baseUrl = 'http://localhost:5001/api';
+const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
 console.log(baseUrl);
 
 async function checkIsLogged() {
