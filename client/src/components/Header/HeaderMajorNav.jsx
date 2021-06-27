@@ -37,7 +37,7 @@ function HeaderMajorNav() {
             console.log("With userId: ", userId);
             getCart(userId)
                 .then((response) => {
-                    console.log(response.data.cart);
+                    console.log(response.data.message);
                     // if (response.data.cart.length > 0) {
                     cartDispatch({
                         type: 'LOAD_CART_FROM_DATABASE',
@@ -48,7 +48,7 @@ function HeaderMajorNav() {
                     // }
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.log(error.response.data.message);
                 });
         }
     }, [cartDispatch, isLoggedIn, userName, userId]);
