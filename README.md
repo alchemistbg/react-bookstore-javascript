@@ -2,4 +2,4 @@
 
 ## MERN based bookstore web-app
 
-Master
+Master branch
