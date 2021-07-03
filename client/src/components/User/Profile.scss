@@ -1,61 +1,17 @@
 .profile-wrapper {
     width: var(--width-main-content);
 
-    .personal-info {
-        margin-bottom: 2em;
-
-        .info-table {
-            padding: 1em 0 2em 0;
-
-            h6 {
-                font-weight: normal;
-            }
-
-            span {
-                padding-left: 2em;
-                font-weight: bold;
-            }
-
-        }
-    }
-
-    // .orders-info {
-    //     padding-bottom: 2em;
-
-    //     .order-list {
-    //         font-size: 2em;
-    //     }
-
-    //     .order-item {
-    //         display: flex;
-    //         font-size: 2em;
-    //         justify-content: space-between;
-    //     }
-    // }
-
+    .personal-info,
+    .orders-info,
     .comments-info {
-        padding-bottom: 2em;
+        margin-bottom: 2em;
     }
-
 }
-
-// .tlabel,
-// .order-date::before {
-//     content: "\f105";
-//     font-weight: bold;
-//     font-family: 'Font Awesome 5 Free';
-//     padding-right: 1em;
-// }
 
 .tabs {
     margin: auto;
     flex-wrap: wrap;
     display: flex;
-    // max-width: 59vw;
-    // border: 2px solid green;
-    /* background: #efefef; */
-    /* box-shadow: 0 48px 80px -32px rgba(0, 0, 0, 0.3); */
-    // padding: 1vw;
 }
 
 .input {
@@ -88,37 +44,22 @@
     }
 }
 
-/* .label:active { */
-.ilabel:active {
-    // background: #ccc;
-}
-
-/* .input:checked+.label { */
 .input:checked+.ilabel {
     background: var(--color-main-text);
     color: var(--color-main-background);
 }
 
-/* .triangle, */
 .panel {
     width: 100%;
     display: none;
     padding: 1em 0em;
-    // border: 2px solid var(--color-main-text);
-    // padding: 20px 30px 30px;
-    // background: lightgreen;
 }
 
-/* .input:checked+.label+.panel { */
 .input:checked+.ilabel+.panel {
     display: block;
-    /* background: blue; */
-    /* background: red; */
 }
 
 @media (min-width: 600px) {
-
-    /* .label { */
     .ilabel {
         width: auto;
     }
@@ -134,7 +75,6 @@
     border-left: 0.5em solid transparent;
     border-right: 0.5em solid transparent;
     border-top: 0.5em solid var(--color-main-text);
-    /* margin-top: -1.5em; */
     margin: auto;
 
     position: absolute;
@@ -145,80 +85,4 @@
 
 .input:checked+.ilabel .triangle {
     display: block;
-}
-
-.orders-list {
-    // background: red;
-    display: block;
-    list-style: none;
-    padding: 0;
-}
-
-.orders-list-item-cb {
-    display: none;
-}
-
-.orders-list-item {
-    text-align: left;
-    padding-bottom: 0.5em;
-
-    .orders-list-item-data {
-        display: none;
-    }
-
-    .orders-list-item-cb:checked+& {
-        // background: purple;
-    }
-
-    .orders-list-item-cb:checked+& .orders-list-item-label {
-
-        // color: var(--color-navigation-text);
-        // background: var(--color-donut-border-darker);
-
-        .order-date::before {
-            content: '\f0d7';
-            padding-right: 0.35em;
-        }
-    }
-
-    .orders-list-item-cb:checked+& .orders-list-item-data {
-        display: block;
-        padding-top: 0.5em;
-    }
-}
-
-.orders-list-item-label {
-    font-size: 1.2em;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-
-
-
-    &:hover {}
-
-    .order-date,
-    .order-sum {
-        width: 40%;
-        border: 2px solid blue;
-    }
-
-    .order-size,
-    .order-sum {
-        text-align: right;
-    }
-
-    .order-size {
-        width: 20%;
-        padding: 0 1em;
-        border: 2px solid blue;
-    }
-
-    .order-date::before {
-        content: '\f0da';
-        font-family: "Font Awesome 5 Free";
-        font-weight: bold;
-        display: inline-block;
-        padding-right: 0.6em;
-    }
 }
