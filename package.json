@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
+    "dev": "nodemon -r dotenv/config index.js dotenv_config_path=./envs/.env.development",
+    "prod": "nodemon -r dotenv/config index.js dotenv_config_path=./envs/.env.production",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
