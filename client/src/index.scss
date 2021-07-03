@@ -6,7 +6,6 @@
 
 @import './scss/layout.scss';
 @import './scss/buttons.scss';
-@import './scss/comments.scss';
 
 @import './components/Common/Preloader/Donut.scss';
 @import './components/Common/Pagination/Pagination.scss';
@@ -23,6 +22,10 @@
 @import './components/Common/Quantity/Quantity.scss';
 
 @import './components/User/Profile.scss';
+@import './components/User/Tabs/PersonalTab.scss';
+@import './components/User/Tabs/OrdersTab.scss';
+@import './components/User/Tabs/CommentsTab.scss';
+
 @import './components/Cart/Cart.scss';
 @import './components/Common/BookTable/BookTable.scss';
 
