@@ -1,48 +1,49 @@
+import { BASE_URL } from './../utils/constants.js';
+
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-// const baseUrl = 'http://localhost:5001/api';
-const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
-console.log(baseUrl);
+
+console.log(BASE_URL);
 
 async function checkIsLogged() {
     // console.log("Check if user is logged in!!!");
-    return axios.post(`${baseUrl}/users`, {
+    return axios.post(`${BASE_URL}/users`, {
         withCredentials: true
     });
 }
 
 async function registerUser(registerData, reCaptchaToken) {
     const data = { ...registerData, reCaptchaToken };
-    return axios.post(`${baseUrl}/users/register`, data);
+    return axios.post(`${BASE_URL}/users/register`, data);
 }
 
 async function loginUser(loginData) {
-    return axios.post(`${baseUrl}/users/login`, loginData, {
+    return axios.post(`${BASE_URL}/users/login`, loginData, {
         withCredentials: true
     });
 }
 
 async function logoutUser() {
-    return axios.post(`${baseUrl}/users/logout`, {
+    return axios.post(`${BASE_URL}/users/logout`, {
         withCredentials: true
     });
 }
 
 async function getUserProfile(userId) {
-    return axios.get(`${baseUrl}/users/${userId}`, {
+    return axios.get(`${BASE_URL}/users/${userId}`, {
         withCredentials: true
     });
 }
 
 async function getOrders(userId) {
-    return axios.get(`${baseUrl}/users/${userId}/orders`, {
+    return axios.get(`${BASE_URL}/users/${userId}/orders`, {
         withCredentials: true
     })
 }
 
 async function postOrder(orderData) {
-    return axios.post(`${baseUrl}/orders`, orderData);
+    return axios.post(`${BASE_URL}/orders`, orderData);
 }
 
 export {

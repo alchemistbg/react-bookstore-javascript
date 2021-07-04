@@ -1,8 +1,7 @@
+import { BASE_URL } from './../utils/constants.js';
+
 import axios from 'axios';
 axios.defaults.withCredentials = true;
-
-// const baseUrl = 'http://localhost:5001/api';
-const baseUrl = `https://mern-bookstore.herokuapp.com/api`;
 
 async function getBookCover(isbn, size) {
     // const cover = await axios.get(`https://cors-anywhere.herokuapp.com/http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
@@ -11,23 +10,23 @@ async function getBookCover(isbn, size) {
 }
 
 async function getBooks(category = '') {
-    return await axios.get(`${baseUrl}/books/${category}`);
+    return await axios.get(`${BASE_URL}/books/${category}`);
 }
 
 async function getBooksByGenre(genre) {
-    return await axios.get(`${baseUrl}/books/genres/${genre}`);
+    return await axios.get(`${BASE_URL}/books/genres/${genre}`);
 }
 
 async function getBookDetails(bookId) {
-    return await axios.get(`${baseUrl}/books/${bookId}`);
+    return await axios.get(`${BASE_URL}/books/${bookId}`);
 }
 
 async function postComment(comment, bookId) {
-    return await axios.post(`${baseUrl}/books/${bookId}/comments`, comment);
+    return await axios.post(`${BASE_URL}/books/${bookId}/comments`, comment);
 }
 
 async function getGenres() {
-    return await axios.get(`${baseUrl}/genres`);
+    return await axios.get(`${BASE_URL}/genres`);
 }
 
 export {
