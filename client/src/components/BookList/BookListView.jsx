@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import BookList from './BookList';
 import Sidebar from './Sidebar';
 
-function BookListView(props) {
+const BookListView = (props) => {
     const [genre, setGenre] = useState('');
 
     function handleClick(event) {
@@ -11,9 +11,8 @@ function BookListView(props) {
         setGenre(selectedGenre);
     }
 
-    // console.log(props);
     return <div className="book-list-container">
-        <Sidebar {...props} onClick={handleClick} />
+        {/* <Sidebar {...props} onClick={handleClick} /> */}
         <BookList {...props} genre={genre} />
     </div>
 }

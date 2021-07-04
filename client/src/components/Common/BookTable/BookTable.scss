@@ -14,9 +14,18 @@
 
         }
 
-        &.data-row:nth-child(2n+1) {
-            background: yellow;
-        }
+        // &.ordersTab {
+
+    //     &:nth-child(2n) {
+    //         // color: var(--color-navigation-text);
+    //         color: red;
+    //         background: var(--color-donut-border-dark);
+    //     }
+    // }
+
+        // &.data-row:nth-child(2n+1) {
+    //     background: yellow;
+    // }
 
         button {
             display: inline;

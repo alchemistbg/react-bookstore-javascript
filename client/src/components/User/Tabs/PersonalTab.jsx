@@ -22,7 +22,7 @@ const PersonalTab = (props) => {
                 <table className="info-table">
                     <tbody>
                         <tr>
-                            <td><h6 className="user-name">username:</h6></td>
+                            <td><h6 className="user-name">User name:</h6></td>
                             <td><h6><span>{profile.userName}</span></h6></td>
                         </tr>
                         <tr>

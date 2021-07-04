@@ -21,18 +21,13 @@ const populateGenreOption = {
 module.exports = {
 
     getBooks: (req, res) => {
+        // console.log(req.headers['x-forwarded-for']);
         bookModel.find()
             // .select('author title price isbn')
             .populate(populateGenreOption)
             .populate(populateCommentsOption)
             .then((books) => {
-                /*
-                    A simple test
-                    books = books.map((book) => {
-                        return book = { ...book._doc, test: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" }
-                    });
-                    console.log(books[0])
-                */
+                console.log(books[0]);
                 res.status(200).json({
                     message: "Books retrieved successfully",
                     books
@@ -89,6 +84,7 @@ module.exports = {
     },
 
     getBooksByGenre: (req, res) => {
+        console.log(req.params);
         const genre = req.params.id;
         genreModel.findOne({ name: genre })
             .then((genre) => {
