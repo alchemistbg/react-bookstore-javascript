@@ -31,6 +31,7 @@
     margin: auto;
     display: flex;
     align-items: center;
+
     .total-price {
         padding-left: 1em;
         font-size: 1.5em;
@@ -53,5 +54,15 @@
 }
 
 .cart-wrapper {
-    width: var(--width-main-content)
+    width: var(--width-main-content);
+    background-color: green;
+
+    .header {
+        font-size: 1.2em;
+        background: purple !important;
+    }
+
+    .data-row {
+        background: red;
+    }
 }

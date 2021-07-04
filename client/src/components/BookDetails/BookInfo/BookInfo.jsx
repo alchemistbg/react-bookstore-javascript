@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-// import { Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Quantity from './../../Common/Quantity/Quantity';
 
@@ -59,6 +59,7 @@ const BookInfo = (props) => {
             book.qty = bookQty;
         }
     }
+    console.log(book);
 
     return (
         <div className="book-info">
@@ -74,15 +75,15 @@ const BookInfo = (props) => {
                         <td className="column-data">{book.publisher}</td>
                     </tr>
                     <tr>
-                        <td className="column-header">Categories: {book.genres}</td>
+                        <td className="column-header">Categories:</td>
                         <td className="column-data">
-
                             {
                                 book.genres.map((genre, index) => {
+                                    const genreName = genre.name;
                                     if (index < book.genres.length - 1) {
-                                        return <span key={genre._id}>{genre.name}, </span>;
+                                        return <NavLink key={genre._id} to={`genres/${genre.name}`}>{genreName}, </NavLink>;
                                     }
-                                    return <span key={genre._id}>{genre.name}</span>;
+                                    return <NavLink key={genre._id} to={`genres/${genre.name}`}>{genreName}</NavLink>;
                                 })
                             }
 
