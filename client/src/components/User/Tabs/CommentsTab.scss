@@ -8,19 +8,17 @@
 .comment-item {
     display: flex;
     flex-wrap: wrap;
-    // flex-direction: column;
     margin: 1em 0em;
     padding: 0;
     background: var(--color-comment-background);
 }
 
 .commented-object {
-    // display: block;
     flex-basis: 100%;
     padding: 0.5em 0em;
     text-align: center;
     color: var(--color-navigation-text);
-    background: var(--color-highlight-text-alpha);
+    background: var(--color-donut-border-darker);
 
     .highlighted {
         font-weight: bold;
@@ -47,7 +45,6 @@
 }
 
 .comment-content {
-    // font-weight: bold;
     flex-grow: 1;
     padding: 0.5em;
     min-height: 4em;

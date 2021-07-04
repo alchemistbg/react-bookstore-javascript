@@ -25,9 +25,9 @@ const OrdersTab = (props) => {
                     ) : (
                         <ul className="orders-list">{
                             orders.map((order, index) => {
-                                return <Fragment key={order._id} >
+                                return <li key={order._id} className="orders-list-item">
                                     <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
-                                    <li className="orders-list-item">
+                                    <div className="orders-list-item-info">
                                         <label htmlFor={"cb-" + index} className="orders-list-item-label">
                                             <span className="order-date">{timeFormat(order.orderDate)}</span>
                                             <span className="order-size">{order.orderedBooks.length}</span>
@@ -36,8 +36,8 @@ const OrdersTab = (props) => {
                                         <span className="orders-list-item-data">
                                             <BookTable source="ordersTab" bookTable={order.orderedBooks} />
                                         </span>
-                                    </li>
-                                </Fragment>
+                                    </div>
+                                </li>
                             })
                         }
                         </ul>
