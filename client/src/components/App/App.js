@@ -39,7 +39,8 @@ function App() {
 							<Header />
 							<main className='site-main'>
 								<Switch>
-									<Route exact path="/" component={Home} />
+									{/* <Route exact path="/" component={Home} /> */}
+									<Route exact path="/" render={(props) => <Home {...props} />} />
 									<Route path="/login" component={LoginForm} />
 									<Route path="/logout" >
 										<Redirect to="/" />
