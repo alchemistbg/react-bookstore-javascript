@@ -1,26 +1,25 @@
-import React, { Component } from 'react';
-
+import React from 'react';
 import BookFromCategory from './BookFromCategory';
 
-class Home extends Component {
-    constructor(props) {
-        super(props);
+const Home = (props) => {
 
-        this.state = {
-            pageName: 'Reactive Bookstore | Home'
-        }
-    }
-    render() {
-        return (
-            document.title = this.state.pageName,
-            <div className="home-page">
-                <h2>Home</h2>
-                <BookFromCategory category="upcoming" />
-                <BookFromCategory category="newest" />
-                <BookFromCategory category="bestselling" />
-            </div>
-        );
-    }
+    return (
+        document.title = "Reactive Bookstore | Home",
+        <div className="home-page">
+            <h2>Home</h2>
+            {
+                process.env.NODE_ENV === "development" ? (
+                    <div>
+                        <h5>{process.env.NODE_ENV}</h5>
+                        <h5>{process.env.REACT_APP_API_URL}</h5>
+                    </div>
+                ) : (null)
+            }
+            <BookFromCategory category="upcoming" />
+            <BookFromCategory category="newest" />
+            <BookFromCategory category="bestselling" />
+        </div>
+    )
 }
 
 export default Home;
