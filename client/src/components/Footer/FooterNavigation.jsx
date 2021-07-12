@@ -6,6 +6,17 @@ function FooterNavigation(params) {
         <Fragment>
             <div>
                 <h6>Logo</h6>
+                <ul>
+                    <li>
+                        <NavLink to="/project">About this project</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to=""></NavLink>
+                    </li>
+                    <li>
+                        <NavLink to=""></NavLink>
+                    </li>
+                </ul>
             </div>
             <div>
                 <h6>Reactive Bookstore</h6>
@@ -17,14 +28,20 @@ function FooterNavigation(params) {
                         <NavLink to="/contacts">Contacts</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/about">Carrier</NavLink>
+                        <NavLink to="/careers">Careers</NavLink>
                     </li>
                 </ul>
             </div>
             <div>
                 <h6>Join</h6>
-                <div>Login</div>
-                <div>Register</div>
+                <ul>
+                    <li>
+                        <NavLink to="/login">Login</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/register">Register</NavLink>
+                    </li>
+                </ul>
             </div>
             <div>
                 <h6>FAQs</h6>
