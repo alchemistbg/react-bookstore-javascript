@@ -17,6 +17,8 @@ import BookDetails from './../BookDetails/BookDetails';
 
 import About from './../Static/About';
 import Contacts from './../Static/Contacts';
+import Careers from './../Static/Careers';
+import Project from './../Static/Project';
 import NotFound from './../Static/NotFound';
 
 import { UserProvider } from './../../context/userContext/UserContext';
@@ -56,7 +58,9 @@ function App() {
 
 									<Route path="/about" component={About} />
 									<Route path="/contacts" component={Contacts} />
-									<Route path="/not-found" component={NotFound} />
+									<Route path="/careers" component={Careers} />
+									<Route path="/project" component={Project} />
+									<Route component={NotFound} />
 									{/* <Redirect to="/not-found" /> */}
 								</Switch>
 							</main>
@@ -64,7 +68,6 @@ function App() {
 						</CartProvider>
 					</Router>
 				</div >
-				{/* ); */}
 			</div>
 		</UserProvider>
 	)
