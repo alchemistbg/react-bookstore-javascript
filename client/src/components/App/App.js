@@ -19,7 +19,7 @@ import About from './../Static/About';
 import Contacts from './../Static/Contacts';
 import Careers from './../Static/Careers';
 import Project from './../Static/Project';
-import NotFound from './../Static/NotFound';
+import NotFound from './../Static/NotFound/NotFound';
 
 import { UserProvider } from './../../context/userContext/UserContext';
 import { userReducer, initialUserState } from './../../reducers/userReducer';
