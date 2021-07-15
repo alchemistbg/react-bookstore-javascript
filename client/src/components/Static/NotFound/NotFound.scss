@@ -1,0 +1,79 @@
+.not-found {
+    height: calc(100vh - 17.64em);
+    width: var(--width-main-content);
+
+    padding: 0.5em;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.6)),
+        // url("./../../../images/404-background.jpg");
+        url("./../../../images/404-background.jpg");
+
+    .top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    h1,
+    h4,
+    p {
+        margin: 0;
+        padding: 0;
+        // line-height: 1.5em;
+    }
+
+    h1 {
+        line-height: 1em;
+
+    }
+
+    .left,
+    .right {
+        color: hsl(0, 50%, 50%);
+    }
+
+    .left {
+        padding-right: 0.5em;
+        font-size: 4em;
+    }
+
+    .right {
+        font-size: 2em;
+    }
+
+    .bottom {
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+        }
+
+        h5 {
+            margin-bottom: 0.5em;
+            padding: 0.25em 0.5em;
+            color: var(--color-navigation-text);
+            background-color: var(--color-donut-border-dark);
+        }
+
+        a {
+            border: 1px solid red;
+            margin: 0 auto;
+            text-decoration: none; // padding-top: 2em;
+            display: flex;
+            width: max-content;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                height: 10em;
+                padding-right: 2em;
+            }
+
+            h3:before {
+                padding-right: 0.5em;
+                font-weight: bold;
+                content: "\f0a8";
+                font-family: "Font Awesome 5 Free";
+            }
+        }
+    }
+}

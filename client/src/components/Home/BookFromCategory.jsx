@@ -10,16 +10,19 @@ import { getBooks } from './../../requests/bookRequests';
 import Donut from './../Common/Preloader/Donut';
 
 
-function BookFromCategory(props) {
+const BookFromCategory = (props) => {
     const { category } = props;
 
     const sliderSettings = {
-        draggable: false,
-        infinite: false,
-        speed: 250,
+        draggable: true,
+        speed: 300,
         slidesToShow: 3,
-        slidesToScroll: 1
-    };
+        slidesToScroll: 1,
+        autoplay: true,
+        // infinite: false,
+        // centerMode: true,
+        // centerPadding: "0px"
+    }
 
     let [books, setBooks] = useState([]);
     let [isLoading, setLoading] = useState(true);

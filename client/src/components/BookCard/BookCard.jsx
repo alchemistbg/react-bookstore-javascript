@@ -1,58 +1,49 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getBookCover } from './../../requests/bookRequests';
 import Donut from './../Common/Preloader/Donut';
 
-class Book extends Component {
-    constructor(props) {
-        super(props);
+const BookCard = (props) => {
 
-        this.state = {
-            isLoading: true,
-            book: this.props.book,
-            bookCover: null
-        }
-    }
+    const book = props.book;
+    const [isLoading, setIsLoading] = useState(true);
+    const [bookCover, setBookCover] = useState(null);
 
-    async componentDidMount() {
-        const { isbn } = this.state.book
-        const cover = await getBookCover(isbn, 'M')
+    useEffect(() => {
+        getBookCover(book.isbn, 'M')
+            .then((cover) => {
+                setBookCover(cover);
+                setIsLoading(false);
+            }).catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
-        this.setState({
-            bookCover: cover,
-            isLoading: false
-        });
-    }
-
-    render() {
-        const { isLoading, book, bookCover } = this.state;
-
-        return <div className='book-item'>
-            <Link className="book-link" to={{ pathname: `/books/${book._id}`, state: { book } }} >
-                <div className="details"></div>
-                {
-                    isLoading ? (
-                        <div className="card-loader">
-                            <Donut />
-                        </div>
-                    ) : (
-                        <div className="book-cover">
-                            <img className="img" src={bookCover} alt={book.title} />
-                            {/* <img className="img" src={bookCover} alt={book.title} crossorigin="anonymous" /> */}
-                        </div>
-                    )
-                }
-                <div className="book-meta">
-                    <div className="book-title">{book.title}</div>
-                </div>
-                <div className="book-footer">
-                    <div className="book-author">from <span>{book.author}</span></div>
-                    <div className="book-price">Price: <span>{book.price}$</span></div>
-                </div>
-            </Link>
-        </div >
-    }
+    return <div className='book-item'>
+        <Link className="book-link" to={{ pathname: `/books/${book._id}`, state: { book } }} >
+            <div className="details"></div>
+            {
+                isLoading ? (
+                    <div className="card-loader">
+                        <Donut />
+                    </div>
+                ) : (
+                    <div className="book-cover">
+                        <img className="img" src={bookCover} alt={book.title} />
+                        {/* <img className="img" src={bookCover} alt={book.title} crossorigin="anonymous" /> */}
+                    </div>
+                )
+            }
+            <div className="book-meta">
+                <div className="book-title">{book.title}</div>
+            </div>
+            <div className="book-footer">
+                <div className="book-author">from <span>{book.author}</span></div>
+                <div className="book-price">Price: <span>{book.price}$</span></div>
+            </div>
+        </Link>
+    </div >
 }
 
-export default Book;
+export default BookCard;
