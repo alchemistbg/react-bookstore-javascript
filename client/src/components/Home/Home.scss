@@ -20,4 +20,15 @@
     .slick-next:before {
         color: var(--color-main-text);
     }
+
+    .slick-slide {
+        .book-item {
+            margin: 1em 0.5em;
+        }
+
+        .book-item:nth-child(1),
+        .book-item:last-child {
+            // margin-left: 0em;
+        }
+    }
 }
