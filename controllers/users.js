@@ -15,7 +15,6 @@ const validateUserInfo = (req, res, next) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        // console.log('user controller', errors);
         const error = new Error('ERROR: Incorrect user data!');
         error.status = 422;
         error.info = errors.array();
@@ -38,7 +37,6 @@ const validateReCaptchaToken = (token) => {
 
 module.exports = {
     isLogged: (req, res) => {
-        // console.log(req);
         res.status(200).json({
             message: "User is still logged in",
             token: req.token
@@ -123,14 +121,12 @@ module.exports = {
                         path: '/',
                         expires: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
                     });
-                    // console.log(res.cookies);
+
                     res.status(200).json({
                         message: 'Login successful.',
                         token,
-                        // userName: user.userName,
-                        // userId: user._id
                     });
-                    // res.cookie('x-auth-token', token).send(token);
+
                 })
                 .catch((error) => {
                     next(error);
