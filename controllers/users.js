@@ -7,12 +7,16 @@ const orderModel = require('./../models/Order');
 const axios = require('axios');
 const mongoose = require('mongoose');
 
-const validateUserInfo = (req, res) => {
+const bcrypt = require('bcrypt');
+// const { ResultWithContext } = require('express-validator/src/chain');
+const saltRounds = 10;
+
+const validateUserInfo = (req, res, next) => {
 
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
-        const error = new Error('Incorrect user data!');
+        // console.log('user controller', errors);
+        const error = new Error('ERROR: Incorrect user data!');
         error.status = 422;
         error.info = errors.array();
         throw error;
@@ -50,12 +54,13 @@ module.exports = {
         //     return;
         // }
 
-        // console.log(req.body.reCaptchaToken);
+        // console.log(req.body.reCaptchaToken);\
+
         if (validateUserInfo(req, res)) {
             const { firstName, lastName, userName, password, email, userRole } = req.body;
             userModel.create({ firstName, lastName, userName, password, email, userRole })
                 .then((user) => {
-                    res.status(201).json({
+                    return res.status(201).json({
                         message: 'Registration successful.',
                         userId: user._id,
                         userName
@@ -140,6 +145,63 @@ module.exports = {
         }).status(200).json({ message: 'Logout successfully' });
     },
 
+    patchPassword: (req, res, next) => {
+
+        if (req.user.userId !== req.params.id) {
+            return res.status(403).json({
+                message: "Unauthorized"
+            });
+        }
+
+        const { userId } = req.user;
+
+        let userRawOldPassword = req.body.oldPassword;
+        let userHashedOldPassword = undefined;
+        let userRawNewPassword = req.body.newPassword;
+        let userData = undefined;
+
+        if (validateUserInfo(req, res)) {
+            userModel.findById(userId)
+                .then((user) => {
+                    userData = user;
+                    userHashedOldPassword = userData.password;
+                    return userData.matchPassword(userRawOldPassword);
+                })
+                .then((result) => {
+                    if (result) {
+                        const salt = userData.password.substr(0, 29);
+                        return bcrypt.hash(userRawNewPassword, salt);
+                    } else {
+                        const error = {
+                            message: "Wrong current password!",
+                            status: 422
+                        }
+                        throw error;
+                    }
+                })
+                .then((userHashedNewPassword) => {
+                    if (userHashedNewPassword === userHashedOldPassword) {
+                        const error = {
+                            message: "Your new password cannot be same as the current one!",
+                            status: 422
+                        }
+                        throw error;
+                    } else {
+                        return userData.matchPassword(req.body.oldPassword)
+                    }
+                })
+                .then((user) => {
+                    console.log("New user's password", user);
+                    res.status(200).json({
+                        message: "Password changed successfully"
+                    });
+                })
+                .catch((error) => {
+                    next(error);
+                });
+        }
+    },
+
     getProfile: (req, res, next) => {
         console.log(req.user);
         const { userId, userName } = req.user;
@@ -180,6 +242,12 @@ module.exports = {
     },
 
     patchProfile: (req, res, next) => {
+        if (req.user.userId !== req.params.id) {
+            return res.status(422).json({
+                message: "Unauthorized"
+            });
+        }
+
         userModel.findById(req.user.userId).exec()
             .then((user) => {
                 if (!user) {
@@ -201,7 +269,7 @@ module.exports = {
             });
     },
 
-    deleteProfile: (req, res) => {
+    deleteProfile: (req, res, next) => {
         if (req.user.userRole !== 'admin') {
             return res.status(403).json({
                 message: "Unauthorized"
