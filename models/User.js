@@ -77,13 +77,14 @@ userSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
         try {
             const salt = await bcrypt.genSalt(saltRounds);
-            console.log(salt);
+            // console.log("UserModel - salt: ", salt);
             const hashedPassword = await bcrypt.hash(this.password, salt);
-            console.log(hashedPassword)
+            // console.log("UserModel - hashedPass: ", hashedPassword);
             this.password = hashedPassword;
             // next();
         } catch (error) {
             //TODO
+            console.log(error);
         }
     }
     next();
