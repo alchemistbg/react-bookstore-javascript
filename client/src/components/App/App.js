@@ -7,8 +7,8 @@ import Header from './../Header/Header';
 import Footer from './../Footer/Footer';
 
 import Home from './../Home/Home';
-import LoginForm from './../Forms/LoginForm';
-import RegisterForm from './../Forms/RegisterForm';
+import LoginForm from './../Forms/Login/LoginForm';
+import RegisterForm from './../Forms/Register/RegisterForm';
 import Cart from './../Cart/Cart';
 import Profile from './../User/Profile';
 // import BookList from './components/BookList/BookList';
@@ -48,7 +48,9 @@ function App() {
 										<Redirect to="/" />
 									</Route>
 									<Route path="/register" component={RegisterForm} />
-									<Route path="/profile" component={Profile} />
+									<Route path="/profile" render={(props) => <Profile {...props} />} />
+									{/* <Route path="/edit-profile" render={(props) => <EditProfile {...props} />} /> */}
+									{/* <Route path="/edit-profile" component={EditProfile} /> */}
 
 									<Route exact path="/books" render={(props) => <BookListView {...props} />} />
 									<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
