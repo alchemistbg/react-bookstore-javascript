@@ -3,12 +3,19 @@ import { Link } from "react-router-dom";
 
 import Recaptcha from "react-google-recaptcha";
 
-import Input from "./Input";
-import { registerUser } from "./../../requests/userRequests";
-import { validateForm, validateInput } from "./../../utils/inputValidation";
-import { showToast } from "./../../utils/helpers";
+import Input from "../../Common/Input/Input";
+import { registerUser } from "../../../requests/userRequests";
+import { validateForm, validateInput } from "../../../utils/inputValidation";
+import { showToast } from "../../../utils/helpers";
 
 const RegisterForm = (props) => {
+
+	// const [fieldType, setFieldType] = useState("password");
+	const [showPassword, setShowPassword] = useState(true);
+	const handleHidePassword = () => {
+		setShowPassword(!showPassword);
+	};
+
 	const [formData, setFormData] = useState({
 		firstName: "",
 		lastName: "",
@@ -132,7 +139,7 @@ const RegisterForm = (props) => {
 							divClassNames="form-field-wrapper email-wrapper"
 							value={formData.email}
 							onChange={handleChange}
-							type="test"
+							type="text"
 							nameAndId="email"
 							labelClassName="placeholder"
 							labelTextValue="Email"
@@ -166,6 +173,9 @@ const RegisterForm = (props) => {
 							nameAndId="password"
 							labelClassName="placeholder"
 							labelTextValue="Password"
+							isPassword={true}
+							handleHidePassword={handleHidePassword}
+							showPassword={showPassword}
 						/>
 						<Input
 							isAutoFocus={false}
@@ -176,10 +186,13 @@ const RegisterForm = (props) => {
 							nameAndId="repeatPassword"
 							labelClassName="placeholder"
 							labelTextValue="Repeat password"
+							isPassword={true}
+							handleHidePassword={handleHidePassword}
+							showPassword={showPassword}
 						/>
 						<button className="form-button" type="submit">
 							Register
-							</button>
+						</button>
 					</form>
 					{/* <Recaptcha
 						sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
@@ -195,8 +208,8 @@ const RegisterForm = (props) => {
 							<b className="redirects">Login</b>
 						</Link>
 					}{" "}
-						page
-					</div>
+					page
+				</div>
 			</Fragment>
 		)
 	);
