@@ -8,7 +8,7 @@ import UserContext from './../../context/userContext/UserContext';
 import CartContext from './../../context/cartContext/CartContext';
 import jwt from 'jwt-decode';
 
-function HeaderMajorNav() {
+const HeaderMajorNav = () => {
     const [{ isLoggedIn, userName, userId }, userDispatch] = useContext(UserContext);
     const [{ cart }, cartDispatch] = useContext(CartContext);
 

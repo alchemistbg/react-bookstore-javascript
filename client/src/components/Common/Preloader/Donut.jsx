@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Donut() {
+const Donut = () => {
     return (
         <div className="donut-wrapper">
             <p className="donut-text">Loading...</p>

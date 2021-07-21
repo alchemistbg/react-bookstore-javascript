@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
 
-function FooterNavigation(params) {
+const FooterNavigation = (params) => {
     return (
         <Fragment>
             <div>

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { getGenres } from './../../requests/bookRequests';
 
-function Sidebar(props) {
+const Sidebar = (props) => {
     const [genres, setGenres] = useState([]);
 
     useEffect(() => {

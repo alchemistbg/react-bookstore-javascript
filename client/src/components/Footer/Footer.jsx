@@ -2,7 +2,7 @@ import React from 'react'
 
 import FooterNavigation from './FooterNavigation'
 
-function Footer() {
+const Footer = () => {
     return (
         <footer>
             <nav className='footer-nav'>

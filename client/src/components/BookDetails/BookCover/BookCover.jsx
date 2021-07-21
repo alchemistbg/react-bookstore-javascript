@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getBookCover } from '../../../requests/bookRequests';
 import Donut from '../../Common/Preloader/Donut';
 
-function BookCover(props) {
+const BookCover = (props) => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [bookCover, setBookCover] = useState(null);

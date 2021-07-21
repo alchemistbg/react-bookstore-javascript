@@ -4,7 +4,7 @@ import { timeFormat } from './../../../utils/helpers';
 import { paginate } from './../../../utils/paginate';
 import Pagination from './../../Common/Pagination/Pagination';
 
-function BookComments(props) {
+const BookComments = (props) => {
     const { book } = props;
     const { length: commentsCount } = book.comments;
     const { comments: allComments } = book;
