@@ -17,7 +17,7 @@ const OrdersTab = (props) => {
 
         <div className="panel">
 
-            <h4 className="header">Orders information</h4>
+            <h2 className="header">Orders information</h2>
             <div className="orders-info">
                 {
                     orders.length === 0 ? (
