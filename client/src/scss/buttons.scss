@@ -17,6 +17,18 @@
         cursor: pointer;
     }
 
+    &.edit-profile,
+    &.change-password,
+    &.apply,
+    &.cancel {
+        display: inline !important;
+    }
+
+    &.edit-profile,
+    &.apply {
+        margin-right: 0.5em;
+    }
+
     &.book-table {
         padding: 0;
         margin: calc(0.6em + 2px) 0.5em;
