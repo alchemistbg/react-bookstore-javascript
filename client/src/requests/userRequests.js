@@ -3,7 +3,6 @@ import { BASE_URL } from './../utils/constants.js';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-
 console.log(BASE_URL);
 
 async function checkIsLogged() {

@@ -26,10 +26,10 @@ const RegisterForm = (props) => {
 		reCaptchaToken: ""
 	});
 	const [formErrors, setFormErrors] = useState({
-		userName: [],
-		email: [],
 		firstName: [],
 		lastName: [],
+		email: [],
+		userName: [],
 		password: [],
 		repeatPassword: [],
 	});
