@@ -4,19 +4,19 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export const getCart = async (userId) => {
-    return axios.get(`${BASE_URL}/${userId}`, {
+    return axios.get(`${BASE_URL}/carts/${userId}`, {
         withCredentials: true
     });
 }
 
 export const postCart = async (userId, cartData) => {
-    return axios.post(`${BASE_URL}/${userId}`, cartData, {
+    return axios.post(`${BASE_URL}/carts/${userId}`, cartData, {
         withCredentials: true
     });
 }
 
 export const deleteCart = async (userId) => {
-    return axios.delete(`${BASE_URL}/${userId}`, {
+    return axios.delete(`${BASE_URL}/carts/${userId}`, {
         withCredentials: true
     });
 }

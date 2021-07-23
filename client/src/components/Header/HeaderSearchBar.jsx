@@ -1,6 +1,6 @@
 import React from 'react'
 
-function HeaderSearchBar() {
+const HeaderSearchBar = () => {
     return (
         <input type="text" name="" id="" placeholder="Search" />
     );

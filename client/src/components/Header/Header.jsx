@@ -5,7 +5,7 @@ import HeaderMajorNav from './HeaderMajorNav';
 import HeaderMinorNav from './HeaderMinorNav';
 import HeaderSearchBar from './HeaderSearchBar'
 
-function Header() {
+const Header = () => {
     return (
         <header>
             <nav className='header-nav'>

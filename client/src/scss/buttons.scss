@@ -1,6 +1,6 @@
 .form-button {
     display: block;
-    // margin-left: auto;
+    margin: 1em 0 2em 0;
     padding: 0.6em;
     border: 2px solid var(--color-main-text);
     border-radius: var(--border-form-radius);
@@ -15,6 +15,18 @@
         color: var(--color-main-background);
         background-color: var(--color-main-text);
         cursor: pointer;
+    }
+
+    &.edit-profile,
+    &.change-password,
+    &.apply,
+    &.cancel {
+        display: inline !important;
+    }
+
+    &.edit-profile,
+    &.apply {
+        margin-right: 0.5em;
     }
 
     &.book-table {

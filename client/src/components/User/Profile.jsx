@@ -9,13 +9,32 @@ import { getUserProfile, getOrders } from './../../requests/userRequests';
 
 import UserContext from './../../context/userContext/UserContext';
 
-const Profile = () => {
-    console.log("Profile");
+const Profile = (props) => {
     const [{ isLoggedIn, userName, userId, error }, dispatch] = useContext(UserContext);
 
     const [profile, setProfile] = useState({});
     const [orders, setOrders] = useState([]);
     const [comments, setComments] = useState([]);
+    const [toEditProfile, setToEditProfile] = useState(false);
+    const [toEditPassword, setToEditPassword] = useState(false);
+
+    const handleEditProfile = () => {
+        console.log("Edit profile");
+        setToEditProfile(true);
+        setToEditPassword(false);
+    }
+
+    const handleEditPassword = () => {
+        console.log("Edit password");
+        setToEditProfile(false);
+        setToEditPassword(true);
+    }
+
+    const handleCancel = () => {
+        console.log("Cancel");
+        setToEditProfile(false);
+        setToEditPassword(false);
+    }
 
     useEffect(() => {
         getUserProfile(userId)
@@ -56,7 +75,14 @@ const Profile = () => {
                             <h2>Profile page of {profile.fullName}</h2>
 
                             <div className="tabs">
-                                <PersonalTab profile={profile} />
+                                <PersonalTab
+                                    profile={profile}
+                                    handleEditProfile={handleEditProfile}
+                                    toEditProfile={toEditProfile}
+                                    handleEditPassword={handleEditPassword}
+                                    toEditPassword={toEditPassword}
+                                    handleCancel={handleCancel}
+                                />
                                 {/* <ProfileTab profile={profile} onCheck={handleCheck} /> */}
                                 <OrdersTab orders={orders} />
                                 <CommentsTab comments={comments} />

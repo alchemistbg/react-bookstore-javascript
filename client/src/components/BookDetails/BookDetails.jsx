@@ -11,7 +11,7 @@ import { showToast } from './../../utils/helpers';
 import UserContext from './../../context/userContext/UserContext';
 import BookCommentsForm from './BookCommentsForm/BookCommentsForm';
 
-function BookDetails(props) {
+const BookDetails = (props) => {
 
     const [{ isLoggedIn, userId }] = useContext(UserContext);
 

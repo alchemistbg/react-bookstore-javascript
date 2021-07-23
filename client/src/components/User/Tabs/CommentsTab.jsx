@@ -18,7 +18,7 @@ const CommentsTab = (props) => {
 
         <div className="panel">
 
-            <h4 className="header">Comments information</h4>
+            <h2 className="header">Comments information</h2>
             <div className="comments-info">
                 {
                     comments.length === 0 ?

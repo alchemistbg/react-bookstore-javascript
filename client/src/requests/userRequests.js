@@ -3,7 +3,6 @@ import { BASE_URL } from './../utils/constants.js';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-
 console.log(BASE_URL);
 
 async function checkIsLogged() {
@@ -30,6 +29,12 @@ async function logoutUser() {
     });
 }
 
+async function patchPassword(userId, passData) {
+    return axios.patch(`${BASE_URL}/users/${userId}/patchpass`, passData, {
+        withCredentials: true
+    });
+}
+
 async function getUserProfile(userId) {
     return axios.get(`${BASE_URL}/users/${userId}`, {
         withCredentials: true
@@ -51,6 +56,7 @@ export {
     registerUser,
     loginUser,
     logoutUser,
+    patchPassword,
     getUserProfile,
     getOrders,
     postOrder
