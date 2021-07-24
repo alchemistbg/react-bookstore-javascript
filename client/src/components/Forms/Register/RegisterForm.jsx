@@ -1,4 +1,4 @@
-import React, { Fragment, Component, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Recaptcha from "react-google-recaptcha";
@@ -10,10 +10,33 @@ import { showToast } from "../../../utils/helpers";
 
 const RegisterForm = (props) => {
 
-	// const [fieldType, setFieldType] = useState("password");
 	const [showPassword, setShowPassword] = useState(true);
-	const handleHidePassword = () => {
+	const handleHidePassword = (inputRef, showPassRef) => {
+		console.log(inputRef);
 		setShowPassword(!showPassword);
+		if (showPassword) {
+			inputRef.current.type = 'text';
+			showPassRef.current.classList.add('show-pass');
+			showPassRef.current.classList.remove('hide-pass');
+		} else {
+			inputRef.current.type = 'password';
+			showPassRef.current.classList.remove('show-pass');
+			showPassRef.current.classList.add('hide-pass');
+		}
+	};
+
+	const [showRepPassword, setShowRepPassword] = useState(true);
+	const handleHideRepPassword = (inputRef, showPassRef) => {
+		setShowRepPassword(!showRepPassword);
+		if (showRepPassword) {
+			inputRef.current.type = 'text'
+			showPassRef.current.classList.add('show-pass');
+			showPassRef.current.classList.remove('hide-pass');
+		} else {
+			inputRef.current.type = 'password'
+			showPassRef.current.classList.remove('show-pass');
+			showPassRef.current.classList.add('hide-pass');
+		}
 	};
 
 	const [formData, setFormData] = useState({
@@ -124,9 +147,8 @@ const RegisterForm = (props) => {
 						onSubmit={handleSubmit}
 					>
 						<Input
-							// isAutoFocus={true}
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper uname-wrapper"
+							isAutoFocus={true}
 							value={formData.userName}
 							onChange={handleChange}
 							type="text"
@@ -135,8 +157,8 @@ const RegisterForm = (props) => {
 							labelTextValue="Username"
 						/>
 						<Input
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper email-wrapper"
+							isAutoFocus={false}
 							value={formData.email}
 							onChange={handleChange}
 							type="text"
@@ -145,8 +167,8 @@ const RegisterForm = (props) => {
 							labelTextValue="Email"
 						/>
 						<Input
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper fname-wrapper"
+							isAutoFocus={false}
 							value={formData.firstName}
 							onChange={handleChange}
 							type="text"
@@ -155,8 +177,8 @@ const RegisterForm = (props) => {
 							labelTextValue="First Name"
 						/>
 						<Input
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper lname-wrapper"
+							isAutoFocus={false}
 							value={formData.lastName}
 							onChange={handleChange}
 							type="text"
@@ -165,8 +187,8 @@ const RegisterForm = (props) => {
 							labelTextValue="Last Name"
 						/>
 						<Input
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper pass-wrapper"
+							isAutoFocus={false}
 							value={formData.password}
 							onChange={handleChange}
 							type="password"
@@ -174,12 +196,11 @@ const RegisterForm = (props) => {
 							labelClassName="placeholder"
 							labelTextValue="Password"
 							isPassword={true}
-							handleHidePassword={handleHidePassword}
-							showPassword={showPassword}
+							handleHide={handleHidePassword}
 						/>
 						<Input
-							isAutoFocus={false}
 							divClassNames="form-field-wrapper pass-rep-wrapper"
+							isAutoFocus={false}
 							value={formData.repeatPassword}
 							onChange={handleChange}
 							type="password"
@@ -187,8 +208,7 @@ const RegisterForm = (props) => {
 							labelClassName="placeholder"
 							labelTextValue="Repeat password"
 							isPassword={true}
-							handleHidePassword={handleHidePassword}
-							showPassword={showPassword}
+							handleHide={handleHideRepPassword}
 						/>
 						<button className="form-button" type="submit">
 							Register
