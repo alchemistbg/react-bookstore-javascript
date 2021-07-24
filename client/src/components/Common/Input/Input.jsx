@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 
 
 function Input(props) {
@@ -14,40 +14,17 @@ function Input(props) {
         labelTextValue,
         error,
         isPassword,
-        handleHidePassword,
-        showPassword
+        handleHide,
     } = props;
 
-    const changeFieldTypeRef = useRef();
-
-    const handleFieldChangeType = (evt) => {
-        console.log(evt.target.classList);
-        console.log(evt.target.parentElement.children[0].id);
-        if (showPassword && evt.target.parentElement.children[0].id === "password") {
-            evt.target.classList.add("show-pass");
-            evt.target.classList.remove("hide-pass");
-            evt.target.parentElement.children[0].type = "text";
-        } else if (!showPassword && evt.target.parentElement.children[0].id === "password") {
-            evt.target.classList.remove("show-pass");
-            evt.target.classList.add("hide-pass");
-            evt.target.parentElement.children[0].type = "password";
-        }
-
-        if (showPassword && evt.target.parentElement.children[0].id === "repeatPassword") {
-            evt.target.classList.add("show-pass");
-            evt.target.classList.remove("hide-pass");
-            evt.target.parentElement.children[0].type = "text";
-        } else if (!showPassword && evt.target.parentElement.children[0].id === "repeatPassword") {
-            evt.target.classList.remove("show-pass");
-            evt.target.classList.add("hide-pass");
-            evt.target.parentElement.children[0].type = "password";
-        }
-    }
+    const inputRef = useRef();
+    const showPassRef = useRef();
 
     return (
 
         <div className={divClassNames}>
             <input
+                ref={inputRef}
                 autoFocus={isAutoFocus}
                 value={value}
                 onFocus={onFocus}
@@ -63,20 +40,14 @@ function Input(props) {
             {
                 isPassword ? (
                     <button
+                        ref={showPassRef}
                         className="field-type-change hide-pass"
                         id={nameAndId}
                         key={nameAndId}
                         type="button"
-                        // ref={changeFieldTypeRef}
-                        onClick={(evt) => {
-                            handleHidePassword();
-                            handleFieldChangeType(evt);
-                        }} >
-                        {/* {
-                            showPassword ? ("test") : ("fuck")
-                        } */}
+                        onClick={() => handleHide(inputRef, showPassRef)} >
                     </button>
-                ) : null
+                ) : (null)
             }
             {/* {error && <div className="message message-error">{error}</div>} */}
         </div >
