@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import jwt from 'jwt-decode';
 
@@ -11,8 +11,18 @@ import UserContext from "../../../context/userContext/UserContext";
 
 const LoginForm = (props) => {
 	const [showPassword, setShowPassword] = useState(true);
-	const handleHidePassword = () => {
+	const handleHidePassword = (inputRef, showPassRef) => {
 		setShowPassword(!showPassword);
+
+		if (showPassword) {
+			inputRef.current.type = 'text';
+			showPassRef.current.classList.add('show-pass');
+			showPassRef.current.classList.remove('hide-pass');
+		} else {
+			inputRef.current.type = 'password';
+			showPassRef.current.classList.remove('show-pass');
+			showPassRef.current.classList.add('hide-pass');
+		}
 	};
 
 	const [formData, setFormData] = useState({
@@ -187,8 +197,7 @@ const LoginForm = (props) => {
 									labelClassName="placeholder"
 									labelTextValue="Password"
 									isPassword={true}
-									handleHidePassword={handleHidePassword}
-									showPassword={showPassword}
+									handleHide={handleHidePassword}
 								// error="no errors"
 								/>
 								<button className="form-button" type="submit">
