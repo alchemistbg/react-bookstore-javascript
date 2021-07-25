@@ -22,5 +22,11 @@ BCrypt
 ## Description
 
 ## TODO
-- [ ] Admin panel
 - [ ] Side drawer
+- [ ] Filter books by category using 'select'
+- [ ] Search books (make search works)
+- [ ] Integrate reCaptcha
+- [ ] Admin panel
+  - [ ] Add/Edit/Delete books
+  - [ ] Edit orders
+  - [ ] Other admin things
