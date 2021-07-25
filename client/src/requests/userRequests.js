@@ -41,6 +41,12 @@ async function getUserProfile(userId) {
     });
 }
 
+async function patchUserProfile(userId, formData) {
+    return axios.patch(`${BASE_URL}/users/${userId}`, formData, {
+        withCredentials: true
+    });
+}
+
 async function getOrders(userId) {
     return axios.get(`${BASE_URL}/users/${userId}/orders`, {
         withCredentials: true
@@ -58,6 +64,7 @@ export {
     logoutUser,
     patchPassword,
     getUserProfile,
+    patchUserProfile,
     getOrders,
     postOrder
 }
