@@ -22,5 +22,5 @@ BCrypt
 ## Description
 
 ## TODO
-- [] Admin panel
-- [] Side drawer
+- [ ] Admin panel
+- [ ] Side drawer
