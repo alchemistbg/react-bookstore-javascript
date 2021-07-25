@@ -1,8 +1,14 @@
 import React, { useState, useRef } from 'react';
+import { useHistory } from 'react-router';
 import Input from './../../../Common/Input/Input';
+import { patchUserProfile } from './../../../../requests/userRequests';
+import { validateForm } from '../../../../utils/inputValidation';
+import { showToast } from '../../../../utils/helpers';
 
 const EditProfile = (props) => {
     const { profile } = props;
+
+    const history = useHistory();
 
     const [formData, setFormData] = useState({
         firstName: profile.firstName,
@@ -26,7 +32,36 @@ const EditProfile = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(formData);
+        validateForm('editProfile', formData)
+            .then(() => {
+                patchUserProfile(profile._id, formData)
+                    .then((res) => {
+                        history.push('/profile');
+                        showToast('success', {
+                            title: "Well done!",
+                            message: res.data.message
+                        });
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                        if (error.response) {
+                            console.log(error.response);
+                            if (error.response.data.message === 'Incorrect user data!') {
+                                showToast('error', error.response.data.info);
+                            } else {
+                                const toast = {
+                                    title: "Error",
+                                    message: error.response.data.message
+                                };
+                                showToast("simpleError", toast);
+                            }
+                        }
+                    })
+
+            }).catch((errors) => {
+                console.log(errors);
+                showToast('error', errors)
+            });
     }
 
     return (
@@ -34,9 +69,8 @@ const EditProfile = (props) => {
             <h4>Edit Profile</h4>
             <form className="form" onSubmit={handleSubmit}>
                 <Input
-                    divClassNames={
-                        "form-field-wrapper fname-wrapper"
-                    }
+                    divClassNames={"form-field-wrapper fname-wrapper"}
+                    inputClassNames={"filled-input"}
                     isAutoFocus={true}
                     value={formData.firstName}
                     onChange={handleChange}
@@ -47,10 +81,9 @@ const EditProfile = (props) => {
                     labelTextValue="Firstname"
                 />
                 <Input
-                    divClassNames={
-                        "form-field-wrapper lname-wrapper"
-                    }
-                    isAutoFocus={true}
+                    divClassNames={"form-field-wrapper lname-wrapper"}
+                    inputClassNames={"filled-input"}
+                    isAutoFocus={false}
                     value={formData.lastName}
                     onChange={handleChange}
                     onFocus={handleChange}
@@ -60,10 +93,9 @@ const EditProfile = (props) => {
                     labelTextValue="Lastname"
                 />
                 <Input
-                    divClassNames={
-                        "form-field-wrapper uname-wrapper"
-                    }
-                    isAutoFocus={true}
+                    divClassNames={"form-field-wrapper uname-wrapper"}
+                    inputClassNames={"filled-input"}
+                    isAutoFocus={false}
                     value={formData.userName}
                     onChange={handleChange}
                     onFocus={handleChange}
@@ -73,10 +105,9 @@ const EditProfile = (props) => {
                     labelTextValue="Username"
                 />
                 <Input
-                    divClassNames={
-                        "form-field-wrapper uname-wrapper"
-                    }
-                    isAutoFocus={true}
+                    divClassNames={"form-field-wrapper uname-wrapper"}
+                    inputClassNames={"filled-input"}
+                    isAutoFocus={false}
                     value={formData.email}
                     onChange={handleChange}
                     onFocus={handleChange}
