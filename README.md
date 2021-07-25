@@ -1,5 +1,22 @@
 # Reactive Bookstore
 
-## MERN based bookstore web-app
+A full stack MERN web application
+A working version of this app can be seen here: [https://mern-bookstore.herokuapp.com](https://mern-bookstore.herokuapp.com)
 
-Master branch
+## Client-side
+HTML
+SCSS
+React.js
+React router
+React hooks
+Context API
+
+## Server-side
+Node.js
+Express
+Mongo
+Mongoose
+JWT
+BCrypt
+
+## Description
