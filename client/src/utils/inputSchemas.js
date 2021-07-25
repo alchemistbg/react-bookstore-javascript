@@ -68,7 +68,7 @@ const registerFormSchema = yup.object().shape({
         .oneOf([yup.ref('password'), null], 'Both password fields must match')
 });
 
-const changePasswordFormSchema = yup.object().shape({
+const editPasswordFormSchema = yup.object().shape({
     oldPassword: yup
         .string()
         .required(c.password.oldRequired)
@@ -90,8 +90,25 @@ const changePasswordFormSchema = yup.object().shape({
         .oneOf([yup.ref('newPassword'), null], 'Both password fields must match'),
 });
 
+const editProfileFormSchema = yup.object().shape({
+    firstName: yup
+        .string()
+        .required(c.names.fNameRequired),
+    lastName: yup
+        .string()
+        .required(c.names.lNameRequired),
+    userName: yup
+        .string()
+        .required(c.userName.required),
+    email: yup
+        .string()
+        .required(c.email.required)
+        .email(c.email.valid),
+});
+
 export {
     loginFormSchema,
     registerFormSchema,
-    changePasswordFormSchema
+    editPasswordFormSchema,
+    editProfileFormSchema
 }

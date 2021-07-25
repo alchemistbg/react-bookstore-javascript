@@ -1,6 +1,6 @@
 // import * as yup from 'yup';
 
-import { loginFormSchema, registerFormSchema, changePasswordFormSchema } from './inputSchemas';
+import { loginFormSchema, registerFormSchema, editPasswordFormSchema, editProfileFormSchema } from './inputSchemas';
 
 const parseErrors = (error) => {
     const errors = error.inner.reduce((acc, { path, message }) => {
@@ -34,14 +34,25 @@ const validateForm = (form, data) => {
             })
     }
 
-    if (form === 'changePass') {
-        return changePasswordFormSchema
+    if (form === 'editPassword') {
+        return editPasswordFormSchema
             .validate(data, { abortEarly: false })
             .then(() => {
                 return data;
             })
             .catch((error) => {
                 return Promise.reject(parseErrors(error));
+            });
+    }
+
+    if (form === 'editProfile') {
+        return editProfileFormSchema
+            .validate(data, { abortEarly: false })
+            .then(() => {
+                return data;
+            })
+            .catch((error) => {
+                return Promise.reject(parseErrors(error))
             });
     }
 }
