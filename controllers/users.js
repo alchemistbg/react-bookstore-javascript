@@ -186,8 +186,7 @@ module.exports = {
                         return userData.matchPassword(req.body.oldPassword)
                     }
                 })
-                .then((user) => {
-                    console.log("New user's password", user);
+                .then((result) => {
                     res.status(200).json({
                         message: "Password changed successfully"
                     });
@@ -238,30 +237,49 @@ module.exports = {
     },
 
     patchProfile: (req, res, next) => {
+
         if (req.user.userId !== req.params.id) {
             return res.status(422).json({
                 message: "Unauthorized"
             });
         }
 
-        userModel.findById(req.user.userId).exec()
+        let userData = { ...req.body };
+        userModel.findById(req.user.userId)
             .then((user) => {
                 if (!user) {
-                    return res.status(400).json({});
+                    return res.status(404).json({
+                        message: "User not Found!"
+                    });
                 }
-
-                let origAddress = { ...user.address };
-                origAddress = { ...req.body.address };
-                user.address = { ...origAddress };
-                return user.save();
+                return userModel.findOne({ email: req.body.email });
+            })
+            .then((result) => {
+                if (result && result._id.toString() !== req.user.userId.toString()) {
+                    return res.status(422).json({
+                        message: "User with this email already exists!"
+                    });
+                } else {
+                    return userModel.findOne({ userName: req.body.userName });
+                }
+            })
+            .then((result) => {
+                if (result && result._id.toString() !== req.user.userId) {
+                    return res.status(422).json({
+                        message: "User with this username already exists!"
+                    });
+                } else {
+                    return userModel.updateOne(userData);
+                }
             })
             .then((result) => {
                 return res.status(200).json({
-                    message: "User profile updated successfully",
+                    message: "Profile updated successfully",
                 });
             })
             .catch((error) => {
-                next(error);
+                console.log("ERROR: ", error);
+                // next(error);
             });
     },
 
