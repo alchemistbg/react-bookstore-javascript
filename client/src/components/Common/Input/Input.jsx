@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 
 function Input(props) {
     const { divClassNames,
+        inputClassNames,
         isAutoFocus,
         value,
         onFocus,
@@ -25,6 +26,7 @@ function Input(props) {
         <div className={divClassNames}>
             <input
                 ref={inputRef}
+                className={inputClassNames}
                 autoFocus={isAutoFocus}
                 value={value}
                 onFocus={onFocus}

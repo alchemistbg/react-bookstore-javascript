@@ -51,9 +51,6 @@ const PersonalTab = (props) => {
         </div>
     }
 
-    // console.log("Edit profile", toEditProfile, "; Edit password", toEditPassword);
-    // console.log(snippet);
-
     return <Fragment>
         <input className="input" type="radio" name="tabs" id="tab-1" defaultChecked />
         <div className="ilabel">

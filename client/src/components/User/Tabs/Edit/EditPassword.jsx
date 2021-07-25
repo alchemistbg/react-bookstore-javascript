@@ -23,7 +23,6 @@ const EditPassword = (props) => {
     const handleHideOldPassword = (inputRef, showPassRef) => {
         console.log(inputRef);
         console.log(showPassRef);
-        // console.log(inputRef);
         setShowOldPassword(!showOldPassword);
         if (showOldPassword) {
             inputRef.current.type = 'text';
@@ -81,7 +80,7 @@ const EditPassword = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        validateForm('changePass', formData)
+        validateForm('editPassword', formData)
             .then(() => {
                 patchPassword(props.profile._id, formData)
                     .then((res) => {
