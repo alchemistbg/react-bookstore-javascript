@@ -15,7 +15,7 @@ A full stack MERN web application. A working version of this app can be seen her
 * Express  
 * Mongo  
   * Development -> Local MongoDB  
-  * Production -> Cloud Mongo  
+  * Production -> Cloud Mongo (Atlas)  
 * Mongoose  
 * JWT  
 * BCrypt  
