@@ -25,6 +25,7 @@ const { RSA_NO_PADDING } = require('constants');
 
 console.log(process.env.NODE_ENV)
 app.use((req, res, next) => {
+    console.log(req.ip);
     if (process.env.NODE_ENV === "development") {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5002');
     } else if (process.env.NODE_ENV === "production") {
