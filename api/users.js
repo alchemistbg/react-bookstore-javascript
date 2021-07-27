@@ -11,10 +11,10 @@ router.post('/login', utils.validator.loginDataValidator(), userController.login
 router.post('/logout', utils.auth, userController.logout);
 
 router.get('/:id', utils.auth, userController.getProfile);
-router.patch('/:id', utils.auth, userController.patchProfile);
+router.patch('/:id', utils.auth, utils.validator.patchProfileValidator(), userController.patchProfile);
 router.delete('/:id', utils.auth, userController.deleteProfile);
 
-router.patch('/:id/patchpass', utils.auth, utils.validator.newPasswordDataValidator(), userController.patchPassword);
+router.patch('/:id/pass', utils.auth, utils.validator.patchPasswordDataValidator(), userController.patchPassword);
 
 router.get('/:id/orders', utils.auth, userController.getUserOrders);
 

@@ -244,43 +244,45 @@ module.exports = {
             });
         }
 
-        let userData = { ...req.body };
-        userModel.findById(req.user.userId)
-            .then((user) => {
-                if (!user) {
-                    return res.status(404).json({
-                        message: "User not Found!"
+        if (validateUserInfo(req, res)) {
+            let userData = { ...req.body };
+            userModel.findById(req.user.userId)
+                .then((user) => {
+                    if (!user) {
+                        return res.status(404).json({
+                            message: "User not Found!"
+                        });
+                    }
+                    return userModel.findOne({ email: req.body.email });
+                })
+                .then((result) => {
+                    if (result && result._id.toString() !== req.user.userId.toString()) {
+                        return res.status(422).json({
+                            message: "User with this email already exists!"
+                        });
+                    } else {
+                        return userModel.findOne({ userName: req.body.userName });
+                    }
+                })
+                .then((result) => {
+                    if (result && result._id.toString() !== req.user.userId) {
+                        return res.status(422).json({
+                            message: "User with this username already exists!"
+                        });
+                    } else {
+                        return userModel.updateOne(userData);
+                    }
+                })
+                .then((result) => {
+                    return res.status(200).json({
+                        message: "Profile updated successfully",
                     });
-                }
-                return userModel.findOne({ email: req.body.email });
-            })
-            .then((result) => {
-                if (result && result._id.toString() !== req.user.userId.toString()) {
-                    return res.status(422).json({
-                        message: "User with this email already exists!"
-                    });
-                } else {
-                    return userModel.findOne({ userName: req.body.userName });
-                }
-            })
-            .then((result) => {
-                if (result && result._id.toString() !== req.user.userId) {
-                    return res.status(422).json({
-                        message: "User with this username already exists!"
-                    });
-                } else {
-                    return userModel.updateOne(userData);
-                }
-            })
-            .then((result) => {
-                return res.status(200).json({
-                    message: "Profile updated successfully",
+                })
+                .catch((error) => {
+                    console.log("ERROR: ", error);
+                    // next(error);
                 });
-            })
-            .catch((error) => {
-                console.log("ERROR: ", error);
-                // next(error);
-            });
+        }
     },
 
     deleteProfile: (req, res, next) => {
