@@ -30,7 +30,7 @@ async function logoutUser() {
 }
 
 async function patchPassword(userId, passData) {
-    return axios.patch(`${BASE_URL}/users/${userId}/patchpass`, passData, {
+    return axios.patch(`${BASE_URL}/users/${userId}/pass`, passData, {
         withCredentials: true
     });
 }
