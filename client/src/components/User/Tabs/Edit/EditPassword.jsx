@@ -97,7 +97,6 @@ const EditPassword = (props) => {
                     }).catch((error) => {
                         console.log(error);
                         if (error.response) {
-                            // console.log(error.response.data.info);
                             if (error.response.data.message === 'Incorrect user data!') {
                                 showToast('error', error.response.data.info);
                             } else {

@@ -9,9 +9,10 @@
     --width-main-content: 60vw;
 
     @media (max-width: 768px) {
-
         --width-main-content: 95vw;
     }
+
+    --height-header: 5em;
 
     --border-form-radius: 0.2em;
     --border-form-width: 2px;

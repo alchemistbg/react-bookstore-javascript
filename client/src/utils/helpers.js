@@ -5,15 +5,16 @@ const toastOptions = {
     newestOnTop: false,
     timeOut: 1000,
     // extendedTimeOut: 1000,
-    progressBar: true,
     // timeOut: 0,
     // extendedTimeOut: 0
+    progressBar: true,
 }
 
 function showToast(toastType, toastData) {
     toastr.remove();
 
     if (toastType === 'success') {
+        console.log(toastData)
         toastr[toastType](toastData.message, toastData.title, toastOptions);
         return;
     }
@@ -29,10 +30,6 @@ function showToast(toastType, toastData) {
         }
     });
 }
-
-// function totalPriceFormat(price, qty) {
-
-// }
 
 function timeFormat(commentTime) {
     const time = new Date(commentTime).toDateString();

@@ -183,12 +183,13 @@ module.exports = {
                         }
                         throw error;
                     } else {
-                        return userData.matchPassword(req.body.oldPassword)
+                        userData.password = userRawNewPassword;
+                        return userData.save();
                     }
                 })
                 .then((result) => {
                     res.status(200).json({
-                        message: "Password changed successfully"
+                        message: "Password changed successfully!"
                     });
                 })
                 .catch((error) => {
