@@ -1,0 +1,19 @@
+.hamburger {
+    display: inline-block;
+    background-color: var(--color-navigation-background);
+    text-align: center;
+    padding: 0.5em;
+    cursor: pointer;
+
+    &:after {
+        font-family: 'Font Awesome 5 Free';
+        content: '\f0c9';
+        font-weight: bold;
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    @media(min-width: 769px) {
+        display: none;
+    }
+}
