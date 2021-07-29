@@ -7,8 +7,10 @@ import { getCart } from './../../requests/cartRequests';
 import UserContext from './../../context/userContext/UserContext';
 import CartContext from './../../context/cartContext/CartContext';
 import jwt from 'jwt-decode';
+import NavigationItems from './../Common/NavigationItems/NavigationItems';
 
-const HeaderMajorNav = () => {
+const HeaderMajorNav = (props) => {
+
     const [{ isLoggedIn, userName, userId }, userDispatch] = useContext(UserContext);
     const [{ cart }, cartDispatch] = useContext(CartContext);
 
@@ -33,19 +35,14 @@ const HeaderMajorNav = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            console.log("LOGGED IN as: ", userName);
-            console.log("With userId: ", userId);
             getCart(userId)
                 .then((response) => {
-                    console.log(response.data.message);
-                    // if (response.data.cart.length > 0) {
                     cartDispatch({
                         type: 'LOAD_CART_FROM_DATABASE',
                         payload: {
                             ...response.data.cart[0]
                         }
                     });
-                    // }
                 })
                 .catch((error) => {
                     console.log(error.response.data.message);
@@ -53,54 +50,59 @@ const HeaderMajorNav = () => {
         }
     }, [cartDispatch, isLoggedIn, userName, userId]);
 
-    // const handleOnLoad = () => {
-    //     console.log("Loaded...");
-    // }
-
     const handleLogOut = () => {
-        // logoutUser()
-        //     .then((res) => {
-        //         console.log(res);
-        //     })
-        //     .catch((error) => {
-        //         console.error(error);
-        //     });
-        // <Redirect to='/' />
         userDispatch({
             type: 'LOGOUT'
         });
     }
 
-    return (
-        <ul className="major-nav-list">
-            {isLoggedIn ? (
-                <Fragment>
-                    <li>
-                        <NavLink to="/profile">Welcome, {userName}</NavLink>
-                    </li>
-                    <li >
-                        <NavLink to="/cart">
-                            <i className="fas fa-shopping-cart">
-                                <span className="cart-size">{cart.length}</span>
-                            </i>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/logout" onClick={handleLogOut}>Logout</NavLink>
-                    </li>
-                </Fragment>
-            ) : (
-                <Fragment>
-                    <li>
-                        <NavLink to="/login">Login</NavLink>
-                    </li>
-                    <li>
-                        <NavLink to="/register">Register</NavLink>
-                    </li>
-                </Fragment>
-            )
+    const menu = {
+        loggedTrue: [
+            {
+                class: '',
+                link: '/profile',
+                text: `Welcome, ${userName || null}`
+            },
+            {
+                class: '',
+                link: '/cart',
+                text: 'cart',
+                size: `${cart.length || 0}`
+            },
+            {
+                class: '',
+                link: '/logout',
+                text: 'Logout',
+                clicked: { handleLogOut }
+
             }
-        </ul >
+        ],
+
+        loggedFalse: [
+            {
+                class: '',
+                link: '/login',
+                text: 'Login'
+
+            },
+            {
+                class: '',
+                link: '/register',
+                text: 'Register'
+            }
+        ]
+    }
+    return (
+        <>
+            {
+                isLoggedIn ? (
+                    <NavigationItems className="major-nav-list" menu={menu.loggedTrue} />
+                ) : (
+                    <NavigationItems className="major-nav-list" menu={menu.loggedFalse} />
+                )
+            }
+
+        </>
     );
 }
 

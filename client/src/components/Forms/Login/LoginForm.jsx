@@ -120,14 +120,16 @@ const LoginForm = (props) => {
 					})
 					.catch((error) => {
 						console.log(error);
-						const { message } = error.response.data;
-						let info = undefined;
-						if (message === 'Incorrect user data!') {
-							info = 'USER DATA'
+						if (error.response) {
+							const { message } = error.response.data;
+							let info = undefined;
+							if (message === 'Incorrect user data!') {
+								info = 'USER DATA'
+							}
+							const serverError = {};
+							serverError[info] = ['Wrong username or password! Please try again!'];
+							showToast('error', serverError);
 						}
-						const serverError = {};
-						serverError[info] = ['Wrong username or password! Please try again!'];
-						showToast('error', serverError);
 					});
 			})
 			.catch((errors) => {

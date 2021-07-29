@@ -5,7 +5,6 @@ export const initialCartState = {
 };
 
 export const cartReducer = (state, action) => {
-    console.log(action.type);
 
     let itemIndex;
     if (action.item) {
@@ -21,12 +20,8 @@ export const cartReducer = (state, action) => {
     }
 
     const saveCart = (cartData, userId) => {
-        // localStorage.setItem("cart", JSON.stringify(data));
-        // console.log(cartData);
-        // console.log(userId);
         postCart(userId, cartData)
             .then((response) => {
-                console.log(response);
             })
             .catch((error) => {
                 console.log(error);
@@ -35,7 +30,6 @@ export const cartReducer = (state, action) => {
 
     switch (action.type) {
         case 'LOAD_CART_FROM_DATABASE':
-            console.log(action.payload);
             state.cart = [...action.payload.selectedBooks];
             saveCart(state.cart);
             return {
@@ -54,8 +48,6 @@ export const cartReducer = (state, action) => {
 
             const book = { ...action.item }
             book.totalPrice = +(+book.qty * +book.price).toFixed(2);
-            // action.item.totalPrice = +(+action.item.qty * +action.item.price).toFixed(2);
-            // console.log("1st time: ", book);
             state.cart.push(book);
             saveCart(state.cart, action.userId);
             return {
@@ -88,7 +80,6 @@ export const cartReducer = (state, action) => {
             if (state.cart.length > 0) {
                 saveCart(state.cart);
             } else {
-                // clearCart();
                 deleteCart(action.userId)
                     .then((response) => {
                         console.log(response);
