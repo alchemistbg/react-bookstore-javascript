@@ -24,6 +24,7 @@ A full stack MERN web application. A working version of this app can be seen her
 
 ## TODO
 - [x] Logo
+- [x] Favicon
 - [ ] Side drawer
 - [ ] Add Select component:
   - [ ] Filter books by category
