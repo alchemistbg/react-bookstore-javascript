@@ -35,3 +35,4 @@ A full stack MERN web application. A working version of this app can be seen her
   - [ ] Add/Edit/Delete books
   - [ ] Edit orders
   - [ ] Other admin things
+- [ ] Pagination on the server 
