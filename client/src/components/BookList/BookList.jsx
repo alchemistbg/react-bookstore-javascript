@@ -10,7 +10,7 @@ import { getBooks, getBooksByGenre } from './../../requests/bookRequests';
 const BookList = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [books, setBooks] = useState([]);
-    const [pageSize, setPageSize] = useState(6);
+    const [pageSize, setPageSize] = useState(8);
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {

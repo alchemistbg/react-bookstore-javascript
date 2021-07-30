@@ -36,7 +36,7 @@ const BookCard = (props) => {
                 )
             }
             <div className="book-meta">
-                <div className="book-title">{book.title}</div>
+                <h6 className="book-title">{book.title}</h6>
             </div>
             <div className="book-footer">
                 <div className="book-author">from <span>{book.author}</span></div>
