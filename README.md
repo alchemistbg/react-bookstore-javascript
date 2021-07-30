@@ -25,11 +25,10 @@ A full stack MERN web application. A working version of this app can be seen her
 ## TODO
 - [x] Logo
 - [x] Favicon
-- [ ] Side drawer
+- [x] Side drawer
 - [ ] Add Select component:
   - [ ] Filter books by category
   - [ ] Sort books/comments/orders by different criteria
-- [ ] Filter books by category using 'select'
 - [ ] Search books (make search works)
 - [ ] Integrate reCaptcha
 - [ ] Admin panel
