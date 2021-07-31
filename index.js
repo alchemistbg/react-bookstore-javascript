@@ -26,8 +26,8 @@ const { RSA_NO_PADDING } = require('constants');
 console.log(process.env.NODE_ENV)
 app.use((req, res, next) => {
     // console.log("User IP address (req.ip): ", req.ip);
+    // console.log("User IP address (req.headers): ", req.headers['x-forwarded-for']);
 
-    console.log("User IP address (req.headers): ", req.headers['x-forwarded-for']);
     if (process.env.NODE_ENV === "development") {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5002');
     } else if (process.env.NODE_ENV === "production") {
