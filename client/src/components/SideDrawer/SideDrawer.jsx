@@ -26,7 +26,7 @@ const SideDrawer = (props) => {
                         <span className="reactive">Reactive</span> Bookstore
                     </p>
                 </Link>
-                <button><i class="far fa-window-close"></i></button>
+                <button><i className="far fa-window-close"></i></button>
             </div>
             <NavigationItems className={'major-nav-list mobile'} menu={menu} />
         </div>
