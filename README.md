@@ -27,8 +27,8 @@ A full stack MERN web application. A working version of this app can be seen her
 - [x] Favicon
 - [x] Side drawer
 - [ ] Add Select component:
-  - [ ] Filter books by category
   - [ ] Sort books/comments/orders by different criteria
+  - [ ] Filter books by category
 - [ ] Search books (make search works)
 - [ ] Integrate reCaptcha
 - [ ] Admin panel
@@ -36,3 +36,4 @@ A full stack MERN web application. A working version of this app can be seen her
   - [ ] Edit orders
   - [ ] Other admin things
 - [ ] Pagination on the server 
+- [ ] Add tests for the backend as well as for the frontend
