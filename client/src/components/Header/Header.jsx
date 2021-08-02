@@ -11,6 +11,8 @@ import HeaderMinorNav from './HeaderMinorNav';
 import HeaderSearchBar from './HeaderSearchBar'
 import SideDrawer from './../SideDrawer/SideDrawer';
 
+import { useWindowSize } from '../../utils/hooks';
+
 import UserContext from './../../context/userContext/UserContext';
 import CartContext from './../../context/cartContext/CartContext';
 import NavigationItems from './../Common/NavigationItems/NavigationItems';
@@ -24,17 +26,15 @@ const Header = () => {
 
     const toggleSideDrawerHandler = () => {
         setToggleSideDrawer(!toggleSideDrawer);
-        console.log(toggleSideDrawer);
     }
 
     const closeSideDrawerHandler = () => {
         setToggleSideDrawer(!toggleSideDrawer);
     }
+
     useEffect(() => {
-        console.log("Checking if user is logged in");
         checkIsLogged()
             .then((response) => {
-                console.log(response.data);
                 const decodedToken = jwt(response.data.token);
                 userDispatch({
                     type: "CHECK_IF_LOGGED",
@@ -90,7 +90,6 @@ const Header = () => {
                 link: '/logout',
                 text: 'Logout',
                 clicked: { handleLogOut }
-
             }
         ],
 
@@ -109,6 +108,21 @@ const Header = () => {
         ]
     }
 
+    const [pageWidth, pageHeight] = useWindowSize();
+    if (pageWidth < 769) {
+        menu.loggedFalse.unshift({
+            class: '',
+            link: '/books',
+            text: 'Books'
+        });
+
+        menu.loggedTrue.unshift({
+            class: '',
+            link: '/books',
+            text: 'Books'
+        });
+    }
+
     return (
         <header>
             <nav className='header-nav'>
@@ -123,13 +137,13 @@ const Header = () => {
                             </p>
                         </Link>
 
-                        {/* <HeaderMajorNav /> */}
-
                         <NavigationItems
                             className="major-nav-list"
                             {...(isLoggedIn ? { menu: menu.loggedTrue } : { menu: menu.loggedFalse })}
                         />
                     </div>
+
+                    <span>Window size: {pageWidth} x {pageHeight}</span>
 
                     <div className="second-row">
                         <HeaderMinorNav />
