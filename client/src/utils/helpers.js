@@ -32,12 +32,21 @@ function showToast(toastType, toastData) {
 }
 
 function timeFormat(commentTime) {
-    const time = new Date(commentTime).toDateString();
-    const timeArr = time.split(' ');
-    const date = timeArr[2];
-    const month = timeArr[1];
-    const year = timeArr[3];
-    return `${date} ${month} ${year}`;
+    const dateStr = new Date(commentTime).toDateString();
+    const dateArr = dateStr.split(' ');
+    const date = dateArr[2];
+    const month = dateArr[1];
+    const year = dateArr[3];
+
+    const fullDate = `${date} ${month} ${year}`;
+
+    const timeStr = new Date(commentTime).toTimeString();
+    const timeArr = timeStr.split(':');
+    const hour = timeArr[0];
+    const min = timeArr[1];
+    const sec = timeArr[2].split(' ')[0];
+    const fullTime = `${hour}:${min}:${sec}`;
+    return [fullDate, fullTime];
 }
 
 function calcCartTotalSum(cart) {
