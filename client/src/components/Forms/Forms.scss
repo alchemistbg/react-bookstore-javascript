@@ -1,6 +1,7 @@
 .form {
 
     width: var(--width-main-content);
+    // border: 2px solid red;
 
     textarea {
         display: block;
@@ -21,7 +22,7 @@
         // width: var(--width-main-content);
         @include bp (tabletl) {
             // display: flex;
-            align-content: center;
+            // align-content: center;
         }
     }
 
@@ -125,7 +126,7 @@
     .form-field-wrapper {
         margin-bottom: 0.5em;
         position: relative;
-        width: 40%;
+        width: 50%;
 
         @include bp(tablets) {
             width: 60%;

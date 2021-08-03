@@ -31,11 +31,28 @@
 
 .comment-meta {
     flex-shrink: 1;
+    flex-basis: 25%;
     display: flex;
+
     flex-direction: column;
     align-items: center;
     margin: auto;
     padding: 0 1em;
+
+    @media(max-width: 1080px) {
+        flex-basis: 30%;
+        padding: 0 0.5em;
+    }
+
+    @media(max-width: 900px) {
+        flex-basis: 35%;
+        padding: 0 0.5em;
+    }
+
+    @media(max-width: 400px) {
+        flex-basis: 40%;
+        padding: 0 0.5em;
+    }
 }
 
 .comment-time,
