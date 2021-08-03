@@ -15,18 +15,14 @@ const BookInfo = (props) => {
     let bookRef = useRef(props.book);
     let book = bookRef.current;
     book.qty = bookQty;
-    // book.qty = 1;
 
     useEffect(() => {
         book = bookRef.current;
-        // return;
         book.qty = bookQty;
-        // book.qty = 1;
         return () => {
             book = bookRef.current;
         }
     }, [bookRef.current])
-
 
     const [{ isLoggedIn, userId }] = useContext(UserContext);
 
@@ -38,6 +34,10 @@ const BookInfo = (props) => {
             setBookQty(bookQty);
         }
     }
+
+    const handleOnClick = () => {
+        console.log("Link clicked!");
+    };
 
     const handleIncrement = () => {
         bookQty += 1;
@@ -59,7 +59,6 @@ const BookInfo = (props) => {
             book.qty = bookQty;
         }
     }
-    console.log(book);
 
     return (
         <div className="book-info">
@@ -68,7 +67,7 @@ const BookInfo = (props) => {
                 <tbody>
                     <tr>
                         <td className="column-header">Author:</td>
-                        <td className="column-data">{book.author}</td>
+                        <td className="column-data"><NavLink to='TBA' onClick={handleOnClick}>{book.author}</NavLink></td>
                     </tr>
                     <tr>
                         <td className="column-header">Publisher:</td>
@@ -95,7 +94,6 @@ const BookInfo = (props) => {
                     </tr>
                     <tr>
                         <td className="column-header">Price:</td>
-                        {/* <td className="column-data">{(book.price).toFixed(2)}$</td> */}
                         <td className="column-data">{book.price}$</td>
                     </tr>
                 </tbody>
@@ -104,8 +102,6 @@ const BookInfo = (props) => {
                 <Quantity
                     book={book}
                     qty={book.qty}
-                    // handleDecrement={() => handleDecrement(book)}
-                    // handleDecrement={() => handleDecrement(book)}
                     handleDecrement={handleDecrement}
                     handleIncrement={handleIncrement}
                 />
