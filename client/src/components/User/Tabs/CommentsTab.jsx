@@ -28,12 +28,13 @@ const CommentsTab = (props) => {
                             <ul className="comments-list">
                                 {
                                     comments.map((comment) => {
+                                        const time = timeFormat(comment.commentTime);
                                         return <li key={comment._id} className="comment-item">
                                             <div className="commented-object">
                                                 concerning <span className="highlighted"><Link to={`/books/${comment.bookCommented._id}`}>{comment.bookCommented.title}</Link></span>
                                             </div>
                                             <div className="comment-meta">
-                                                <span className="comment-time">on {timeFormat(comment.commentTime)} </span>
+                                                <span className="comment-time">on {`${time[0]} (${time[1]})`} </span>
                                                 <span className="comment-author">YOU wrote:</span>
                                             </div>
                                             <div className="comment-content">

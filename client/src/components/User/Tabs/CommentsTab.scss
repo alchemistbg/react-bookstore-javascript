@@ -30,14 +30,15 @@
 }
 
 .comment-meta {
+    padding: 0 1em;
+    margin: auto;
+
     flex-shrink: 1;
     flex-basis: 25%;
-    display: flex;
 
+    display: flex;
     flex-direction: column;
     align-items: center;
-    margin: auto;
-    padding: 0 1em;
 
     @media(max-width: 1080px) {
         flex-basis: 30%;
