@@ -23,6 +23,7 @@ const SelectList = (props) => {
                         return <SelectListItem
                             selectItemClassNames={selectItemClassNames}
                             selectListItem={selectListItem}
+                            key={selectListItem.key}
                             handleSelectChange={handleSelectChange}
                             isSelected={selectedOption === selectListItem.text}
                         />
