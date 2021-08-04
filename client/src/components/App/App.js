@@ -27,9 +27,13 @@ import { userReducer, initialUserState } from './../../reducers/userReducer';
 import { CartProvider } from './../../context/cartContext/CartContext';
 import { cartReducer, initialCartState } from './../../reducers/cartReducer';
 
+import { SortProvider } from './../../context/sortContext/SortContext';
+import { sortReducer, initialSortState } from './../../reducers/sortReducer';
+
 function App() {
 	const useAuthState = useReducer(userReducer, initialUserState);
 	const useCartState = useReducer(cartReducer, initialCartState);
+	const useSortState = useReducer(sortReducer, initialSortState);
 
 	return (
 		document.title = "Reactive Bookstore",
@@ -38,35 +42,37 @@ function App() {
 				<div className='site-container'>
 					<Router>
 						<CartProvider value={useCartState}>
-							<Header />
-							<main className='site-main'>
-								<Switch>
-									{/* <Route exact path="/" component={Home} /> */}
-									<Route exact path="/" render={(props) => <Home {...props} />} />
-									<Route path="/login" component={LoginForm} />
-									<Route path="/logout" >
-										<Redirect to="/" />
-									</Route>
-									<Route path="/register" component={RegisterForm} />
-									<Route path="/profile" render={(props) => <Profile {...props} />} />
-									{/* <Route path="/edit-profile" render={(props) => <EditProfile {...props} />} /> */}
-									{/* <Route path="/edit-profile" component={EditProfile} /> */}
+							<SortProvider value={useSortState}>
+								<Header />
+								<main className='site-main'>
+									<Switch>
+										{/* <Route exact path="/" component={Home} /> */}
+										<Route exact path="/" render={(props) => <Home {...props} />} />
+										<Route path="/login" component={LoginForm} />
+										<Route path="/logout" >
+											<Redirect to="/" />
+										</Route>
+										<Route path="/register" component={RegisterForm} />
+										<Route path="/profile" render={(props) => <Profile {...props} />} />
+										{/* <Route path="/edit-profile" render={(props) => <EditProfile {...props} />} /> */}
+										{/* <Route path="/edit-profile" component={EditProfile} /> */}
 
-									<Route exact path="/books" render={(props) => <BookListView {...props} />} />
-									<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
+										<Route exact path="/books" render={(props) => <BookListView {...props} />} />
+										<Route exact path="/books/genres/:id" render={(props) => <BookListView {...props} />} />
 
-									<Route exact path="/books/:id" component={BookDetails} />
-									<Route path="/cart" component={Cart} />
+										<Route exact path="/books/:id" component={BookDetails} />
+										<Route path="/cart" component={Cart} />
 
-									<Route path="/about" component={About} />
-									<Route path="/contacts" component={Contacts} />
-									<Route path="/careers" component={Careers} />
-									<Route path="/project" component={Project} />
-									<Route component={NotFound} />
-									{/* <Redirect to="/not-found" /> */}
-								</Switch>
-							</main>
-							<Footer />
+										<Route path="/about" component={About} />
+										<Route path="/contacts" component={Contacts} />
+										<Route path="/careers" component={Careers} />
+										<Route path="/project" component={Project} />
+										<Route component={NotFound} />
+										{/* <Redirect to="/not-found" /> */}
+									</Switch>
+								</main>
+								<Footer />
+							</SortProvider>
 						</CartProvider>
 					</Router>
 				</div >
