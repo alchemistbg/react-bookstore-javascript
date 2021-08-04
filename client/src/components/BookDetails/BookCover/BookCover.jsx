@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { getBookCover } from '../../../requests/bookRequests';
 import Donut from '../../Common/Preloader/Donut';
@@ -9,7 +10,9 @@ const BookCover = (props) => {
     const [bookCover, setBookCover] = useState(null);
 
     useEffect(() => {
-        getBookCover(props.isbn, 'L')
+        const cancelTokenSource = axios.CancelToken.source();
+
+        getBookCover(props.isbn, 'L', cancelTokenSource)
             .then((cover) => {
                 setBookCover(cover);
                 setIsLoading(false);
@@ -17,6 +20,10 @@ const BookCover = (props) => {
             .catch((error) => {
                 console.log(error);
             });
+
+        return () => {
+            cancelTokenSource.cancel();
+        }
     }, []);
 
     return (

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import { getBookCover } from './../../requests/bookRequests';
 import Donut from './../Common/Preloader/Donut';
@@ -11,14 +12,21 @@ const BookCard = (props) => {
     const [bookCover, setBookCover] = useState(null);
 
     useEffect(() => {
-        getBookCover(book.isbn, 'M')
+
+        const cancelTokenSource = axios.CancelToken.source();
+
+        getBookCover(book.isbn, 'M', cancelTokenSource)
             .then((cover) => {
                 setBookCover(cover);
                 setIsLoading(false);
             }).catch((error) => {
-                console.log(error);
+                console.error(error);
             });
-    }, []);
+
+        return () => {
+            cancelTokenSource.cancel();
+        }
+    }, [book.isbn]);
 
     return <div className='book-item'>
         <Link className="book-link" to={{ pathname: `/books/${book._id}`, state: { book } }} >
