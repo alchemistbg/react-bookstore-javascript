@@ -85,12 +85,11 @@ const BookList = (props) => {
 
             setSortCriteria(sortSettings.booksSorting.sortCriteria);
             setSortDirection(sortSettings.booksSorting.sortDirection);
-
-            sortBooks(sortSettings.booksSorting.sortCriteria, sortSettings.booksSorting.sortDirection);
         }
 
         const option = getSelectedItem(sortSettings.booksSorting);
         setSelectedOption(option.text);
+        sortBooks(sortSettings.booksSorting.sortCriteria, sortSettings.booksSorting.sortDirection);
     };
 
     useEffect(() => {
