@@ -142,8 +142,11 @@ const Header = () => {
                             {...(isLoggedIn ? { menu: menu.loggedTrue } : { menu: menu.loggedFalse })}
                         />
                     </div>
-
-                    <span>Window size: {pageWidth} x {pageHeight}</span>
+                    {
+                        process.env.NODE_ENV === "development" ? (
+                            <span>Window size: {pageWidth} x {pageHeight}</span>
+                        ) : (null)
+                    }
 
                     <div className="second-row">
                         <HeaderMinorNav />
