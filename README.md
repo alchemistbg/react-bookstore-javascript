@@ -22,6 +22,7 @@ A full stack MERN web application. A working version of this app can be seen her
 
 ## Description
 
+
 ## TODO
 - [x] Logo
 - [x] Favicon

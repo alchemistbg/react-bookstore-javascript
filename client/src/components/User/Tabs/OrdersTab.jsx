@@ -25,11 +25,12 @@ const OrdersTab = (props) => {
                     ) : (
                         <ul className="orders-list">{
                             orders.map((order, index) => {
+                                const time = timeFormat(order.orderDate);
                                 return <li key={order._id} className="orders-list-item">
                                     <input className="orders-list-item-cb" type="checkbox" name="" id={"cb-" + index} />
                                     <div className="orders-list-item-info">
                                         <label htmlFor={"cb-" + index} className="orders-list-item-label">
-                                            <span className="order-date">{timeFormat(order.orderDate)}</span>
+                                            <span className="order-date">{`${time[0]} (${time[1]})`}</span>
                                             <span className="order-size">{order.orderedBooks.length}</span>
                                             <span className="order-sum">{order.orderTotalPrice.toFixed(2) || "NaN"}</span>
                                         </label>
