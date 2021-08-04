@@ -22,8 +22,8 @@ const BookList = (props) => {
     const [selectIsOpen, setSelectIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState("");
 
-    const [sortCriteria, setSortCriteria] = useState();
-    const [sortDirection, setSortDirection] = useState();
+    const [sortCriteria, setSortCriteria] = useState('soldNumber');
+    const [sortDirection, setSortDirection] = useState('desc');
 
     const selectHeader = "Sort by: ";
     const selectItems = [
@@ -54,10 +54,25 @@ const BookList = (props) => {
     ]
 
     const onLoad = () => {
-        // console.log('Loaded');
+        let sortSettings = {};
+
         const storageData = localStorage.getItem('sortSettings');
-        let sortSettings = undefined;
-        if (storageData) {
+        if (!storageData) {
+
+            sortSettings.booksSorting = {
+                sortCriteria,
+                sortDirection
+            }
+
+            sortDispatch({
+                type: 'SORT',
+                payload: {
+                    criteria: sortCriteria,
+                    direction: sortDirection
+                }
+            });
+        } else {
+
             sortSettings = JSON.parse(storageData);
 
             sortDispatch({
@@ -70,9 +85,9 @@ const BookList = (props) => {
 
             setSortCriteria(sortSettings.booksSorting.sortCriteria);
             setSortDirection(sortSettings.booksSorting.sortDirection);
-        }
 
-        sortBooks(sortSettings.booksSorting.sortCriteria, sortSettings.booksSorting.sortDirection);
+            sortBooks(sortSettings.booksSorting.sortCriteria, sortSettings.booksSorting.sortDirection);
+        }
 
         const option = getSelectedItem(sortSettings.booksSorting);
         setSelectedOption(option.text);
