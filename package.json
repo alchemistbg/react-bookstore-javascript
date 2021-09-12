@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest -i",
     "start": "nodemon index.js",
