@@ -21,8 +21,19 @@ const populateGenreOption = {
 module.exports = {
 
     getBooks: (req, res) => {
-        // console.log(req.headers['x-forwarded-for']);
-        bookModel.find()
+        let filters = {};
+        const queryKeys = Object.keys(req.query);
+        if (queryKeys.length > 0) {
+            // for (const key in ){
+
+            // }
+            queryKeys.map((key) => {
+                filters[`${key}`] = req.query[`${key}`];
+            });
+        }
+        console.log(filters);
+
+        bookModel.find(filters)
             // .select('author title price isbn')
             .populate(populateGenreOption)
             .populate(populateCommentsOption)
@@ -84,7 +95,7 @@ module.exports = {
     },
 
     getBooksByGenre: (req, res) => {
-        console.log(req.params);
+        // console.log(req.params);
         const genre = req.params.id;
         genreModel.findOne({ name: genre })
             .then((genre) => {
