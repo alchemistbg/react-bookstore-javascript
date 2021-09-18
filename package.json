@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "jest": {
     "verbose": true,
     "testEnvironment": "node"
@@ -29,7 +28,7 @@
     "express-validator": "^6.12.1",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.5",
+    "mongoose": "^5.13.9",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.12"
   },
