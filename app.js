@@ -14,6 +14,7 @@ app.use(express.json());
 
 const db = require('./config/database');
 db.connect();
+// require('./config/database')();
 
 const genresRouter = require('./api/genres');
 const booksRouter = require('./api/books');
