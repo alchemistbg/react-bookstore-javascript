@@ -3,9 +3,15 @@ import { BASE_URL } from './../utils/constants.js';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-async function getBookCover(isbn, size) {
+async function getBookCover(isbn, size, cancelTokenSource) {
     // const cover = await axios.get(`https://cors-anywhere.herokuapp.com/http://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
-    const cover = await axios.get(`https://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`, { responseType: 'blob', withCredentials: false });
+    const cover = await axios.get(
+        `https://covers.openlibrary.org/b/ISBN/${isbn}-${size}.jpg`,
+        {
+            cancelToken: cancelTokenSource.token,
+            responseType: 'blob',
+            withCredentials: false
+        });
     return URL.createObjectURL(cover.data);
 }
 
