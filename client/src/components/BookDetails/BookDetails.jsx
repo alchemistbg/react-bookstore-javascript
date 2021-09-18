@@ -96,7 +96,7 @@ const BookDetails = (props) => {
                     {
                         isLoggedIn ? (
                             <Fragment>
-                                <hr />
+                                {/* <hr /> */}
                                 <div className="book-comment-form">
                                     <h5>Comment this book</h5>
                                     <BookCommentsForm

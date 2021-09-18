@@ -55,13 +55,17 @@
     }
 }
 
-.book-comments {}
+.book-comments {
+    margin: 1em 0 2em 0;
+}
 
 .book-comment-form {
     // border: 2px solid purple;
+    border-top: 2px solid var(--color-main-text);
     display: flex;
     flex-direction: column;
-    padding: 2em 0 3em 0;
+    padding: 1em 0 3em 0;
+    padding: 1em 0 3em 0;
 
     .comment-area {
         margin-bottom: 1em;
